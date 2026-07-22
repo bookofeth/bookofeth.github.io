@@ -1,0 +1,41 @@
+{*
+  Act detail header band, shared by the four Act chapter pages. Receives one param:
+    act -> a single row from $acts (see base.latte).
+  A CSS lapis-washed band is the shipped fallback. A future Gemini acts-plate can
+  drop in with zero markup change: it targets [data-act="{slug}"] .act-plate-img in
+  acts.css. Tabler icons only, no em-dashes.
+*}
+<header class="act-plate" data-act="{$act['slug']}">
+    <div class="act-plate-img" aria-hidden="true"></div>
+    <div class="act-plate-veil" aria-hidden="true"></div>
+    <div class="wrap act-plate-in">
+        <a class="act-back link-arrow" href="/acts/">
+            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l4 4"/><path d="M5 12l4 -4"/></svg>
+            The Acts
+        </a>
+
+        <p class="act-plate-eyebrow rise">Act {$act['act']} &middot; {$act['event']}</p>
+        <h1 class="rise d1">{$act['title']}</h1>
+
+        <div class="act-plate-meta rise d2">
+            <span class="meta-item">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></svg>
+                {$act['place']}
+            </span>
+            <span class="meta-dot" aria-hidden="true">&middot;</span>
+            <span class="meta-item">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"/><path d="M16 3l0 4"/><path d="M8 3l0 4"/><path d="M4 11l16 0"/><path d="M11 15l1 0"/><path d="M12 15l0 3"/></svg>
+                {$act['dateRange']}
+            </span>
+        </div>
+
+        <div class="act-plate-tags rise d3">
+            {if $act['gold']}
+                <span class="tag gold"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6"/></svg>{$act['goldMarker']}</span>
+            {/if}
+            {foreach $act['roleTags'] as $i => $tag}
+                <span class="tag{if $i === 0} lapis{/if}">{$tag}</span>
+            {/foreach}
+        </div>
+    </div>
+</header>

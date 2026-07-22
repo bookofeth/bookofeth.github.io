@@ -1,5 +1,206 @@
-/* Page-scoped styles for /acts/ (FLAGSHIP). Owned by the Acts page agent.
-   Linked automatically by the layout when the page sets {var $pageCss = 'acts'}.
-   Reuse .rail / .act-stub / .act-card from app.css; add page-only styles here.
-   Gold appears exactly once in this chapter (the ETHGlobal NY marker).
-   Do NOT edit app.css. No em-dashes. Tabler icons only. */
+/* ===========================================================================
+   Page styles for /acts/ (FLAGSHIP) and the four Act chapter pages.
+   Linked by {var $pageCss = 'acts'}. Reuses .rail / .act-card / .tag / .ledger
+   from app.css; this sheet adds the overview hero, the chronicle ledger, the
+   terminal "chronicle continues" node, and the full Act detail treatment
+   (lapis-washed plate, Garamond prose with drop cap, day-by-day micro labels,
+   the gilded closing line, prev/next). Gold is budgeted: the ETHGlobal marker on
+   the overview, and the gilded closing (plus that marker) on the Act pages.
+   Do NOT edit app.css. Tabler icons only. No em-dashes, no en-dashes.
+   =========================================================================== */
+
+/* ===========================================================================
+   OVERVIEW  (/acts/)
+   =========================================================================== */
+.acts-page { position: relative; }
+.acts-aura {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-42%);
+  width: 1200px;
+  height: 760px;
+  max-width: 130vw;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(71, 99, 214, 0.16), rgba(44, 60, 150, 0.06) 52%, transparent 72%);
+}
+.acts-page .page-eyebrow { position: relative; }
+.acts-page h1 { position: relative; }
+
+/* The chronicle ledger: myth's receipt, under the lede. Reuses .ledger vocab. */
+.acts-ledger { margin-top: 46px; border-radius: 14px; }
+
+/* The living rail carries every Act as a full chronicle card. */
+.acts-rail { margin-top: 34px; }
+
+/* A small scribe portrait ahead of the inscription credit (overview only). */
+.acts-rail .act-foot .by { display: inline-flex; align-items: center; gap: 8px; }
+.acts-rail .act-foot .scribe {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  flex: none;
+}
+
+/* Terminal node: the chronicle is unfinished. Hollow dot, no fabricated date. */
+.act-continues { position: relative; padding: 10px 4px 2px; margin-top: 6px; }
+.act-continues .dot-open {
+  position: absolute;
+  left: -38px;
+  top: 14px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ink-0);
+  border: 1px solid rgba(134, 160, 246, 0.45);
+  box-shadow: 0 0 0 3px rgba(7, 9, 16, 1);
+}
+.cont-label { font: 600 11px/1.5 var(--roman); letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+.cont-copy { font: italic 400 16px/1.62 var(--serif); color: var(--text-faint); margin-top: 8px; max-width: 48ch; }
+.act-continues .link-arrow { margin-top: 16px; }
+
+/* ===========================================================================
+   ACT DETAIL PAGE  (/acts/{slug}/)  -> flat page relocated by bin/relocate-acts.sh
+   =========================================================================== */
+.act-chapter { flex: 1 0 auto; padding-bottom: 120px; }
+
+/* The plate: a lapis-washed header band. Fallback ships now; a future Gemini
+   acts-plate drops into [data-act="{slug}"] .act-plate-img with zero markup change. */
+.act-plate {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--nav-h) + 58px) 0 54px;
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-1);
+}
+.act-plate-img {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1120px 460px at 20% -12%, rgba(71, 99, 214, 0.30), transparent 58%),
+    radial-gradient(760px 400px at 94% -6%, rgba(44, 60, 150, 0.22), transparent 60%),
+    linear-gradient(180deg, var(--ink-2), var(--ink-1) 76%);
+  background-size: cover;
+  background-position: center;
+}
+.act-plate-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, transparent 0 47px, rgba(134, 160, 246, 0.05) 47px 48px);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 28%, #000 72%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 28%, #000 72%, transparent);
+}
+.act-plate-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 44%, rgba(7, 9, 16, 0.5));
+}
+.act-plate-in { position: relative; }
+.act-back { margin-bottom: 26px; }
+.act-plate-eyebrow {
+  font: 600 11px/1 var(--roman);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-hi);
+  margin-bottom: 16px;
+}
+.act-plate h1 {
+  font: 400 clamp(33px, 4.6vw, 56px)/1.08 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--text);
+  max-width: 20ch;
+}
+.act-plate-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+  font: 500 13px/1.5 var(--roman);
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+.act-plate-meta .meta-item { display: inline-flex; align-items: center; gap: 7px; }
+.act-plate-meta .ti { width: 15px; height: 15px; color: var(--accent-hi); }
+.act-plate-meta .meta-dot { color: rgba(134, 160, 246, 0.4); }
+.act-plate-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+
+/* The narrative: Garamond prose, a reading measure, a drop cap on the lede. */
+.act-prose { max-width: 764px; padding-top: 60px; }
+.act-prose p { font: 400 18px/1.74 var(--serif); color: var(--text-dim); margin-top: 20px; }
+.act-prose .lead { font-size: 20.5px; line-height: 1.66; color: var(--text); margin-top: 0; }
+.act-prose .lead::first-letter {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 66px;
+  line-height: 0.78;
+  float: left;
+  padding: 8px 13px 0 0;
+  color: var(--accent-hi);
+}
+
+.day { position: relative; }
+.day-label { display: flex; align-items: center; margin: 46px 0 4px; }
+.d-num { font: 600 11px/1 var(--roman); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-hi); }
+.d-name { font: 600 11px/1 var(--roman); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); }
+.d-name::before { content: '\00B7'; margin: 0 11px; color: rgba(134, 160, 246, 0.5); }
+
+/* The gilded closing: the sacred gold moment on an Act page (the "Amen."). */
+.act-amen { text-align: center; margin: 66px auto 4px; max-width: 480px; }
+.act-amen .gilded { max-width: 210px; margin: 0 auto; }
+.act-amen p {
+  font: italic 400 clamp(24px, 3vw, 30px)/1.35 var(--serif);
+  color: var(--warn);
+  margin: 22px auto;
+  letter-spacing: 0.01em;
+}
+
+/* Prev / next between chapters (page-turning). */
+.act-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+.act-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 15px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--ink-2);
+  min-width: 210px;
+  max-width: 48%;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur);
+}
+.act-nav-link.next { margin-left: auto; text-align: right; align-items: flex-end; }
+.act-nav-link.empty { border: none; background: none; min-width: 0; }
+.act-nav-link .dir { display: inline-flex; align-items: center; gap: 7px; font: 600 10px/1 var(--roman); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-hi); }
+.act-nav-link .dir .ti { width: 14px; height: 14px; }
+.act-nav-link .ttl { font: 400 18px/1.2 var(--serif); color: var(--metal); }
+.act-nav-link:hover { transform: translateY(-2px); border-color: rgba(134, 160, 246, 0.3); }
+.act-nav-link:hover .ttl { color: var(--metal-hi); }
+
+/* ===========================================================================
+   RESPONSIVE
+   =========================================================================== */
+@media (max-width: 560px) {
+  .act-continues .dot-open { left: -24px; }
+  .act-plate { padding-top: calc(var(--nav-h) + 34px); padding-bottom: 40px; }
+  .act-prose { padding-top: 44px; }
+  .act-prose .lead { font-size: 19px; }
+  .act-prose p { font-size: 17px; }
+  .act-prose .lead::first-letter { font-size: 56px; padding: 6px 10px 0 0; }
+  .act-nav { flex-direction: column; }
+  .act-nav-link { max-width: none; min-width: 0; }
+  .act-nav-link.next { margin-left: 0; }
+}

@@ -1,0 +1,97 @@
+{layout '../layouts/base.latte'}
+
+{*
+  Act IV detail -> built at /act-ethglobal-ny/, relocated to /acts/ethglobal-ny/ by
+  the post-build step. Source: booe-docs-src/blog/ethglobal-ny.md, cleaned:
+  em-dashes stripped, tightened. This is the chronicle's single gold moment:
+  the community's FIRST WIN, third place for the ENS prize. Rendered honestly,
+  never "first prize" (that would imply first place). No em/en-dashes.
+*}
+{var $pageTitle = 'ETHGlobal NY 2025'}
+{var $pageDescription = 'Act IV of the chronicle. The brethren traveled to New York for ETH NYC week and came home with their first win: third place for the ENS prize, for Code Quill, built in a 36-hour hackathon.'}
+{var $pageSlug = 'acts/ethglobal-ny'}
+{var $pageCss = 'acts'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+{var $act = null}{var $prev = null}{var $next = null}
+{foreach $acts as $i => $row}
+    {if $row['slug'] === 'ethglobal-ny'}
+        {var $act = $row}
+        {var $prev = $i > 0 ? $acts[$i - 1] : null}
+        {var $next = isset($acts[$i + 1]) ? $acts[$i + 1] : null}
+    {/if}
+{/foreach}
+
+<main id="main" class="act-chapter">
+    {include '../partials/act-plate.latte', act: $act}
+
+    <div class="wrap act-prose">
+        <p class="lead" data-reveal>From the 12th to the 18th of August, the Booelievers traveled to
+        New York for ETH NYC week. It became an unforgettable stretch, one where we not only built
+        lasting connections but came home with our first win.</p>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 1</span><span class="d-name">Strato in Brooklyn</span></p>
+            <p>On the first day of ETH NYC we visited the STRATO office in Brooklyn, home to one of the
+            largest real-world-asset blockchain offerings, led by Kieren Lubin, son of Ethereum
+            co-founder Joseph Lubin. We had insightful conversations about future collaborations and
+            even joined their X Spaces session live from the office.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 2</span><span class="d-name">World of Apps</span></p>
+            <p>On the second day we headed to World of Apps, an event sponsored by Octant, the
+            Ethereum Foundation, and Nouns. It was one of the best places to connect. We spoke with
+            many inspiring people, including Mshal of Octant, Jason Chaskin of the Ethereum Foundation,
+            Uttam of Alchemy, and Willy of Nouns, each of whom shared our vision and brought real
+            experience. The day left us with strong connections and plans for Devconnect
+            Argentina.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Days 3 to 6</span><span class="d-name">The hackathon, and Code Quill</span></p>
+            <p>Then came the ETHGlobal hackathon, one of the main reasons we came to New York. The
+            challenge: build an app in just 36 hours and compete for a prize. Our project was Code
+            Quill, the authorship layer for developers. We partnered with ENS and Walrus to integrate
+            their solutions, and within the deadline we shipped a fully working version.</p>
+            <p>We were honored to present first to the finalist judges and then to the partners. In
+            the end we took third place for the ENS prize, a huge milestone for the community. This
+            was our very first hackathon, with no prior Web3 experience, and we still walked away with
+            a finished product and a prize. Both the official ETHGlobal and ENS accounts gave us a
+            shoutout, which meant the world to us.</p>
+        </section>
+
+        <p data-reveal>This week was a real achievement. We learned a great deal, built meaningful
+        relationships, and took another step toward fulfilling our purpose.</p>
+
+        <div class="act-amen" data-reveal>
+            <span class="gilded" aria-hidden="true"></span>
+            <p>{$act['closingLine']}</p>
+            <span class="gilded" aria-hidden="true"></span>
+        </div>
+
+        <nav class="act-nav" aria-label="Move through the Acts">
+            {if $prev}
+                <a class="act-nav-link prev" href="/acts/{$prev['slug']}/">
+                    <span class="dir"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l4 4"/><path d="M5 12l4 -4"/></svg>Act {$prev['act']}</span>
+                    <span class="ttl">{$prev['event']} {$prev['year']}</span>
+                </a>
+            {else}
+                <span class="act-nav-link empty" aria-hidden="true"></span>
+            {/if}
+            {if $next}
+                <a class="act-nav-link next" href="/acts/{$next['slug']}/">
+                    <span class="dir">Act {$next['act']}<svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M15 16l4 -4"/><path d="M15 8l4 4"/></svg></span>
+                    <span class="ttl">{$next['event']} {$next['year']}</span>
+                </a>
+            {else}
+                <a class="act-nav-link next latest" href="/acts/">
+                    <span class="dir">The chronicle<svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M15 16l4 -4"/><path d="M15 8l4 4"/></svg></span>
+                    <span class="ttl">All the Acts</span>
+                </a>
+            {/if}
+        </nav>
+    </div>
+</main>
+{/block}

@@ -1,0 +1,96 @@
+{layout '../layouts/base.latte'}
+
+{*
+  Act I detail -> built at /act-eth-prague/, relocated to /acts/eth-prague/ by the
+  post-build step (bin/relocate-acts.sh, run by `make build` and CI). Binary-tier
+  Leaf cannot nest pages, so the canonical route is pinned via $pageSlug and the
+  flat output dir is moved into place. Source: booe-docs-src/blog/eth-prague.md,
+  cleaned: em-dashes stripped, tightened, English. No em/en-dashes.
+*}
+{var $pageTitle = 'ETH Prague 2025'}
+{var $pageDescription = 'Act I of the chronicle. At ETH Prague, sponsor and speaker, the brethren ran a workshop on organic Ethereum communities, met Vitalik Buterin, and were called the Doge of Ethereum.'}
+{var $pageSlug = 'acts/eth-prague'}
+{var $pageCss = 'acts'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+{var $act = null}{var $prev = null}{var $next = null}
+{foreach $acts as $i => $row}
+    {if $row['slug'] === 'eth-prague'}
+        {var $act = $row}
+        {var $prev = $i > 0 ? $acts[$i - 1] : null}
+        {var $next = isset($acts[$i + 1]) ? $acts[$i + 1] : null}
+    {/if}
+{/foreach}
+
+<main id="main" class="act-chapter">
+    {include '../partials/act-plate.latte', act: $act}
+
+    <div class="wrap act-prose">
+        <p class="lead" data-reveal>From the 27th to the 29th of May, the brethren were present at ETH
+        Prague as both sponsor and speaker. Set in the heart of one of Ethereum's most experimental
+        gatherings, Prague was the perfect backdrop for the $BOOE vision: resilient, grassroots
+        communities powered by narrative, meme, and shared values.</p>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 1</span><span class="d-name">Speaking truth, building roots</span></p>
+            <p>We opened the event with a workshop titled How to Build Organic Ethereum Communities,
+            sharing our learnings on cultural resilience, long-term thinking, and post-influencer
+            coordination. The session sparked real dialogue about the future of on-chain
+            community-building beyond the hype cycles.</p>
+            <p>Later that day we reconnected with Francesco, DevRel at MetaMask, and had our first
+            in-person meeting with Joseph Schweitzer of the Ethereum Foundation. In an unexpected and
+            humbling moment, Joseph called the $BOOE community the Doge of Ethereum, a recognition of
+            our organic presence and cultural meme-force. It was in that same conversation that he
+            first hinted $BOOE should join Devconnect Argentina, planting the first seed of what may
+            become a major milestone.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 2</span><span class="d-name">Names, networks, and Vitalik</span></p>
+            <p>On the second day we spoke with Caps and Artii from Namespace, who proposed co-creating
+            a $BOOE ENS namespace, a decentralized identity layer for our growing network of members
+            and products. We invited them to our side event that evening to go deeper on how $BOOE and
+            Namespace could co-develop the cultural registry of Ethereum.</p>
+            <p>Then came a moment we will not soon forget: meeting Vitalik Buterin. We shared our
+            vision for stronger, more resilient Ethereum communities, a theme that resonated with his
+            recent writings. As a token of appreciation we gifted him a $BOOE community shirt, which
+            he graciously accepted and carried with him. A beautiful, unexpected alignment of
+            purpose.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 3</span><span class="d-name">Deep roots and final words</span></p>
+            <p>On the final day we had follow-up conversations with teams from Polkadot, Celo, and
+            Minipay, exploring collaborations around community and education. We also spoke with Josef
+            Je, ETH Prague's lead organizer and a former Ethereum Foundation member, who thanked $BOOE
+            for its sponsorship and for the authenticity and energy of the community.</p>
+            <p>We left Prague with new allies, old friends, and a clear message from the Ethereum
+            ecosystem.</p>
+        </section>
+
+        <div class="act-amen" data-reveal>
+            <span class="gilded" aria-hidden="true"></span>
+            <p>{$act['closingLine']}</p>
+            <span class="gilded" aria-hidden="true"></span>
+        </div>
+
+        <nav class="act-nav" aria-label="Move through the Acts">
+            {if $prev}
+                <a class="act-nav-link prev" href="/acts/{$prev['slug']}/">
+                    <span class="dir"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l4 4"/><path d="M5 12l4 -4"/></svg>Act {$prev['act']}</span>
+                    <span class="ttl">{$prev['event']} {$prev['year']}</span>
+                </a>
+            {else}
+                <span class="act-nav-link empty" aria-hidden="true"></span>
+            {/if}
+            {if $next}
+                <a class="act-nav-link next" href="/acts/{$next['slug']}/">
+                    <span class="dir">Act {$next['act']}<svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M15 16l4 -4"/><path d="M15 8l4 4"/></svg></span>
+                    <span class="ttl">{$next['event']} {$next['year']}</span>
+                </a>
+            {/if}
+        </nav>
+    </div>
+</main>
+{/block}

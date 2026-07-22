@@ -1,0 +1,92 @@
+{layout '../layouts/base.latte'}
+
+{*
+  Act III detail -> built at /act-10-year-eth-zug/, relocated to
+  /acts/10-year-eth-zug/ by the post-build step. Source:
+  booe-docs-src/blog/10-year-eth-zug.md, cleaned: em-dashes stripped, tightened.
+  A single-day event, so the micro labels mark movements, not days. No dashes.
+*}
+{var $pageTitle = '10 Years of Ethereum, Zug 2025'}
+{var $pageDescription = 'Act III of the chronicle. At Ethereum\'s birthplace, the brethren honored a decade of Ethereum with the Ethereum Foundation, Akasha, and Bitcoin Suisse, and heard Mihai Alisie announce etherLaken.'}
+{var $pageSlug = 'acts/10-year-eth-zug'}
+{var $pageCss = 'acts'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+{var $act = null}{var $prev = null}{var $next = null}
+{foreach $acts as $i => $row}
+    {if $row['slug'] === '10-year-eth-zug'}
+        {var $act = $row}
+        {var $prev = $i > 0 ? $acts[$i - 1] : null}
+        {var $next = isset($acts[$i + 1]) ? $acts[$i + 1] : null}
+    {/if}
+{/foreach}
+
+<main id="main" class="act-chapter">
+    {include '../partials/act-plate.latte', act: $act}
+
+    <div class="wrap act-prose">
+        <p class="lead" data-reveal>On the 30th of July, the brethren traveled to Zug, Switzerland, the
+        birthplace of Ethereum, to celebrate ten years of Ethereum alongside the Ethereum Foundation,
+        the Akasha Foundation, and Bitcoin Suisse. It was a day of gratitude, vision, and reconnection
+        with the origins of Ethereum's mission.</p>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Keynote</span><span class="d-name">A decade, and a glimpse of the next</span></p>
+            <p>The gathering opened with a heartfelt keynote by Mihai Alisie, co-founder of Ethereum
+            and of Bitcoin Magazine. He thanked everyone present for their contributions over the past
+            ten years, reflecting on Ethereum's evolution from an idea into a global movement. What
+            followed was a presentation by several Ethereum core members, culminating in Mihai's major
+            announcement: a new physical home for Ethereum is coming, etherLaken, in Switzerland. The
+            project aims to bring at least ten percent of the Ethereum ecosystem to this new location,
+            planting roots for long-term research, coordination, and on-chain cultural
+            infrastructure.</p>
+            <p>After the presentation we had the honor of speaking with Mihai one-on-one. He
+            encouraged the $BOOE community to visit etherLaken and to explore how we might contribute
+            to its development, in presence and in spirit. We captured a photo and a video message
+            with Mihai for the community, and thanked him deeply for his time and support.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Research</span><span class="d-name">Students, and Booelief</span></p>
+            <p>Another highlight was meeting Theo, a researcher from the Ethereum Foundation focused on
+            academic engagement. With Tarzan still active as a student, the conversation sparked
+            immediate possibilities. Theo shared his interest in working with $BOOE on academic and
+            educational initiatives, and invited us to continue the conversation in more depth at
+            ETHGlobal NYC, where he would also be present. It was one of those rare, serendipitous
+            meetings that could turn into something lasting.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Community</span><span class="d-name">Booelievers, born in Zug</span></p>
+            <p>Throughout the day we connected with a wide range of Ethereum believers, many of whom
+            walked away as new Booelievers. It was a beautiful reminder that the values we carry,
+            culture, resilience, community, and memes with meaning, resonate across every corner of
+            the ecosystem. As we often say:</p>
+        </section>
+
+        <div class="act-amen" data-reveal>
+            <span class="gilded" aria-hidden="true"></span>
+            <p>{$act['closingLine']}</p>
+            <span class="gilded" aria-hidden="true"></span>
+        </div>
+
+        <nav class="act-nav" aria-label="Move through the Acts">
+            {if $prev}
+                <a class="act-nav-link prev" href="/acts/{$prev['slug']}/">
+                    <span class="dir"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l4 4"/><path d="M5 12l4 -4"/></svg>Act {$prev['act']}</span>
+                    <span class="ttl">{$prev['event']} {$prev['year']}</span>
+                </a>
+            {else}
+                <span class="act-nav-link empty" aria-hidden="true"></span>
+            {/if}
+            {if $next}
+                <a class="act-nav-link next" href="/acts/{$next['slug']}/">
+                    <span class="dir">Act {$next['act']}<svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M15 16l4 -4"/><path d="M15 8l4 4"/></svg></span>
+                    <span class="ttl">{$next['event']} {$next['year']}</span>
+                </a>
+            {/if}
+        </nav>
+    </div>
+</main>
+{/block}

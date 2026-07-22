@@ -1,30 +1,93 @@
 {layout '../layouts/base.latte'}
 
 {*
-  ROUTE STUB -> /acts/. Owned by the Acts page agent (FLAGSHIP). $acts is already
-  available in this block (bootstrapped by the layout, see base.latte). Reuse the
-  .rail, .act-stub, .act-card component classes from app.css. Gold appears exactly
-  once here (the ETHGlobal NY marker). See scratchpad/BUILD-NOTES.md.
+  /acts/  FLAGSHIP overview, the chronicle proper. Owned by the Acts page agent.
+  $acts is bootstrapped by the layout (see base.latte), chronological ascending.
+  Every Act renders as a full chronicle card on the living lapis rail. Reuses the
+  .rail / .act-card component system from app.css; page-only styling in acts.css.
+  Gold appears exactly once here: the ETHGlobal NY marker. No em-dashes.
 *}
 {var $pageTitle = 'The Acts'}
-{var $pageDescription = 'A chronicle of a movement. Wherever Ethereum gathers, the Book is carried. ETH Prague, EthCC Cannes, 10 Years of Ethereum in Zug, and the first win at ETHGlobal NY.'}
+{var $pageDescription = 'A chronicle of a movement. Wherever Ethereum gathers, the brethren carry the Book into the room. ETH Prague, EthCC Cannes, 10 Years of Ethereum in Zug, and the first win at ETHGlobal NY.'}
 {var $pageSlug = 'acts'}
 {var $pageCss = 'acts'}
 {var $bodyClass = 'page-inner'}
 
 {block content}
-<main id="main" class="page-shell">
+{var $x = 'https://x.com/bookof_eth'}
+<main id="main" class="page-shell acts-page">
+    <div class="acts-aura" aria-hidden="true"></div>
+
     <div class="wrap">
-        <div class="chapter-head">
+        <div class="chapter-head" data-reveal>
             <span class="ch-node"></span>
-            <span class="ch-label">Chapter &middot; The Acts</span>
+            <span class="ch-label">Chapter III &middot; The Acts</span>
             <span class="ch-line"></span>
             <span class="ch-folio">Folio III</span>
         </div>
-        <p class="eyebrow page-eyebrow">The deeds of the brethren, in the world</p>
-        <h1>The Acts</h1>
-        <p class="page-lede">The Book does not live only on-chain. It shows up in the real world, across Ethereum. Each appearance is an Act.</p>
-        <p class="page-note">This chapter is being inscribed.</p>
+
+        <p class="eyebrow page-eyebrow rise">The deeds of the brethren, in the world</p>
+        <h1 class="rise d1">The Acts</h1>
+        <p class="page-lede rise d2">The Book does not live only on-chain. Wherever Ethereum gathers,
+        the brethren carry it into the room. Each appearance is an Act, a chapter in an ongoing
+        chronicle of a movement.</p>
+
+        <div class="ledger acts-ledger rise d3">
+            <div class="ledger-in">
+                <div class="cell"><span class="k">Acts inscribed</span><span class="v">4</span></div>
+                <div class="cell"><span class="k">Cities</span><span class="v">Prague <i>to</i> New York</span></div>
+                <div class="cell"><span class="k">Span</span><span class="v">May to Aug 2025</span></div>
+                <div class="cell"><span class="k">Every deed inscribed by</span><span class="v">Tarzan</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="rail acts-rail">
+            {foreach $acts as $a}
+                <article class="act-card" data-reveal>
+                    <span class="dot"></span>
+                    <div class="act-when">
+                        <span class="a-label">Act {$a['act']}</span>
+                        <div class="date">{$a['dateBig']}{if $a['dateRest']} <small>{$a['dateRest']}</small>{/if}</div>
+                        <span class="year">{$a['event']} &middot; {$a['year']}</span>
+                        <span class="place">
+                            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></svg>
+                            {$a['place']}
+                        </span>
+                    </div>
+                    <div class="act-body">
+                        <span class="ghost" aria-hidden="true">{$a['act']}</span>
+                        <div class="act-tags">
+                            {if $a['gold']}
+                                <span class="tag gold"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6"/></svg>{$a['goldMarker']}</span>
+                            {/if}
+                            {foreach $a['roleTags'] as $i => $tag}
+                                <span class="tag{if $i === 0} lapis{/if}">{$tag}</span>
+                            {/foreach}
+                        </div>
+                        <h3>{$a['title']}</h3>
+                        <p class="excerpt">{$a['excerpt']}</p>
+                        <div class="act-foot">
+                            <span class="by"><img class="scribe" src="/assets/img/avatars/tarzan.jpg" alt="" width="22" height="22" decoding="async" loading="lazy">Inscribed by <b>{$a['author']}</b> &middot; {$a['published']}</span>
+                            <a class="link-arrow read" href="/acts/{$a['slug']}/">Read the chapter
+                                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            {/foreach}
+
+            <div class="act-continues" data-reveal>
+                <span class="dot-open" aria-hidden="true"></span>
+                <p class="cont-label">The chronicle continues</p>
+                <p class="cont-copy">Wherever Ethereum gathers next, the Book will be carried. The next
+                Act is not yet written.</p>
+                <a class="link-arrow" href="{$x}" target="_blank" rel="noopener">Follow the next Act
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                </a>
+            </div>
+        </div>
     </div>
 </main>
 {/block}

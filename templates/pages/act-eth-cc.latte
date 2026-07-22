@@ -1,0 +1,107 @@
+{layout '../layouts/base.latte'}
+
+{*
+  Act II detail -> built at /act-eth-cc/, relocated to /acts/eth-cc/ by the
+  post-build step. Source: booe-docs-src/blog/eth-cc.md, cleaned: em-dashes
+  stripped, "Infinity Garden" corrected to "Infinite Garden", tightened. No dashes.
+*}
+{var $pageTitle = 'EthCC Cannes 2025'}
+{var $pageDescription = 'Act II of the chronicle. As a sponsor at EthCC in Cannes, the brethren spent a week building bridges with MetaMask, Web3Privacy, Strato Mercata, the Devconnect Argentina team, and the Ethereum Foundation.'}
+{var $pageSlug = 'acts/eth-cc'}
+{var $pageCss = 'acts'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+{var $act = null}{var $prev = null}{var $next = null}
+{foreach $acts as $i => $row}
+    {if $row['slug'] === 'eth-cc'}
+        {var $act = $row}
+        {var $prev = $i > 0 ? $acts[$i - 1] : null}
+        {var $next = isset($acts[$i + 1]) ? $acts[$i + 1] : null}
+    {/if}
+{/foreach}
+
+<main id="main" class="act-chapter">
+    {include '../partials/act-plate.latte', act: $act}
+
+    <div class="wrap act-prose">
+        <p class="lead" data-reveal>From the 30th of June to the 4th of July, the brethren were present
+        as a sponsor at EthCC in Cannes. The journey began with an invitation from Joseph Schweitzer,
+        a long-standing Ethereum contributor and member of the Ethereum Foundation, and opened into a
+        week of deep connection, discovery, and dialogue across the ecosystem.</p>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 1</span><span class="d-name">Builders and bridges</span></p>
+            <p>We began at the MetaMask Builders Night hosted by Francesco, an evening full of
+            meaningful conversations with teams from across the Layer 1 and Layer 2 landscape. We
+            spoke with projects like Kadena, Celo, and Aave, and found shared values in community
+            building, decentralization, and cultural resilience.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 2</span><span class="d-name">Privacy matters</span></p>
+            <p>On the second day we attended the Web3Privacy Now side event. There we met Mikola, a
+            core developer of Web3Privacy, and Bob Summerwill, a former Ethereum Foundation
+            contributor and long-time advocate. These encounters solidified a strong connection with
+            Strato Mercata, the company led by Kieren Lubin, son of Consensys founder Joseph Lubin.
+            The conversations turned on on-chain privacy, governance culture, and future
+            collaboration.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 3</span><span class="d-name">Devconnect on the horizon</span></p>
+            <p>We met the organizing team of Devconnect Argentina, the largest upcoming Ethereum event
+            in the world. We explored how $BOOE could play a meaningful role there, not only as a
+            participant but as a contributor to the cultural and educational layer of Ethereum's
+            global narrative. The discussions left us excited about helping co-create the on-chain
+            cultural experience at Devconnect.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 4</span><span class="d-name">Picnic and possibilities</span></p>
+            <p>Migle from Web3Privacy invited us to a relaxed community picnic. Between bites and fresh
+            air we spoke about how Web3Privacy and $BOOE could collaborate at future events,
+            co-hosting sessions, supporting one another's ecosystems, and amplifying privacy-first and
+            community-first narratives within the wider movement.</p>
+        </section>
+
+        <section class="day" data-reveal>
+            <p class="day-label"><span class="d-num">Day 5</span><span class="d-name">Gardens and futures</span></p>
+            <p>We ended the journey with a heartfelt conversation with Jason Chaskin of the Ethereum
+            Foundation about the future of the Infinite Garden, a space within the EF for exploring
+            long-term, cultural, and experimental ideas. The $BOOE mission, to protect and celebrate
+            Ethereum's social layer through story, meme, and movement, felt deeply aligned with the
+            Garden's ethos.</p>
+        </section>
+
+        <p data-reveal>Our presence at EthCC Cannes was more than symbolic. It was a week of building
+        trust, forming unlikely alliances, and planting seeds for future collaboration. We are
+        grateful to the Ethereum Foundation, the organizers, and every builder and dreamer we met.
+        The Book of Ethereum continues, not as a fixed text but as a living community weaving culture,
+        narrative, and code.</p>
+
+        <div class="act-amen" data-reveal>
+            <span class="gilded" aria-hidden="true"></span>
+            <p>{$act['closingLine']}</p>
+            <span class="gilded" aria-hidden="true"></span>
+        </div>
+
+        <nav class="act-nav" aria-label="Move through the Acts">
+            {if $prev}
+                <a class="act-nav-link prev" href="/acts/{$prev['slug']}/">
+                    <span class="dir"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l4 4"/><path d="M5 12l4 -4"/></svg>Act {$prev['act']}</span>
+                    <span class="ttl">{$prev['event']} {$prev['year']}</span>
+                </a>
+            {else}
+                <span class="act-nav-link empty" aria-hidden="true"></span>
+            {/if}
+            {if $next}
+                <a class="act-nav-link next" href="/acts/{$next['slug']}/">
+                    <span class="dir">Act {$next['act']}<svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M15 16l4 -4"/><path d="M15 8l4 4"/></svg></span>
+                    <span class="ttl">{$next['event']} {$next['year']}</span>
+                </a>
+            {/if}
+        </nav>
+    </div>
+</main>
+{/block}
