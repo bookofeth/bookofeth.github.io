@@ -9,14 +9,14 @@
   Fonts are self-hosted woff2 (no Google Fonts hotlink). Dark-only brand surface.
 *}
 {var $siteName = $leafName ?? 'Book of Ethereum'}
-{var $prodUrl = rtrim($leafProductionUrl ?? 'https://bookofeth.xyz', '/')}
+{var $prodUrl = rtrim($leafProductionUrl ?? 'https://bookofeth.github.io', '/')}
 {var $tagline = 'The cultural layer of Ethereum'}
 {var $pt = trim($pageTitle ?? '')}
 {var $ps = trim($pageSlug ?? '')}
 {var $metaTitle = $pt !== '' ? $pt . ' &middot; ' . $siteName : $siteName . ' &middot; ' . $tagline}
 {var $metaDescription = trim($pageDescription ?? '') !== '' ? trim($pageDescription) : ($leafDescription ?? 'The cultural layer of Ethereum. The Book of Ethereum preserves its memory, translates its meaning, and projects its myth forward.')}
 {var $canonical = $ps !== '' ? $prodUrl . '/' . $ps . '/' : $prodUrl . '/'}
-{var $ogImage = $prodUrl . '/logo.png'}
+{var $ogImage = $prodUrl . '/assets/img/og-card.png'}
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,8 +30,8 @@
 
 <link rel="canonical" href="{$canonical}">
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/logo.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-title" content="{$siteName}">
 
 <meta property="og:type" content="website">
@@ -41,8 +41,8 @@
 <meta property="og:site_name" content="{$siteName}">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="{$ogImage}">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="1024">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="{$canonical}">
@@ -50,10 +50,10 @@
 <meta name="twitter:description" content="{$metaDescription}">
 <meta name="twitter:image" content="{$ogImage}">
 
-{* Self-hosted fonts. Preload the two load-bearing weights (scripture + interface). *}
-<link rel="preload" href="/assets/fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-
+{* Self-hosted fonts, discovered via fonts.css below (same-origin woff2, font-display:swap).
+   No rel=preload: the reveal system briefly hides above-the-fold text, so a preloaded
+   weight was flagged "not used within a few seconds" on every page. The CSS-driven fetch
+   is already early and same-origin, so the preload bought nothing but console noise. *}
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="/assets/css/app.css">
