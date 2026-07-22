@@ -1,13 +1,22 @@
-{* Site footer. No em-dashes, no en-dashes. *}
+{*
+  Global footer, the colophon (the book closing). No em-dashes, no en-dashes.
+  Carries the footer's single budgeted gilded rule. External links open in a new
+  tab with rel="noopener". OpenSea is intentionally omitted: no verified
+  booelievers collection URL was provided (do not invent one).
+*}
 <footer class="site-footer">
-    <div class="footer-inner">
-        <a class="footer-mark" href="/" aria-label="Book of Ethereum home">
-            <img src="/logo.png" alt="" width="28" height="28" decoding="async">
-            <span>Book of Ethereum</span>
-        </a>
-        <p class="footer-credit">
-            &copy; {=date('Y')} BOOE Foundation. Made with care by
-            <a href="https://ophelios.com" rel="noopener" target="_blank">Ophelios</a>.
-        </p>
+    <img class="mark" src="/logo.png" alt="Book of Ethereum" width="44" height="44" decoding="async">
+    <p class="epigraph">So it is written, so it shall be mined.</p>
+    <div class="gilded" aria-hidden="true"></div>
+    <div class="foot-row">
+        <p>&copy; {=date('Y')} BOOE Foundation. Made with care by <a href="https://ophelios.com" target="_blank" rel="noopener">Ophelios</a>.</p>
+        <nav class="foot-links" aria-label="External">
+            <a href="https://x.com/bookof_eth" target="_blank" rel="noopener">X</a>
+            <a href="https://t.co/9CV0sztBLG" target="_blank" rel="noopener">Telegram</a>
+            <a href="https://app.aragon.org/dao/ethereum-mainnet/booe.dao.eth/dashboard" target="_blank" rel="noopener">DAO</a>
+            <a href="https://pilgrimage.bookofeth.xyz/" target="_blank" rel="noopener">Pilgrimage</a>
+            <a href="https://ens.bookofeth.xyz/" target="_blank" rel="noopener">ENS</a>
+            <a href="https://booemerch.com/" target="_blank" rel="noopener">Merch</a>
+        </nav>
     </div>
 </footer>

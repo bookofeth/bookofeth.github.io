@@ -1,0 +1,59 @@
+{*
+  Global header nav. Fixed, transparent over the hero, frosts on scroll (see
+  site.js + .nav.scrolled in app.css). Wordmark left, five chapters, silver CTA
+  pill (Join the Brethren -> Telegram). Mobile collapses to a burger that opens a
+  full-screen table-of-contents sheet (the menu-as-TOC signature moment).
+*}
+{var $tg = 'https://t.co/9CV0sztBLG'}
+{var $navItems = [
+    ['label' => 'The Philosophy', 'href' => '/philosophy/', 'folio' => 'I'],
+    ['label' => 'The Trinity',    'href' => '/trinity/',    'folio' => 'II'],
+    ['label' => 'The Acts',       'href' => '/acts/',       'folio' => 'III'],
+    ['label' => 'The Brethren',   'href' => '/brethren/',   'folio' => 'IV'],
+    ['label' => 'The Manifest',   'href' => '/manifest/',   'folio' => 'V'],
+]}
+
+<header class="nav" data-nav>
+    <div class="nav-in">
+        <a class="brand" href="/" aria-label="Book of Ethereum home">
+            <img src="/logo.png" alt="" width="30" height="30" decoding="async">
+            <b>BOOK OF ETHEREUM</b>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+            {foreach $navItems as $item}
+                <a href="{$item['href']}">{$item['label']}</a>
+            {/foreach}
+        </nav>
+
+        <a class="btn btn-silver nav-cta" href="{$tg}" target="_blank" rel="noopener">
+            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+            Join the Brethren
+        </a>
+
+        <button class="nav-burger" type="button" data-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="nav-sheet">
+            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+        </button>
+    </div>
+</header>
+
+<div class="nav-sheet" id="nav-sheet" data-menu aria-hidden="true">
+    <button class="nav-sheet-close" type="button" data-menu-close aria-label="Close menu">
+        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
+    </button>
+    <p class="nav-sheet-label">Table of contents</p>
+    <ul class="nav-toc">
+        {foreach $navItems as $item}
+            <li>
+                <a href="{$item['href']}">
+                    <span>{$item['label']}</span>
+                    <span class="folio">Folio {$item['folio']}</span>
+                </a>
+            </li>
+        {/foreach}
+    </ul>
+    <a class="btn btn-silver" href="{$tg}" target="_blank" rel="noopener">
+        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        Join the Brethren
+    </a>
+</div>
