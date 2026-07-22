@@ -781,8 +781,8 @@ svg.ti {
 .site-footer .gilded { max-width: 280px; margin: 28px auto; }
 .foot-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; max-width: var(--measure); margin: 0 auto; padding: 0 var(--edge); flex-wrap: wrap; }
 .foot-row p { font: 500 12px/1.6 var(--roman); color: var(--text-faint); }
-.foot-row p a { color: var(--text-dim); transition: color var(--dur); }
-.foot-row p a:hover { color: var(--accent-hi); }
+.foot-row p a { color: var(--text-dim); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; text-decoration-color: rgba(142, 151, 171, 0.6); transition: color var(--dur); }
+.foot-row p a:hover { color: var(--accent-hi); text-decoration-color: currentColor; }
 .foot-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
 .foot-links a { font: 600 10.5px/1 var(--roman); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); transition: color var(--dur); }
 .foot-links a:hover { color: var(--accent-hi); }
