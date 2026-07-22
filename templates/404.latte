@@ -1,0 +1,77 @@
+{layout 'layouts/base.latte'}
+
+{*
+  BOOE 404. Overrides the bundled Leaf docs error view (app/Views/404.latte),
+  so the lost visitor lands on real BOOE chrome (nav + footer + site.js) with
+  ZERO external scripts (the bundled default pulled 5 cdnjs Prism scripts + a dead
+  lang-switcher). One <title> only, from the shared head. Reverent, with a wink.
+  No em-dashes. Tabler icons only, copied verbatim. Built on app.css components.
+*}
+
+{var $pageTitle = 'Not Found'}
+{var $pageDescription = 'This page was never inscribed. Return to the beginning of the Book, or open the Manifest to find your way.'}
+{var $bodyClass = 'page-inner'}
+
+{block head}
+<style>
+  .notfound {
+    position: relative;
+    min-height: calc(100vh - var(--nav-h) - 260px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .notfound .nf-ghost {
+    font: 400 clamp(120px, 20vw, 240px)/1 var(--serif);
+    color: rgba(134, 160, 246, 0.08);
+    letter-spacing: 0.04em;
+    user-select: none;
+    pointer-events: none;
+    margin-bottom: -0.28em;
+  }
+  .notfound .eyebrow { margin-bottom: 16px; }
+  .notfound h1 {
+    font: 400 clamp(34px, 4.4vw, 56px)/1.1 var(--serif);
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .notfound .page-lede {
+    font: italic 400 clamp(17px, 1.6vw, 20px)/1.6 var(--serif);
+    color: var(--text-dim);
+    margin: 22px auto 0;
+    max-width: 52ch;
+  }
+  .notfound .nf-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+  }
+</style>
+{/block}
+
+{block content}
+<main id="main" class="page-shell">
+  <div class="wrap">
+    <section class="notfound">
+      <span class="nf-ghost" aria-hidden="true">404</span>
+      <p class="eyebrow">Folio not found</p>
+      <h1>This page was never inscribed.</h1>
+      <p class="page-lede">The verse you seek is not in the Book. Perhaps it was never written, or the path has since been rewritten. Return to the beginning, or open the Manifest and find your way.</p>
+      <div class="nf-actions">
+        <a class="btn btn-silver" href="/">
+          <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l4 4"/><path d="M5 12l4 -4"/></svg>
+          Return to the beginning
+        </a>
+        <a class="btn btn-ghost" href="/manifest/">
+          <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z"/><path d="M19 16h-12a2 2 0 0 0 -2 2"/><path d="M9 8h6"/></svg>
+          Open the Manifest
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+{/block}
