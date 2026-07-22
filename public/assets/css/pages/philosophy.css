@@ -1,0 +1,4 @@
+/* Page-scoped styles for /philosophy/. Owned by the Philosophy page agent.
+   Linked automatically by the layout when the page sets {var $pageCss = 'philosophy'}.
+   Build on the global system in app.css (tokens, chapter-head, buttons, cards).
+   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: max 3. */

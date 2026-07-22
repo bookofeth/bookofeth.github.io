@@ -1,0 +1,5 @@
+/* Page-scoped styles for /brethren/. Owned by the Brethren page agent.
+   Linked automatically by the layout when the page sets {var $pageCss = 'brethren'}.
+   Reuse the coin-medallion device for the three Prophets; keep them silver unless
+   the gold budget is re-allocated (see DESIGN-DIRECTION C6).
+   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: max 3. */

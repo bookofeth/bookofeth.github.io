@@ -1,0 +1,4 @@
+/* Page-scoped styles for /trinity/ (FLAGSHIP). Owned by the Trinity page agent.
+   Linked automatically by the layout when the page sets {var $pageCss = 'trinity'}.
+   Reuse .cycle / .node / .rcard from app.css; add page-only styles here.
+   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: max 3. */

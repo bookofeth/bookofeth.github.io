@@ -1,0 +1,5 @@
+/* Page-scoped styles for /acts/ (FLAGSHIP). Owned by the Acts page agent.
+   Linked automatically by the layout when the page sets {var $pageCss = 'acts'}.
+   Reuse .rail / .act-stub / .act-card from app.css; add page-only styles here.
+   Gold appears exactly once in this chapter (the ETHGlobal NY marker).
+   Do NOT edit app.css. No em-dashes. Tabler icons only. */

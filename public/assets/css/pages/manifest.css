@@ -1,0 +1,4 @@
+/* Page-scoped styles for /manifest/. Owned by the Manifest / docs agent.
+   Linked automatically by the layout when the page sets {var $pageCss = 'manifest'}.
+   The illuminated table of contents. Build on the global system in app.css.
+   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: max 3. */
