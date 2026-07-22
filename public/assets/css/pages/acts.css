@@ -17,12 +17,12 @@
   position: absolute;
   top: -60px;
   left: 50%;
-  transform: translateX(-42%);
-  width: 1200px;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
   height: 760px;
-  max-width: 130vw;
   pointer-events: none;
-  background: radial-gradient(closest-side, rgba(71, 99, 214, 0.16), rgba(44, 60, 150, 0.06) 52%, transparent 72%);
+  background: radial-gradient(closest-side at 46% 50%, rgba(71, 99, 214, 0.16), rgba(44, 60, 150, 0.06) 52%, transparent 72%);
 }
 .acts-page .page-eyebrow { position: relative; }
 .acts-page h1 { position: relative; }
