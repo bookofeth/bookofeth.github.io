@@ -39,8 +39,21 @@ done
 
 # Rewrite the auto-generated sitemap loc entries: /act-{slug}/ -> /acts/{slug}/.
 # The overview is '/acts/' (no trailing dash after 'act'), so it is left alone.
+# Also drop the /404/ entry: the error page is served as 404.html (a 404 status),
+# so it must not advertise itself as an indexable URL in the sitemap.
 if [ -f "$DIST/sitemap.xml" ]; then
   perl -0pi -e 's{/act-([a-z0-9][a-z0-9-]*)/}{/acts/$1/}g' "$DIST/sitemap.xml"
+  perl -ni -e 'print unless m{<loc>[^<]*/404/</loc>}' "$DIST/sitemap.xml"
 fi
 
 echo "relocate-acts: relocated ${moved} Act page(s) into ${DIST}/acts/"
+
+# Prune the bundled Leaf docs-scaffold JS. These ship from the framework's EMBEDDED
+# public/ defaults, so deleting them from the project's public/assets/js/ is not
+# enough (the binary re-injects its copies at build). None are referenced by any
+# BOOE template (only site.js is). Removing them here keeps them out of dist on
+# every build, local and CI. site.js is kept.
+for dead in theme sidebar search copy-code lang-switcher; do
+  rm -f "$DIST/assets/js/${dead}.js"
+done
+echo "relocate-acts: pruned unused docs-scaffold JS from ${DIST}/assets/js/"
