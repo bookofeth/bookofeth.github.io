@@ -1,0 +1,79 @@
+name: Deploy to GitHub Pages
+
+# The site is a static Zephyrus Leaf build. dist/ is NOT committed: this pipeline
+# installs Leaf, runs `leaf build` on CI, validates the output, then publishes it
+# to GitHub Pages. No CNAME is written (the bookofeth.xyz custom-domain cutover is
+# gated and must not hijack live DNS).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deploy at a time; a newer push supersedes an in-flight one.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: intl, mbstring, sodium, pdo, pdo_sqlite
+
+      - name: Install Leaf
+        run: |
+          curl -fsSL https://leaf.ophelios.com/install.sh | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Build site
+        run: leaf build
+
+      - name: Validate build output
+        run: |
+          test -f dist/index.html  || { echo "FAIL: dist/index.html missing"; exit 1; }
+          test -f dist/sitemap.xml || { echo "FAIL: dist/sitemap.xml missing"; exit 1; }
+          test -f dist/robots.txt  || { echo "FAIL: dist/robots.txt missing"; exit 1; }
+          # House rule: no em-dash (U+2014) or en-dash (U+2013) anywhere in shipped text.
+          python3 - <<'PY'
+          import pathlib, sys
+          exts = {".html", ".css", ".js", ".json", ".xml", ".txt", ".webmanifest"}
+          bad = []
+          for p in pathlib.Path("dist").rglob("*"):
+              if p.is_file() and p.suffix.lower() in exts:
+                  t = p.read_text(encoding="utf-8", errors="ignore")
+                  if "—" in t or "–" in t:
+                      bad.append(str(p))
+          if bad:
+              print("FAIL: em/en-dash found in:", ", ".join(bad)); sys.exit(1)
+          print("OK: no em/en-dash in dist")
+          PY
+          echo "OK: dist validated"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
