@@ -55,12 +55,12 @@
                                     </span>
                                 </span>
                             </td>
-                            <td>{if $r['verb']}<span class="tk-val">{$r['verb']|firstUpper}</span>{else}<span class="tk-dim">In development</span>{/if}</td>
-                            <td>{if $r['launched']}<span class="tk-val">{$r['launched']}</span>{else}<span class="tk-dim">In development</span>{/if}</td>
-                            <td>{if $r['supply']}<span class="tk-val">{$r['supply']}</span>{else}<span class="tk-dim">Not yet minted</span>{/if}</td>
-                            <td>{if $r['tax'] !== null}<span class="tk-val">{$r['tax']}</span>{else}<span class="tk-dim">To be set</span>{/if}</td>
-                            <td>{if $r['lp']}<span class="tk-val{if $r['lp'] !== null} pos{/if}">{$r['lp']}</span>{else}<span class="tk-dim">To be locked</span>{/if}</td>
-                            <td>
+                            <td data-label="Role">{if $r['verb']}<span class="tk-val">{$r['verb']|firstUpper}</span>{else}<span class="tk-dim">In development</span>{/if}</td>
+                            <td data-label="Launched">{if $r['launched']}<span class="tk-val">{$r['launched']}</span>{else}<span class="tk-dim">In development</span>{/if}</td>
+                            <td data-label="Supply">{if $r['supply']}<span class="tk-val">{$r['supply']}</span>{else}<span class="tk-dim">Not yet minted</span>{/if}</td>
+                            <td data-label="Tax">{if $r['tax'] !== null}<span class="tk-val">{$r['tax']}</span>{else}<span class="tk-dim">To be set</span>{/if}</td>
+                            <td data-label="Liquidity">{if $r['lp']}<span class="tk-val{if $r['lp'] !== null} pos{/if}">{$r['lp']}</span>{else}<span class="tk-dim">To be locked</span>{/if}</td>
+                            <td data-label="On-chain">
                                 {if $r['contract']}
                                     <span class="tk-chain">
                                         <button type="button" class="ca-chip" data-copy="{$r['contract']}" aria-label="Copy {$r['ticker']} contract address {$r['contract']}" title="{$r['contract']}">

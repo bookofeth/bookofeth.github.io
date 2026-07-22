@@ -278,3 +278,50 @@
   .chapter-nav { gap: 28px; }
   .cn-next { margin-left: 0; }
 }
+
+/* Token reference on phones: the 7-column table reflows into stacked ledger
+   cards so every field, including the copyable contract chip + DexTools link
+   (the "receipts"), is visible with no horizontal scrolling. Desktop and small
+   tablets keep the table (it scrolls in place inside .tokentable-wrap above this
+   breakpoint). The <thead> is kept for assistive tech, visually hidden. */
+@media (max-width: 640px) {
+  .tokentable-wrap { overflow-x: visible; }
+  .tokentable { min-width: 0; display: block; }
+  .tokentable thead {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0);
+    white-space: nowrap; border: 0;
+  }
+  .tokentable tbody { display: block; }
+  .tokentable tbody tr {
+    display: block;
+    padding: 6px 18px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tokentable tbody tr:last-child { border-bottom: none; }
+  .tokentable tbody tr:hover { background: none; }
+  .tokentable td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line-quiet);
+  }
+  .tokentable td:last-child { border-bottom: none; padding-bottom: 2px; flex-wrap: wrap; row-gap: 10px; }
+  .tokentable td::before {
+    content: attr(data-label);
+    flex: none;
+    font: 600 9.5px/1.4 var(--roman);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  /* First cell is the card title (relic dot + ticker + name), no label. */
+  .tokentable td:first-child { padding: 10px 0 14px; border-bottom: 1px solid var(--line); }
+  .tokentable td:first-child::before { display: none; }
+  /* On-chain cell: label left, chip + DexTools link right (wrap if tight). */
+  .tokentable td:last-child .tk-chain { justify-content: flex-end; }
+}
