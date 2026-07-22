@@ -38,6 +38,11 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Root-level guard: no page may ever scroll sideways, whatever a decorative
+     full-bleed aura/glow tries to do. body alone is not enough, the document
+     element must clamp too. */
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -52,6 +57,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  max-width: 100%;
 }
 body.menu-open { overflow: hidden; }
 
@@ -885,4 +891,18 @@ svg.ti {
   .act-card .dot { left: -24px; }
   .act-stub .a-meta { margin-left: 0; width: 100%; }
   .foot-row { justify-content: center; text-align: center; }
+}
+
+/* Narrow phones: the chapter running-head folio ("Manifest . Appendix I") is
+   too long for the row, so let it shrink and wrap right-aligned instead of
+   bleeding off the right edge. */
+@media (max-width: 480px) {
+  .ch-folio {
+    min-width: 0;
+    white-space: normal;
+    text-align: right;
+    overflow-wrap: anywhere;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
 }
