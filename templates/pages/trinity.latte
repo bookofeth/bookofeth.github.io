@@ -1,11 +1,14 @@
 {layout '../layouts/base.latte'}
 
 {*
-  ROUTE STUB -> /trinity/. Owned by the Trinity page agent (FLAGSHIP). $relics is
-  already available in this block (bootstrapped by the layout, see base.latte).
-  Reuse the .cycle, .node, .rcard component classes from app.css. See
-  scratchpad/BUILD-NOTES.md.
+  The Trinity (FLAGSHIP). The full deep experience, richer than the home teaser:
+  the altar (cycle + harmony), a legible "how the cycle turns" flow, each relic
+  told in full ($BOOE / $HOPE / $PROPHET with story + ledger + contract copy +
+  DexTools chip), the honest $HOLY outlier, and a forward-looking close.
+  $relics is bootstrapped by the layout (see base.latte). Gold budget (1): the
+  closing gilded rule. No em-dashes. Tabler icons only, copied verbatim.
 *}
+
 {var $pageTitle = 'The Trinity'}
 {var $pageDescription = 'Four relics, one cycle. $BOOE creates, $HOPE remembers, $PROPHET guides, and faith is rewarded in $HOLY. All ERC-20 on Ethereum mainnet, liquidity locked, zero tax.'}
 {var $pageSlug = 'trinity'}
@@ -13,18 +16,270 @@
 {var $bodyClass = 'page-inner'}
 
 {block content}
-<main id="main" class="page-shell">
+{var $tg = 'https://t.co/9CV0sztBLG'}
+{var $booe = $relics[0]}
+{var $hope = $relics[1]}
+{var $prophet = $relics[2]}
+{var $holy = $relics[3]}
+{var $live = [$relics[0], $relics[1], $relics[2]]}
+
+<main id="main" class="page-shell trinity-page">
+
+{* ================= THE ALTAR (cycle + harmony) ================= *}
+<section class="tr-altar">
+    <div class="tr-altar-bg" aria-hidden="true"></div>
     <div class="wrap">
-        <div class="chapter-head">
+        <div class="chapter-head" data-reveal>
             <span class="ch-node"></span>
-            <span class="ch-label">Chapter &middot; The Trinity</span>
+            <span class="ch-label">Chapter II &middot; The Trinity</span>
             <span class="ch-line"></span>
-            <span class="ch-folio">Folio II</span>
+            <span class="ch-folio">Folio 02</span>
         </div>
-        <p class="eyebrow page-eyebrow">$BOOE &middot; $HOPE &middot; $PROPHET &middot; $HOLY</p>
-        <h1>The Trinity</h1>
-        <p class="page-lede">A living economy of meaning: creation, remembrance, and guidance, and the faith rewarded in $HOLY.</p>
-        <p class="page-note">This chapter is being inscribed.</p>
+
+        <div class="tr-head" data-reveal>
+            <p class="tr-eyebrow">
+                <i class="tb">$BOOE</i><span class="dot">&middot;</span><i class="th">$HOPE</i><span class="dot">&middot;</span><i class="tp">$PROPHET</i><span class="dot">&middot;</span><i class="ty">$HOLY</i>
+            </p>
+            <h1>Four relics. <em>One cycle.</em></h1>
+            <p class="tr-lede">At the heart of the Book lies the Trinity, a symbolic set of relics
+            for creation, remembrance, and guidance. Together they form the living economy of
+            meaning within the ecosystem.</p>
+            <p class="tr-ledgerline">
+                <b>All ERC-20</b><span class="sep">&middot;</span><b>Ethereum mainnet</b><span class="sep">&middot;</span><b>Liquidity locked</b><span class="sep">&middot;</span><b>Zero tax</b>
+            </p>
+        </div>
+
+        <div class="cycle" data-reveal aria-hidden="true">
+            <div class="cycle-ring"></div>
+            <div class="cycle-glint"></div>
+            <span class="spoke k1"></span>
+            <span class="spoke k2"></span>
+            <span class="spoke k3"></span>
+
+            <div class="node n-booe">
+                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$booe['emblem']|noescape}</svg><b>{$booe['ticker']}</b></div>
+                <p class="verb"><b>{$booe['verb']}</b>, {$booe['name']}</p>
+            </div>
+            <div class="node n-hope">
+                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$hope['emblem']|noescape}</svg><b>{$hope['ticker']}</b></div>
+                <p class="verb"><b>{$hope['verb']}</b>, {$hope['name']}</p>
+            </div>
+            <div class="node n-prophet">
+                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$prophet['emblem']|noescape}</svg><b>{$prophet['ticker']}</b></div>
+                <p class="verb"><b>{$prophet['verb']}</b>, {$prophet['name']}</p>
+            </div>
+            <div class="node n-holy">
+                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$holy['emblem']|noescape}</svg><b>{$holy['ticker']}</b></div>
+                <span class="pill">Trinity staking &middot; in development</span>
+            </div>
+        </div>
+
+        <p class="cycle-pill" aria-hidden="true">Trinity staking &middot; in development</p>
+
+        <p class="harmony" data-reveal>
+            <i class="tb">$BOOE</i> creates. <i class="th">$HOPE</i> remembers. <i class="tp">$PROPHET</i> guides.<br>
+            And faith is rewarded in <i class="ty">$HOLY</i>.
+        </p>
     </div>
+</section>
+
+{* ================= HOW THE CYCLE TURNS (the legible flow) ================= *}
+<section class="tr-flow">
+    <div class="wrap">
+        <div class="flow-head" data-reveal>
+            <p class="eyebrow">How the cycle turns</p>
+            <h2>Creation flows forward. <em>Grace flows back.</em></h2>
+            <p class="flow-sub">Three relics carry the current of creation. Stake them together, and
+            the Book returns that faith as a fourth.</p>
+        </div>
+
+        <div class="flow-rail" data-reveal>
+            <div class="flow-track">
+                <div class="flow-step" style="--rc:#86a0f6">
+                    <span class="flow-coin"><svg class="ti" viewBox="0 0 24 24">{$booe['emblem']|noescape}</svg></span>
+                    <span class="flow-tick">$BOOE</span>
+                    <span class="flow-verb">creates</span>
+                </div>
+                <span class="flow-arrow" aria-hidden="true"><svg class="ti" viewBox="0 0 24 24"><path d="M5 12l14 0"/><path d="M15 16l4 -4"/><path d="M15 8l4 4"/></svg></span>
+                <div class="flow-step" style="--rc:#5fc2b4">
+                    <span class="flow-coin"><svg class="ti" viewBox="0 0 24 24">{$hope['emblem']|noescape}</svg></span>
+                    <span class="flow-tick">$HOPE</span>
+                    <span class="flow-verb">remembers</span>
+                </div>
+                <span class="flow-arrow" aria-hidden="true"><svg class="ti" viewBox="0 0 24 24"><path d="M5 12l14 0"/><path d="M15 16l4 -4"/><path d="M15 8l4 4"/></svg></span>
+                <div class="flow-step" style="--rc:#9c8fe0">
+                    <span class="flow-coin"><svg class="ti" viewBox="0 0 24 24">{$prophet['emblem']|noescape}</svg></span>
+                    <span class="flow-tick">$PROPHET</span>
+                    <span class="flow-verb">guides</span>
+                </div>
+            </div>
+
+            <div class="flow-return">
+                <span class="flow-return-cta">Stake the Trinity</span>
+                <span class="flow-arrow down" aria-hidden="true"><svg class="ti" viewBox="0 0 24 24"><path d="M12 5l0 14"/><path d="M16 15l-4 4"/><path d="M8 15l4 4"/></svg></span>
+            </div>
+
+            <div class="flow-grace">
+                <div class="flow-step holy" style="--rc:#cfe2e6">
+                    <span class="flow-coin"><svg class="ti" viewBox="0 0 24 24">{$holy['emblem']|noescape}</svg></span>
+                    <span class="flow-tick">$HOLY</span>
+                    <span class="flow-verb">rewards</span>
+                </div>
+                <p class="flow-grace-note">Faith becomes yield. Grace flows back to the Book, and the
+                cycle turns again. <span class="dev">Staking is in development.</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{* ================= THE RELICS, TOLD IN FULL (the heart) ================= *}
+<section class="tr-relics">
+    <div class="wrap">
+        <div class="flow-head" data-reveal>
+            <p class="eyebrow">The relics, told in full</p>
+            <h2>Every token is a receipt.</h2>
+            <p class="flow-sub">Myth makes the claim, the chain shows the proof. Each relic carries
+            its story and its ledger, on Ethereum mainnet, verifiable now.</p>
+        </div>
+
+        {foreach $live as $r}
+            <article class="relic-full" style="--rc:{$r['color']}" data-reveal>
+                <div class="rf-aside">
+                    <div class="rf-coin">
+                        <svg class="ti" viewBox="0 0 24 24">{$r['emblem']|noescape}</svg>
+                        <b>{$r['ticker']}</b>
+                    </div>
+                    <div class="rf-id">
+                        <h3 class="rf-tick">{$r['ticker']}</h3>
+                        <p class="rf-epi">{$r['name']}</p>
+                        <span class="rf-verb">{$r['verb']}</span>
+                    </div>
+                </div>
+
+                <div class="rf-main">
+                    <p class="rf-story">{$r['story']}</p>
+
+                    <div class="rf-ledger">
+                        <div class="rf-stat"><span class="k">Launched</span><span class="v">{$r['launched']}</span></div>
+                        <div class="rf-stat"><span class="k">Supply</span><span class="v">{$r['supply']}</span></div>
+                        <div class="rf-stat"><span class="k">Tax</span><span class="v">Zero</span></div>
+                        <div class="rf-stat"><span class="k">Liquidity</span><span class="v pos">{$r['lp']}</span></div>
+                        <div class="rf-stat wide"><span class="k">Origin</span><span class="v">{$r['origin']}</span></div>
+                    </div>
+
+                    <div class="rf-receipts">
+                        <button type="button" class="rf-ca" data-copy="{$r['contract']}" aria-label="Copy the {$r['ticker']} contract address">
+                            <svg class="ti ca-copy" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"/><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"/></svg>
+                            <svg class="ti ca-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5l10 -10"/></svg>
+                            <span class="ca-addr">{$r['contract']}</span>
+                            <span class="ca-status" aria-live="polite">Copy</span>
+                        </button>
+                        <a class="rf-dex" href="{$r['dexUrl']}" target="_blank" rel="noopener">
+                            View on DexTools
+                            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        {/foreach}
+
+        {* --- $HOLY: the honest outlier. No supply, no contract, no DexTools chip. --- *}
+        <article class="relic-full holy" style="--rc:{$holy['color']}" data-reveal>
+            <div class="rf-aside">
+                <div class="rf-coin">
+                    <svg class="ti" viewBox="0 0 24 24">{$holy['emblem']|noescape}</svg>
+                    <b>{$holy['ticker']}</b>
+                </div>
+                <div class="rf-id">
+                    <h3 class="rf-tick">{$holy['ticker']}</h3>
+                    <p class="rf-epi">{$holy['name']}</p>
+                    <span class="rf-pill">In development</span>
+                </div>
+            </div>
+
+            <div class="rf-main">
+                <p class="rf-story">{$holy['story']}</p>
+
+                <div class="rf-ledger holy">
+                    <div class="rf-stat"><span class="k">Earned via</span><span class="v">Trinity staking</span></div>
+                    <div class="rf-stat"><span class="k">Kept by</span><span class="v">Holy Labs</span></div>
+                    <div class="rf-stat"><span class="k">Status</span><span class="v holy-v">In development</span></div>
+                </div>
+
+                <p class="rf-veil">Stake the Trinity, and faith becomes yield. The next verse is still
+                being written.</p>
+            </div>
+        </article>
+    </div>
+</section>
+
+{* ================= CLOSING INVOCATION (the horizon) ================= *}
+<section class="tr-close">
+    <div class="tr-close-bg" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="tr-close-inner" data-reveal>
+            <span class="gilded tr-rule"></span>
+            <p class="eyebrow">The harmony of the Trinity</p>
+            <h2>Together, they form a complete cycle.</h2>
+            <p>The staking model is in development through Holy Labs. When it is live, believers who
+            stake $BOOE, $HOPE, and $PROPHET will earn $HOLY through faith and contribution, and grace
+            will flow back to the Book. The next verse is still being written.</p>
+            <div class="tr-close-ctas">
+                <a class="btn btn-silver" href="{$tg}" target="_blank" rel="noopener">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+                    Join the Brethren
+                </a>
+                <a class="btn btn-ghost" href="/acts/">
+                    Read the Acts
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 </main>
+
+<script>
+(function () {
+  'use strict';
+  var buttons = document.querySelectorAll('[data-copy]');
+  if (!buttons.length) return;
+  var fallback = function (value) {
+    try {
+      var t = document.createElement('textarea');
+      t.value = value;
+      t.setAttribute('readonly', '');
+      t.style.position = 'absolute';
+      t.style.left = '-9999px';
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      document.body.removeChild(t);
+    } catch (e) {}
+  };
+  buttons.forEach(function (btn) {
+    var status = btn.querySelector('.ca-status');
+    var timer;
+    btn.addEventListener('click', function () {
+      var value = btn.getAttribute('data-copy');
+      var done = function () {
+        btn.classList.add('copied');
+        if (status) status.textContent = 'Copied';
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          btn.classList.remove('copied');
+          if (status) status.textContent = 'Copy';
+        }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(done, function () { fallback(value); done(); });
+      } else {
+        fallback(value);
+        done();
+      }
+    });
+  });
+})();
+</script>
 {/block}

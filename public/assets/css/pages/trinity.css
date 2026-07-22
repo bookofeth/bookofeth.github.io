@@ -1,4 +1,371 @@
 /* Page-scoped styles for /trinity/ (FLAGSHIP). Owned by the Trinity page agent.
    Linked automatically by the layout when the page sets {var $pageCss = 'trinity'}.
-   Reuse .cycle / .node / .rcard from app.css; add page-only styles here.
-   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: max 3. */
+   Reuses the global .cycle / .node / .harmony / .spoke devices from app.css and adds
+   the deep experience: the altar head, the legible "how the cycle turns" flow, the
+   full relic tellings (.relic-full), and the closing invocation.
+   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: 1 (the close rule). */
+
+.trinity-page { padding-bottom: 0; }
+
+/* relic-tinted tickers, reused by the altar eyebrow */
+.trinity-page .tb { color: #86a0f6; }
+.trinity-page .th { color: #5fc2b4; }
+.trinity-page .tp { color: #9c8fe0; }
+.trinity-page .ty { color: #cfe2e6; }
+
+/* ===========================================================================
+   THE ALTAR (the ceremonial hero: head + cycle + harmony)
+   =========================================================================== */
+.tr-altar { position: relative; padding-bottom: 40px; overflow: hidden; }
+.tr-altar-bg {
+  position: absolute;
+  inset: -60px 0 0;
+  pointer-events: none;
+  background: radial-gradient(900px 640px at 50% 44%, rgba(44, 60, 150, 0.18), transparent 70%);
+}
+
+.tr-head { position: relative; max-width: 680px; margin: 0 auto; text-align: center; }
+.tr-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font: 700 12px/1 var(--roman);
+  letter-spacing: 0.14em;
+}
+.tr-eyebrow i { font-style: normal; }
+.tr-eyebrow .dot { color: rgba(134, 160, 246, 0.4); }
+
+.trinity-page .tr-head h1 {
+  font: 400 clamp(36px, 4.2vw, 56px)/1.1 var(--serif);
+  letter-spacing: -0.012em;
+  color: var(--text);
+  margin: 20px 0 0;
+}
+.trinity-page .tr-head h1 em {
+  font-style: italic;
+  background: linear-gradient(100deg, var(--accent-hi), #b6c6fa 60%, var(--accent-hi));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.tr-lede {
+  font: italic 400 clamp(18px, 1.6vw, 20px)/1.65 var(--serif);
+  color: var(--text-dim);
+  max-width: 56ch;
+  margin: 20px auto 0;
+}
+.tr-ledgerline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+  font: 600 10px/1.8 var(--roman);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.tr-ledgerline b { font-weight: 600; color: var(--metal-lo); }
+.tr-ledgerline .sep { color: rgba(134, 160, 246, 0.4); }
+
+/* ===========================================================================
+   HOW THE CYCLE TURNS (the legible flow) + reused as the relics intro
+   =========================================================================== */
+.tr-flow { position: relative; padding: 104px 0 20px; }
+
+.flow-head { max-width: 640px; margin: 0 auto 54px; text-align: center; }
+.flow-head .eyebrow { display: block; margin-bottom: 14px; }
+.flow-head h2 { font: 400 clamp(30px, 3.3vw, 46px)/1.14 var(--serif); color: var(--text); }
+.flow-head h2 em { font-style: italic; color: var(--accent-hi); }
+.flow-head .flow-sub {
+  font: italic 400 18px/1.6 var(--serif);
+  color: var(--text-dim);
+  margin: 16px auto 0;
+  max-width: 54ch;
+}
+
+.flow-rail { display: flex; flex-direction: column; align-items: center; }
+.flow-track { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+
+.flow-step {
+  --rc: #86a0f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 156px;
+  padding: 22px 16px 20px;
+  border-radius: 16px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur);
+}
+.flow-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rc), transparent);
+  opacity: 0.6;
+}
+.flow-step:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--rc) 26%, var(--line)); }
+.flow-coin {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rc);
+  background:
+    radial-gradient(circle at 34% 28%, rgba(238, 243, 250, 0.13), transparent 46%),
+    linear-gradient(180deg, var(--ink-3), var(--ink-1));
+  border: 1px solid color-mix(in srgb, var(--rc) 48%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--rc) 20%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.flow-coin .ti { width: 24px; height: 24px; }
+.flow-tick { font: 700 14px/1 var(--roman); letter-spacing: 0.06em; color: var(--metal-hi); }
+.flow-verb { font: italic 400 15px/1 var(--serif); color: var(--text-dim); }
+
+.flow-arrow { display: inline-flex; color: rgba(134, 160, 246, 0.55); flex: none; }
+.flow-arrow .ti { width: 26px; height: 26px; stroke-width: 1.5; }
+
+.flow-return { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 20px 0 4px; }
+.flow-return-cta {
+  font: 600 10.5px/1 var(--roman);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-hi);
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(134, 160, 246, 0.3);
+  background: rgba(134, 160, 246, 0.06);
+}
+.flow-arrow.down .ti { width: 22px; height: 22px; }
+
+.flow-grace { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.flow-grace .flow-step.holy { width: 168px; box-shadow: 0 0 34px rgba(207, 226, 230, 0.14); }
+.flow-grace-note {
+  font: italic 400 16.5px/1.6 var(--serif);
+  color: var(--text-dim);
+  text-align: center;
+  max-width: 46ch;
+}
+.flow-grace-note .dev {
+  display: block;
+  margin-top: 8px;
+  font: 600 9.5px/1 var(--roman);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--relic-holy);
+  font-style: normal;
+}
+
+/* ===========================================================================
+   THE RELICS, TOLD IN FULL (the heart). ink-1 band, ink-2 cards.
+   =========================================================================== */
+.tr-relics {
+  background: var(--ink-1);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 108px 0 116px;
+  margin-top: 90px;
+}
+.tr-relics .flow-head { text-align: center; }
+
+.relic-full {
+  --rc: #86a0f6;
+  display: grid;
+  grid-template-columns: 216px 1fr;
+  gap: 34px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 30px 32px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 16px;
+  transition: border-color var(--dur);
+}
+.relic-full::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 32px;
+  right: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rc), transparent);
+  opacity: 0.55;
+}
+.relic-full:hover { border-color: color-mix(in srgb, var(--rc) 22%, var(--line)); }
+.relic-full.holy { background: rgba(22, 30, 47, 0.5); }
+
+/* aside: the medallion + identity */
+.rf-aside { display: flex; flex-direction: column; align-items: flex-start; }
+.rf-coin {
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background:
+    radial-gradient(circle at 34% 26%, rgba(238, 243, 250, 0.14), transparent 42%),
+    radial-gradient(circle at 50% 122%, color-mix(in srgb, var(--rc) 18%, transparent), transparent 62%),
+    linear-gradient(180deg, var(--ink-3), var(--ink-1));
+  border: 1px solid color-mix(in srgb, var(--rc) 48%, transparent);
+  box-shadow: 0 0 32px color-mix(in srgb, var(--rc) 22%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+.rf-coin .ti { width: 28px; height: 28px; color: var(--rc); }
+.rf-coin b { font: 700 13px/1 var(--roman); letter-spacing: 0.09em; color: var(--metal-hi); }
+.rf-id { margin-top: 20px; }
+.rf-tick { font: 700 19px/1.1 var(--roman); letter-spacing: 0.05em; color: var(--metal-hi); }
+.rf-epi { font: italic 400 15px/1.35 var(--serif); color: var(--text-dim); margin-top: 4px; }
+.rf-verb,
+.rf-pill {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font: 600 9.5px/1 var(--roman);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.rf-verb {
+  color: var(--rc);
+  border: 1px solid color-mix(in srgb, var(--rc) 40%, transparent);
+  background: color-mix(in srgb, var(--rc) 8%, transparent);
+}
+.rf-pill {
+  color: var(--relic-holy);
+  border: 1px solid rgba(207, 226, 230, 0.3);
+  background: rgba(207, 226, 230, 0.05);
+}
+
+/* main: story + ledger + receipts */
+.rf-main { min-width: 0; }
+.rf-story { font: 400 16.5px/1.65 var(--serif); color: var(--text-dim); max-width: 68ch; }
+
+.rf-ledger {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr 1.1fr 1.7fr;
+  gap: 1px;
+  margin-top: 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(124, 151, 242, 0.14);
+}
+.rf-ledger.holy { grid-template-columns: repeat(3, 1fr); }
+.rf-stat { background: rgba(7, 9, 16, 0.45); padding: 13px 15px; }
+.rf-stat .k { display: block; font: 600 9.5px/1.4 var(--roman); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 7px; }
+.rf-stat .v { font: 600 12.5px/1.35 var(--roman); font-variant-numeric: tabular-nums; color: var(--metal); }
+.rf-stat .v.pos { color: var(--pos); }
+.rf-stat .v.holy-v { color: var(--relic-holy); }
+
+.rf-receipts { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+.rf-ca {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(7, 9, 16, 0.55);
+  font: 500 11.5px/1.4 var(--roman);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color var(--dur), color var(--dur);
+}
+.rf-ca .ti { width: 15px; height: 15px; flex: none; }
+.rf-ca .ca-copy { color: var(--text-faint); }
+.rf-ca .ca-check { display: none; color: var(--pos); }
+.rf-ca .ca-addr { color: var(--metal); overflow-wrap: anywhere; }
+.rf-ca .ca-status {
+  font: 600 9px/1 var(--roman);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  border-left: 1px solid var(--line);
+  padding-left: 10px;
+  flex: none;
+}
+.rf-ca:hover { border-color: color-mix(in srgb, var(--rc) 40%, transparent); color: var(--metal-hi); }
+.rf-ca:hover .ca-addr { color: var(--metal-hi); }
+.rf-ca:hover .ca-copy { color: var(--accent-hi); }
+.rf-ca.copied { border-color: color-mix(in srgb, var(--pos) 42%, transparent); }
+.rf-ca.copied .ca-copy { display: none; }
+.rf-ca.copied .ca-check { display: inline-block; }
+.rf-ca.copied .ca-status { color: var(--pos); }
+
+.rf-dex {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 15px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--rc) 26%, transparent);
+  background: color-mix(in srgb, var(--rc) 7%, transparent);
+  font: 600 10.5px/1 var(--roman);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--rc) 66%, var(--metal-hi));
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur), color var(--dur);
+}
+.rf-dex .ti { width: 14px; height: 14px; }
+.rf-dex:hover { transform: translateY(-1px); border-color: color-mix(in srgb, var(--rc) 46%, transparent); color: var(--metal-hi); }
+
+.rf-veil { font: italic 400 14px/1.6 var(--serif); color: var(--text-faint); margin-top: 22px; }
+
+/* ===========================================================================
+   CLOSING INVOCATION (the horizon). The single gold moment (.tr-rule).
+   =========================================================================== */
+.tr-close { position: relative; padding: 118px 0; text-align: center; overflow: hidden; }
+.tr-close-bg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(720px 440px at 50% 42%, rgba(44, 60, 150, 0.14), transparent 72%); }
+.tr-close-inner { position: relative; max-width: 660px; margin: 0 auto; }
+.tr-rule { display: block; width: 200px; margin: 0 auto 26px; }
+.tr-close .eyebrow { display: block; margin-bottom: 14px; }
+.tr-close h2 { font: 400 clamp(28px, 3.3vw, 44px)/1.18 var(--serif); color: var(--text); }
+.tr-close p { font: italic 400 18px/1.65 var(--serif); color: var(--text-dim); margin: 20px auto 0; max-width: 58ch; }
+.tr-close-ctas { margin-top: 34px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ===========================================================================
+   RESPONSIVE
+   =========================================================================== */
+@media (max-width: 860px) {
+  .flow-track { flex-direction: column; gap: 6px; }
+  .flow-arrow .ti { transform: rotate(90deg); }
+  .flow-arrow.down .ti { transform: none; }
+  .relic-full { grid-template-columns: 1fr; gap: 24px; padding: 26px 24px; }
+  .relic-full::before { left: 24px; right: 24px; }
+  .rf-aside { flex-direction: row; align-items: center; gap: 18px; }
+  .rf-coin { width: 88px; height: 88px; flex: none; }
+  .rf-coin .ti { width: 24px; height: 24px; }
+  .rf-id { margin-top: 0; }
+  .rf-ledger { grid-template-columns: 1fr 1fr; }
+  .rf-ledger.holy { grid-template-columns: 1fr; }
+  .rf-stat.wide { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .tr-flow { padding-top: 84px; }
+  .tr-relics { padding: 84px 0 90px; margin-top: 70px; }
+  .flow-head { margin-bottom: 40px; }
+  .tr-close { padding: 88px 0; }
+  .rf-ledger { grid-template-columns: 1fr; }
+  .rf-stat.wide { grid-column: auto; }
+  .rf-receipts { flex-direction: column; align-items: stretch; }
+  .rf-ca { justify-content: flex-start; font-size: 11px; }
+  .rf-dex { justify-content: center; }
+}
