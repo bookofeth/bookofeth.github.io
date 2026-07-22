@@ -1,45 +1,81 @@
-/* BOOE site base. Dark, a manuscript lit from within. Extends the locked tokens
-   (tokens.css) and self-hosted fonts (fonts.css). This is the foundation layer;
-   page-specific styles are layered on by later build agents. */
+/* ===========================================================================
+   BOOE global stylesheet, "Verse and Ledger". OWNED BY THE KEYSTONE AGENT.
+   ---------------------------------------------------------------------------
+   The single global system every page builds on. Dark ink lit from within,
+   lapis as the only ambient light, silver as machined tooling, gold reserved
+   for the sacred (budget: max 3 gilded moments per page).
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+   Layering contract:
+     tokens.css  -> LOCKED design tokens (colors, motion, shadows). Never edit.
+     fonts.css   -> self-hosted @font-face (EB Garamond + Space Grotesk).
+     app.css     -> THIS FILE. Global chrome + the reusable component system.
+     pages/*.css -> per-page styles (each page links its own, no one edits app.css).
+
+   Two voices:
+     --serif  (EB Garamond) = scripture: headings, verses, epithets, ghost numerals.
+     --roman  (Space Grotesk) = interface: nav, labels, buttons, numbers (tabular).
+   Numbers are ALWAYS --roman with tabular-nums. No Garamond digits in a stat.
+   =========================================================================== */
+
+/* --- Marketing-scale variables (extend the locked tokens, never override them) */
+:root {
+  --measure: 1160px;   /* content max width */
+  --edge: 24px;        /* horizontal gutter, marketing scale */
+  --nav-h: 64px;       /* fixed nav height reserve */
+}
+@media (max-width: 560px) {
+  :root { --edge: 20px; }
 }
 
+/* --- Reset + base -------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; padding: 0; }
+
 html {
+  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: var(--ink-0);
   color: var(--text);
-  font-family: var(--serif);
-  font-size: 18px;
-  line-height: 1.6;
+  font-family: var(--roman);
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+body.menu-open { overflow: hidden; }
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+/* Tabler icon convention: every icon is a 24x24 stroked <svg class="ti">, copied
+   verbatim from the Tabler set. Never hand-author an icon path. */
+svg.ti {
+  display: inline-block;
+  vertical-align: middle;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-a {
-  color: var(--accent-hi);
-  text-decoration: none;
-  transition: color var(--dur) var(--ease-out);
-}
-
-a:hover {
-  color: var(--metal-hi);
-}
-
-img {
-  max-width: 100%;
-  height: auto;
+.wrap {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 var(--edge);
 }
 
 /* Accessible skip link, hidden until focused. */
@@ -53,169 +89,800 @@ img {
   color: var(--text);
   font-family: var(--roman);
   font-size: 14px;
-  border-radius: 8px;
+  border-radius: 10px;
+}
+.skip-link:focus { left: 12px; top: 12px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent-hi);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-.skip-link:focus {
-  left: 12px;
-  top: 12px;
-}
+/* ===========================================================================
+   SHARED DEVICES (the recurring vocabulary)
+   =========================================================================== */
 
-/* --- Hero (placeholder home) --------------------------------------------- */
-
-.hero {
-  position: relative;
-  flex: 1 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(48px, 12vh, 140px) var(--gutter);
-  overflow: hidden;
-  text-align: center;
-}
-
-/* the only ambient glow allowed: a radial lapis wash behind the mark */
-.hero-glow {
-  position: absolute;
-  top: 34%;
-  left: 50%;
-  width: min(760px, 92vw);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle,
-    rgba(71, 99, 214, 0.28) 0%,
-    rgba(71, 99, 214, 0.1) 34%,
-    rgba(7, 9, 16, 0) 68%
-  );
-  pointer-events: none;
-  filter: blur(6px);
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: rise var(--dur-grand) var(--ease-out) both;
-}
-
-.hero-logo {
-  width: clamp(88px, 14vw, 112px);
-  height: auto;
-  margin-bottom: 28px;
-  filter: drop-shadow(0 0 26px rgba(134, 160, 246, 0.4));
-}
-
-.hero-eyebrow {
-  margin: 0 0 18px;
-  font-family: var(--roman);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.32em;
+/* Eyebrow: Grotesk 600, tracked, uppercase, lapis. */
+.eyebrow {
+  font: 600 11px/1 var(--roman);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--metal-lo);
-}
-
-.hero-title {
-  margin: 0;
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(2.6rem, 8vw, 4.75rem);
-  line-height: 1.05;
-  letter-spacing: 0.005em;
-  color: var(--metal-hi);
-}
-
-.hero-tagline {
-  margin: 22px 0 0;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
-  color: var(--text-dim);
-}
-
-/* gilded rule: a 1px gold gradient hairline, used sparingly */
-.gilded-rule {
-  width: 132px;
-  height: 1px;
-  margin: 30px 0 0;
-  background: linear-gradient(
-    90deg,
-    rgba(224, 178, 111, 0) 0%,
-    rgba(224, 178, 111, 0.85) 50%,
-    rgba(224, 178, 111, 0) 100%
-  );
-}
-
-/* --- Footer -------------------------------------------------------------- */
-
-.site-footer {
-  flex-shrink: 0;
-  border-top: 1px solid var(--line);
-  background: var(--ink-1);
-}
-
-.footer-inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 28px var(--gutter);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.footer-mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--roman);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--metal);
-}
-
-.footer-mark:hover {
-  color: var(--metal-hi);
-}
-
-.footer-credit {
-  margin: 0;
-  font-family: var(--roman);
-  font-size: 13px;
-  color: var(--text-faint);
-}
-
-.footer-credit a {
-  color: var(--text-dim);
-}
-
-.footer-credit a:hover {
   color: var(--accent-hi);
 }
 
-/* --- Motion discipline --------------------------------------------------- */
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* The gilded rule: the sacred 1px gold hairline. Budget it (max 3 per page). */
+.gilded {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(224, 178, 111, 0.55), transparent);
 }
 
+/* The chapter running-head: lapis node + label + fading hairline + folio mark.
+   Every major section opens with one. This is the site's spine. */
+.chapter-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 44px;
+}
+.ch-node {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-hi);
+  box-shadow: 0 0 12px rgba(134, 160, 246, 0.9);
+  flex: none;
+}
+.ch-label {
+  font: 600 11px/1 var(--roman);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-hi);
+  white-space: nowrap;
+}
+.ch-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(124, 151, 242, 0.3), rgba(124, 151, 242, 0.04));
+}
+.ch-folio {
+  font: 600 10px/1 var(--roman);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+/* Buttons: silver (machined, primary) + lapis ghost pill. Silver never glows. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  font: 600 13px/1 var(--roman);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur), border-color var(--dur), color var(--dur);
+}
+.btn .ti { width: 15px; height: 15px; }
+.btn-silver {
+  padding: 13px 22px;
+  color: #0b0e17;
+  background: linear-gradient(180deg, var(--metal-hi), var(--metal) 62%, var(--metal-lo));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 10px 26px rgba(0, 0, 0, 0.5);
+}
+.btn-silver:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 14px 30px rgba(0, 0, 0, 0.55); }
+.btn-ghost {
+  padding: 12px 21px;
+  color: var(--accent-hi);
+  border: 1px solid rgba(134, 160, 246, 0.35);
+  background: rgba(134, 160, 246, 0.06);
+}
+.btn-ghost:hover { transform: translateY(-1px); box-shadow: var(--glow-lapis); }
+
+/* Text link with trailing arrow (section "see more" affordance). */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: 600 12px/1 var(--roman);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-hi);
+  transition: gap var(--dur) var(--ease-out), color var(--dur);
+}
+.link-arrow .ti { width: 14px; height: 14px; }
+.link-arrow:hover { gap: 11px; color: var(--metal-hi); }
+
+/* ===========================================================================
+   MOTION: transform + opacity only. One signature loop per viewport.
+   Hero uses a load-time stagger (.rise); everything below the fold reveals on
+   scroll via [data-reveal] (JS-gated so content is visible if JS never runs).
+   =========================================================================== */
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes float { from { transform: translateY(-6px); } to { transform: translateY(8px); } }
+
+.rise { animation: rise 0.8s var(--ease-out) both; }
+.d1 { animation-delay: 0.08s; }
+.d2 { animation-delay: 0.16s; }
+.d3 { animation-delay: 0.24s; }
+.d4 { animation-delay: 0.32s; }
+.d5 { animation-delay: 0.42s; }
+.d6 { animation-delay: 0.54s; }
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.js [data-reveal].in { opacity: 1; transform: none; }
+[data-reveal-delay="1"] { transition-delay: 0.07s; }
+[data-reveal-delay="2"] { transition-delay: 0.14s; }
+[data-reveal-delay="3"] { transition-delay: 0.21s; }
+[data-reveal-delay="4"] { transition-delay: 0.28s; }
+
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html { scroll-behavior: auto; }
+  .rise { animation: none; }
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* ===========================================================================
+   NAV: fixed, transparent over the hero, frosted glass only after scroll.
+   =========================================================================== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  transition: background var(--dur) var(--ease-out), border-color var(--dur), backdrop-filter var(--dur);
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(7, 9, 16, 0.72);
+  border-bottom: 1px solid var(--glass-edge);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+.nav-in {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 16px var(--edge);
+}
+.brand { display: flex; align-items: center; gap: 11px; flex: none; }
+.brand img { width: 30px; height: auto; filter: drop-shadow(0 2px 8px rgba(71, 99, 214, 0.5)); }
+.brand b {
+  font: 700 12.5px/1 var(--roman);
+  letter-spacing: 0.18em;
+  color: var(--metal-hi);
+  white-space: nowrap;
+}
+.nav-links { display: flex; gap: 26px; margin-left: auto; }
+.nav-links a {
+  font: 500 12.5px/1 var(--roman);
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  transition: color var(--dur);
+}
+.nav-links a:hover,
+.nav-links a[aria-current="page"] { color: var(--metal-hi); }
+.nav .btn-silver { padding: 10px 18px; font-size: 12px; }
+.nav-cta { flex: none; }
+
+/* Mobile menu button + the table-of-contents sheet (signature moment). */
+.nav-burger { display: none; margin-left: auto; width: 42px; height: 42px; align-items: center; justify-content: center; color: var(--metal-hi); border-radius: 12px; border: 1px solid var(--line); }
+.nav-burger .ti { width: 22px; height: 22px; }
+.nav-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(7, 9, 16, 0.96);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  padding: calc(var(--nav-h) + 20px) var(--edge) 40px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
+}
+.nav-sheet.open { opacity: 1; visibility: visible; transform: none; }
+.nav-sheet-close { position: absolute; top: 18px; right: var(--edge); width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; color: var(--metal-hi); border: 1px solid var(--line); border-radius: 12px; }
+.nav-sheet-close .ti { width: 22px; height: 22px; }
+.nav-sheet-label { font: 600 10px/1 var(--roman); letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; }
+.nav-toc { list-style: none; }
+.nav-toc li { border-bottom: 1px solid var(--line-quiet); }
+.nav-toc a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 2px;
+  font: 400 27px/1.1 var(--serif);
+  color: var(--metal);
+  transition: color var(--dur), padding-left var(--dur) var(--ease-out);
+}
+.nav-toc a:hover { color: var(--metal-hi); padding-left: 8px; }
+.nav-toc .folio { font: 600 10px/1 var(--roman); letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); }
+.nav-sheet .btn-silver { margin-top: 28px; align-self: flex-start; padding: 14px 24px; font-size: 13px; }
+
+/* ===========================================================================
+   HERO (Chapter zero, the frontispiece)
+   =========================================================================== */
+.hero { position: relative; padding: 150px 0 0; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; pointer-events: none; }
+.hero-bg .glow {
+  position: absolute;
+  top: -340px;
+  left: 50%;
+  transform: translateX(-34%);
+  width: 1300px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(71, 99, 214, 0.3), rgba(44, 60, 150, 0.12) 46%, transparent 72%);
+}
+.hero-bg .rules {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, transparent 0 87px, rgba(134, 160, 246, 0.05) 87px 88px);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 66%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 66%, transparent 100%);
+}
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent-hi);
+  box-shadow: 0 0 8px rgba(134, 160, 246, 0.9);
+  opacity: 0.5;
+}
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px;
+  align-items: center;
+}
+.hero h1 {
+  font: 400 clamp(40px, 4.9vw, 68px)/1.08 var(--serif);
+  letter-spacing: -0.012em;
+  color: var(--text);
+  margin: 26px 0 0;
+}
+.hero h1 .muted { display: block; color: var(--metal-lo); font-size: 0.62em; letter-spacing: 0.002em; margin-bottom: 14px; }
+.hero h1 em {
+  font-style: italic;
+  background: linear-gradient(100deg, var(--accent-hi), #b6c6fa 60%, var(--accent-hi));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero .lede {
+  font: italic 400 clamp(17px, 1.5vw, 20px)/1.65 var(--serif);
+  color: var(--text-dim);
+  max-width: 56ch;
+  margin: 24px 0 0;
+}
+.motto { display: flex; align-items: center; gap: 16px; margin: 34px 0 0; }
+.motto .gilded { width: 64px; flex: none; }
+.motto span:not(.gilded) {
+  font: 600 11.5px/1 var(--roman);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--warn);
+  white-space: nowrap;
+}
+.hero-ctas { display: flex; gap: 14px; margin: 34px 0 0; flex-wrap: wrap; }
+
+/* Hero relic (the floating book in a lapis halo). */
+.relic-col { position: relative; display: flex; justify-content: center; align-items: center; min-height: 460px; }
+.halo { position: absolute; border-radius: 50%; border: 1px solid rgba(134, 160, 246, 0.12); }
+.halo.h1 { width: 330px; height: 330px; }
+.halo.h2 { width: 452px; height: 452px; border-color: rgba(134, 160, 246, 0.07); }
+.halo.h3 { width: 570px; height: 570px; border-color: rgba(134, 160, 246, 0.045); }
+.halo-glint {
+  position: absolute;
+  width: 452px;
+  height: 452px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 84%, rgba(134, 160, 246, 0.55) 94%, transparent 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 0);
+  animation: spin 16s linear infinite;
+}
+.relic-aura {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(71, 99, 214, 0.4), rgba(71, 99, 214, 0.1) 55%, transparent 75%);
+}
+.relic-book {
+  position: relative;
+  width: 284px;
+  filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 34px rgba(71, 99, 214, 0.38));
+  animation: float 7s ease-in-out infinite alternate;
+}
+.relic-shadow { position: absolute; bottom: 44px; width: 220px; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(71, 99, 214, 0.28), transparent 70%); }
+.relic-col .star.s1 { top: 16%; left: 12%; }
+.relic-col .star.s2 { top: 64%; right: 6%; opacity: 0.35; }
+.relic-col .star.s3 { top: 8%; right: 26%; opacity: 0.3; width: 2px; height: 2px; }
+
+/* The ledger strip: myth's receipt, under the hero. */
+.ledger { position: relative; margin-top: 74px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(14, 19, 32, 0.5); }
+.ledger-in { display: grid; grid-template-columns: repeat(4, 1fr); max-width: var(--measure); margin: 0 auto; }
+.ledger .cell { padding: 20px var(--edge); border-left: 1px solid var(--line-quiet); }
+.ledger .cell:first-child { border-left: none; }
+.ledger .k { font: 600 9.5px/1 var(--roman); letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-faint); display: block; margin-bottom: 8px; }
+.ledger .v { font: 600 14px/1.2 var(--roman); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; color: var(--metal-hi); }
+.ledger .v i { font: italic 400 14px/1 var(--serif); color: var(--text-dim); }
+.ledger .v.pos { color: var(--pos); }
+
+/* ===========================================================================
+   CHAPTER I: THE THREE MISSIONS
+   =========================================================================== */
+.missions { background: var(--ink-1); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.missions .wrap { padding-top: 104px; padding-bottom: 104px; }
+.mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+.mission { position: relative; padding: 12px 40px 8px; border-left: 1px solid var(--line-quiet); }
+.mission:first-child { border-left: none; padding-left: 4px; }
+.mission .numeral { position: absolute; top: -26px; right: 26px; z-index: 0; font: 400 142px/1 var(--serif); color: rgba(134, 160, 246, 0.075); user-select: none; pointer-events: none; }
+.mission .m-icon {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(134, 160, 246, 0.08);
+  border: 1px solid rgba(134, 160, 246, 0.18);
+  color: var(--accent-hi);
+}
+.mission .m-icon .ti { width: 22px; height: 22px; }
+.mission .m-label { font: 600 10.5px/1 var(--roman); letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-faint); margin: 22px 0 10px; position: relative; }
+.mission h3 { font: 400 26px/1.2 var(--serif); color: var(--text); position: relative; }
+.mission p { font: 400 16.5px/1.6 var(--serif); color: var(--text-dim); margin-top: 12px; max-width: 34ch; position: relative; }
+
+/* ===========================================================================
+   CHAPTER II: THE TRINITY (the altar)
+   =========================================================================== */
+.trinity { position: relative; padding: 130px 0 120px; overflow: hidden; }
+.trinity-bg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(900px 620px at 50% 46%, rgba(44, 60, 150, 0.16), transparent 70%); }
+.trinity .head { max-width: 660px; margin: 0 auto; text-align: center; }
+.trinity h2 { font: 400 clamp(34px, 3.6vw, 50px)/1.12 var(--serif); color: var(--text); }
+.trinity h2 em { font-style: italic; color: var(--accent-hi); }
+.trinity .verse { font: italic 400 18px/1.65 var(--serif); color: var(--text-dim); margin-top: 16px; }
+.trinity .ledger-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+  font: 600 10px/1.8 var(--roman);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.trinity .ledger-line b { font-weight: 600; color: var(--metal-lo); }
+.trinity .ledger-line .sep { color: rgba(134, 160, 246, 0.4); }
+
+/* The Cycle diagram: conic ring (lapis->teal->violet), 3 coins on the ring,
+   $HOLY at center, glint circling through the relic colors. Real markup only. */
+.cycle { position: relative; width: 600px; height: 600px; margin: 66px auto 0; }
+.cycle-ring, .cycle-glint { position: absolute; inset: 78px; border-radius: 50%; }
+.cycle-pill { display: none; }
+.cycle-ring {
+  background: conic-gradient(from -8deg, #86a0f6, #5fc2b4 128deg, #9c8fe0 244deg, #86a0f6 360deg);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 0);
+  opacity: 0.62;
+}
+.cycle-glint {
+  background: conic-gradient(from 0deg, transparent 0 80%, rgba(238, 243, 250, 0.9) 93%, transparent 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 0);
+  animation: spin 22s linear infinite;
+  opacity: 0.55;
+}
+.spoke { position: absolute; left: 50%; top: 50%; width: 1px; height: 152px; transform-origin: top center; opacity: 0.5; }
+.spoke.k1 { transform: rotate(180deg); background: linear-gradient(180deg, transparent 30%, rgba(134, 160, 246, 0.34)); }
+.spoke.k2 { transform: rotate(300deg); height: 200px; background: linear-gradient(180deg, transparent 70%, rgba(95, 194, 180, 0.34)); }
+.spoke.k3 { transform: rotate(60deg); height: 200px; background: linear-gradient(180deg, transparent 70%, rgba(156, 143, 224, 0.34)); }
+
+/* Coin medallion: machined ink disc, relic-colored rim, centered Tabler emblem. */
+.node { position: absolute; width: 150px; text-align: center; }
+.node .coin {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background:
+    radial-gradient(circle at 34% 26%, rgba(238, 243, 250, 0.13), transparent 42%),
+    radial-gradient(circle at 50% 118%, var(--nc-soft), transparent 62%),
+    linear-gradient(180deg, var(--ink-3), var(--ink-1));
+  border: 1px solid var(--nc-line);
+  box-shadow: 0 0 26px var(--nc-glow), inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+.node .coin .ti { width: 24px; height: 24px; color: var(--nc); }
+.node .coin b { font: 700 13px/1 var(--roman); letter-spacing: 0.09em; color: var(--metal-hi); }
+.node .verb { font: italic 400 16px/1.3 var(--serif); color: var(--text-dim); margin-top: 11px; }
+.node .verb b { font-style: normal; font-weight: 400; color: var(--metal); }
+.node.n-booe { --nc: #86a0f6; --nc-line: rgba(134, 160, 246, 0.45); --nc-glow: rgba(134, 160, 246, 0.22); --nc-soft: rgba(134, 160, 246, 0.16); top: -32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column-reverse; }
+.node.n-booe .verb { margin: 0 0 12px; }
+.node.n-hope { --nc: #5fc2b4; --nc-line: rgba(95, 194, 180, 0.45); --nc-glow: rgba(95, 194, 180, 0.2); --nc-soft: rgba(95, 194, 180, 0.15); bottom: 32px; right: 18px; }
+.node.n-prophet { --nc: #9c8fe0; --nc-line: rgba(156, 143, 224, 0.45); --nc-glow: rgba(156, 143, 224, 0.2); --nc-soft: rgba(156, 143, 224, 0.15); bottom: 32px; left: 18px; }
+.node.n-holy { --nc: #cfe2e6; --nc-line: rgba(207, 226, 230, 0.4); --nc-glow: rgba(207, 226, 230, 0.18); --nc-soft: rgba(207, 226, 230, 0.12); top: 50%; left: 50%; transform: translate(-50%, -50%); width: 170px; }
+.node.n-holy .coin { width: 118px; height: 118px; box-shadow: 0 0 40px rgba(207, 226, 230, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 14px 30px rgba(0, 0, 0, 0.5); }
+.node.n-holy .pill {
+  display: inline-block;
+  margin-top: 9px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  position: relative;
+  z-index: 1;
+  font: 600 9px/1 var(--roman);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--relic-holy);
+  border: 1px solid rgba(207, 226, 230, 0.28);
+  background: rgba(14, 19, 32, 0.92);
+  white-space: nowrap;
+}
+.harmony { margin: 40px auto 0; text-align: center; font: italic 400 21px/1.6 var(--serif); color: var(--text-dim); }
+.harmony .tb { color: #86a0f6; }
+.harmony .th { color: #5fc2b4; }
+.harmony .tp { color: #9c8fe0; }
+.harmony .ty { color: #cfe2e6; }
+.harmony i { font-style: normal; }
+
+/* Relic cards: ink-2, radius 18, relic-tinted top hairline, hairline stat rows,
+   provenance chip. The $HOLY card is the honest outlier (veil line, no chip). */
+.relic-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 56px; }
+.rcard {
+  --rc: #86a0f6;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur);
+}
+.rcard::before { content: ''; position: absolute; top: 0; left: 22px; right: 22px; height: 1px; background: linear-gradient(90deg, transparent, var(--rc), transparent); opacity: 0.5; }
+.rcard:hover { transform: translateY(-3px); border-color: rgba(124, 151, 242, 0.24); }
+.rcard .top { display: flex; align-items: center; gap: 12px; }
+.rcard .mini {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rc);
+  background: radial-gradient(circle at 35% 28%, rgba(238, 243, 250, 0.12), transparent 45%), linear-gradient(180deg, var(--ink-3), var(--ink-1));
+  border: 1px solid color-mix(in srgb, var(--rc) 45%, transparent);
+}
+.rcard .mini .ti { width: 18px; height: 18px; }
+.rcard .tick { font: 700 15px/1.1 var(--roman); letter-spacing: 0.05em; color: var(--metal-hi); }
+.rcard .epi { font: italic 400 14.5px/1.3 var(--serif); color: var(--text-dim); margin-top: 3px; }
+.rcard .rows { margin-top: 18px; border-top: 1px solid var(--line-quiet); }
+.rcard .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line-quiet); }
+.rcard .row .k { font: 600 9.5px/1.4 var(--roman); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); }
+.rcard .row .v { font: 600 12.5px/1.4 var(--roman); font-variant-numeric: tabular-nums; color: var(--metal); text-align: right; }
+.rcard .row .v.pos { color: var(--pos); }
+.rcard .ca {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(7, 9, 16, 0.5);
+  font: 500 11.5px/1 var(--roman);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  color: var(--text-dim);
+  transition: color var(--dur), border-color var(--dur);
+}
+.rcard .ca .ti { width: 13px; height: 13px; color: var(--text-faint); }
+.rcard .ca:hover { color: var(--accent-hi); border-color: rgba(134, 160, 246, 0.35); }
+.rcard.holy { background: rgba(22, 30, 47, 0.4); }
+.rcard.holy .veil { font: italic 400 13.5px/1.5 var(--serif); color: var(--text-faint); margin-top: 16px; }
+
+/* ===========================================================================
+   CHAPTER III: THE ACTS (the chronicle)
+   =========================================================================== */
+.acts { background: var(--ink-1); border-top: 1px solid var(--line); padding: 120px 0 130px; }
+.acts .head-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 60px; flex-wrap: wrap; }
+.acts h2 { font: 400 clamp(34px, 3.6vw, 50px)/1.12 var(--serif); color: var(--text); }
+.acts .verse { font: italic 400 18px/1.6 var(--serif); color: var(--text-dim); margin-top: 12px; max-width: 52ch; }
+
+/* The living rail: every Act as a stub, the featured Act expands to a chronicle card. */
+.rail { position: relative; padding-left: 44px; }
+.rail::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(134, 160, 246, 0.05), rgba(134, 160, 246, 0.4) 18%, rgba(134, 160, 246, 0.4) 60%, rgba(134, 160, 246, 0.05));
+}
+.act-stub { position: relative; display: flex; align-items: baseline; gap: 18px; padding: 17px 4px; color: var(--text-faint); flex-wrap: wrap; row-gap: 4px; transition: color var(--dur); }
+.act-stub:hover { color: var(--text-dim); }
+.act-stub .dot { position: absolute; left: -38px; top: 24px; width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); border: 1px solid rgba(134, 160, 246, 0.4); transition: box-shadow var(--dur); }
+.act-stub:hover .dot { box-shadow: 0 0 10px rgba(134, 160, 246, 0.7); }
+.act-stub .a-label { font: 600 11px/1.5 var(--roman); letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+.act-stub .a-name { font: 400 19px/1.3 var(--serif); color: var(--metal-lo); transition: color var(--dur); }
+.act-stub:hover .a-name { color: var(--metal); }
+.act-stub .a-meta { font: 500 11.5px/1.6 var(--roman); letter-spacing: 0.05em; color: var(--text-faint); margin-left: auto; font-variant-numeric: tabular-nums; }
+.act-stub .a-meta .gold { color: var(--warn); }
+.act-stub .a-meta .ti { width: 12px; height: 12px; margin-right: 5px; position: relative; top: -1px; }
+
+.act-card {
+  position: relative;
+  margin: 14px 0;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25), 0 24px 60px rgba(0, 0, 0, 0.35);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+}
+.act-card .dot { position: absolute; left: -38px; top: 44px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent-hi); box-shadow: 0 0 14px rgba(134, 160, 246, 0.9); }
+.act-when {
+  padding: 30px 26px;
+  border-right: 1px solid var(--line-quiet);
+  border-radius: 18px 0 0 18px;
+  background: linear-gradient(180deg, rgba(44, 60, 150, 0.14), transparent 70%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.act-when .a-label { font: 600 11px/1 var(--roman); letter-spacing: 0.2em; color: var(--accent-hi); text-transform: uppercase; }
+.act-when .date { font: 400 34px/1.05 var(--serif); color: var(--metal-hi); margin-top: 12px; }
+.act-when .date small { display: block; font-size: 20px; color: var(--text-dim); font-style: italic; margin-top: 4px; }
+.act-when .year { font: 600 12px/1 var(--roman); letter-spacing: 0.2em; color: var(--text-faint); margin-top: 10px; text-transform: uppercase; }
+.act-when .place { display: flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 22px; font: 500 12px/1.5 var(--roman); letter-spacing: 0.06em; color: var(--text-dim); }
+.act-when .place .ti { width: 14px; height: 14px; color: var(--accent-hi); }
+.act-body { padding: 30px 34px 26px; position: relative; }
+.act-body .ghost { position: absolute; top: 6px; right: 30px; pointer-events: none; user-select: none; font: 400 148px/1 var(--serif); color: rgba(134, 160, 246, 0.055); }
+.act-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag { font: 600 9.5px/1 var(--roman); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--line); border-radius: 999px; padding: 6px 11px; }
+.tag.lapis { color: var(--accent-hi); border-color: rgba(134, 160, 246, 0.3); background: rgba(134, 160, 246, 0.06); }
+.tag.gold { color: var(--warn); border-color: rgba(224, 178, 111, 0.35); background: rgba(224, 178, 111, 0.06); }
+.tag.gold .ti { width: 12px; height: 12px; margin-right: 4px; position: relative; top: -1px; }
+.act-body h3 { font: 400 30px/1.22 var(--serif); color: var(--text); margin: 16px 0 0; max-width: 24ch; }
+.act-body .excerpt { font: 400 17px/1.62 var(--serif); color: var(--text-dim); margin: 14px 0 0; max-width: 64ch; }
+.act-body .excerpt::first-letter { font-family: var(--serif); font-size: 52px; line-height: 0.82; float: left; padding: 6px 10px 0 0; color: var(--accent-hi); }
+.act-foot { display: flex; align-items: center; gap: 18px; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line-quiet); flex-wrap: wrap; }
+.act-foot .by { font: 500 12px/1.5 var(--roman); letter-spacing: 0.04em; color: var(--text-faint); }
+.act-foot .by b { color: var(--metal); font-weight: 600; }
+.act-foot .read { margin-left: auto; }
+
+/* ===========================================================================
+   CHAPTER IV: THE BRETHREN (teaser)
+   =========================================================================== */
+.brethren { position: relative; padding: 120px 0; overflow: hidden; }
+.brethren-bg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(760px 460px at 50% 20%, rgba(44, 60, 150, 0.12), transparent 70%); }
+.brethren .inner { max-width: 720px; margin: 0 auto; text-align: center; }
+.brethren .verse { font: italic 400 clamp(22px, 2.6vw, 30px)/1.45 var(--serif); color: var(--text); margin-top: 8px; }
+.brethren .sub { font: 400 16.5px/1.6 var(--serif); color: var(--text-dim); margin: 20px auto 0; max-width: 52ch; }
+.join-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 34px 0 0; }
+.join-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+  font: 600 12px/1 var(--roman);
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur), color var(--dur), box-shadow var(--dur);
+}
+.join-chip .ti { width: 16px; height: 16px; color: var(--accent-hi); }
+.join-chip:hover { transform: translateY(-2px); color: var(--metal-hi); border-color: rgba(134, 160, 246, 0.35); box-shadow: var(--glow-lapis); }
+.brethren .cta-row { margin-top: 36px; display: flex; justify-content: center; }
+
+/* ===========================================================================
+   CHAPTER V: THE ECOSYSTEM (teaser, silver-accented, restraint is the moment)
+   =========================================================================== */
+.ecosystem { background: var(--ink-1); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 120px 0; }
+.eco-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 8px; }
+.eco-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur);
+}
+.eco-card::before { content: ''; position: absolute; top: 0; left: 26px; right: 26px; height: 1px; background: linear-gradient(90deg, transparent, var(--metal), transparent); opacity: 0.4; }
+.eco-card:hover { transform: translateY(-3px); border-color: rgba(124, 151, 242, 0.24); }
+.eco-card .e-top { display: flex; align-items: center; gap: 14px; }
+.eco-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--metal-hi);
+  background: radial-gradient(circle at 34% 26%, rgba(238, 243, 250, 0.12), transparent 46%), linear-gradient(180deg, var(--ink-3), var(--ink-1));
+  border: 1px solid rgba(194, 204, 218, 0.28);
+}
+.eco-icon .ti { width: 22px; height: 22px; }
+.eco-card h3 { font: 400 24px/1.2 var(--serif); color: var(--text); }
+.eco-card .badge { font: 600 9px/1 var(--roman); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; margin-left: auto; align-self: flex-start; }
+.eco-card .badge.live { color: var(--pos); border-color: rgba(111, 208, 168, 0.3); }
+.eco-card .purpose { font: 400 16px/1.55 var(--serif); color: var(--text-dim); }
+.eco-card .e-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 8px; }
+.eco-card .fact { font: 600 10.5px/1.4 var(--roman); letter-spacing: 0.08em; color: var(--metal-hi); font-variant-numeric: tabular-nums; }
+.eco-card .domain { display: inline-flex; align-items: center; gap: 6px; font: 500 11px/1 var(--roman); letter-spacing: 0.04em; color: var(--text-faint); transition: color var(--dur); }
+.eco-card .domain .ti { width: 13px; height: 13px; }
+.eco-card:hover .domain { color: var(--accent-hi); }
+
+/* ===========================================================================
+   CLOSING COLOPHON (home)
+   =========================================================================== */
+.closing { position: relative; padding: 120px 0; text-align: center; overflow: hidden; }
+.closing-bg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(700px 420px at 50% 40%, rgba(44, 60, 150, 0.14), transparent 72%); }
+.closing .inner { position: relative; max-width: 680px; margin: 0 auto; }
+.closing .motto-lapis { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.closing .motto-lapis .rule { height: 1px; width: 60px; flex: none; background: linear-gradient(90deg, transparent, rgba(134, 160, 246, 0.5), transparent); }
+.closing .motto-lapis span:not(.rule) { font: 600 12px/1 var(--roman); letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent-hi); white-space: nowrap; }
+.closing h2 { font: 400 clamp(28px, 3.4vw, 44px)/1.2 var(--serif); color: var(--text); margin-top: 26px; }
+.closing p { font: italic 400 18px/1.65 var(--serif); color: var(--text-dim); margin: 20px auto 0; max-width: 54ch; }
+.closing .cta-row { margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ===========================================================================
+   FOOTER (the colophon, the book closing)
+   =========================================================================== */
+.site-footer { flex-shrink: 0; border-top: 1px solid var(--line); background: var(--ink-0); padding: 74px 0 44px; text-align: center; }
+.site-footer .mark { width: 44px; margin: 0 auto; filter: drop-shadow(0 4px 14px rgba(71, 99, 214, 0.45)); }
+.site-footer .epigraph { font: italic 400 21px/1.5 var(--serif); color: var(--text-dim); margin: 22px auto 0; }
+.site-footer .gilded { max-width: 280px; margin: 28px auto; }
+.foot-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; max-width: var(--measure); margin: 0 auto; padding: 0 var(--edge); flex-wrap: wrap; }
+.foot-row p { font: 500 12px/1.6 var(--roman); color: var(--text-faint); }
+.foot-row p a { color: var(--text-dim); transition: color var(--dur); }
+.foot-row p a:hover { color: var(--accent-hi); }
+.foot-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.foot-links a { font: 600 10.5px/1 var(--roman); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); transition: color var(--dur); }
+.foot-links a:hover { color: var(--accent-hi); }
+
+/* ===========================================================================
+   PAGE SHELL (inner narrative pages / route stubs)
+   Content sits below the fixed nav; sections carry their own chapter head.
+   =========================================================================== */
+.page-shell { flex: 1 0 auto; padding-top: calc(var(--nav-h) + 66px); padding-bottom: 120px; }
+.page-shell .page-eyebrow { margin-bottom: 12px; }
+.page-shell h1 { font: 400 clamp(40px, 5vw, 64px)/1.08 var(--serif); letter-spacing: -0.01em; color: var(--text); }
+.page-shell .page-lede { font: italic 400 clamp(18px, 1.7vw, 21px)/1.6 var(--serif); color: var(--text-dim); margin-top: 20px; max-width: 60ch; }
+.page-shell .page-note { font: 400 15px/1.6 var(--roman); color: var(--text-faint); margin-top: 28px; }
+
+/* ===========================================================================
+   RESPONSIVE
+   =========================================================================== */
+@media (max-width: 1080px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 8px; }
+  .relic-col { min-height: 420px; order: -1; margin-top: -20px; }
+  .hero { padding-top: 128px; }
+  .mission { padding: 12px 28px 8px; }
+}
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-burger { display: inline-flex; }
+  .mission-grid { grid-template-columns: 1fr; gap: 44px; }
+  .mission { border-left: none; padding: 0; }
+  .mission:first-child { padding: 0; }
+  .mission .numeral { right: 0; top: -22px; font-size: 120px; }
+  .relic-cards { grid-template-columns: repeat(2, 1fr); }
+  .ledger-in { grid-template-columns: repeat(2, 1fr); }
+  .ledger .cell:nth-child(3) { border-left: none; border-top: 1px solid var(--line-quiet); }
+  .ledger .cell:nth-child(4) { border-top: 1px solid var(--line-quiet); }
+  .cycle { width: min(92vw, 480px); height: min(92vw, 480px); }
+  .cycle-ring, .cycle-glint { inset: 56px; }
+  .node .coin { width: 88px; height: 88px; }
+  .node { width: 120px; }
+  .node.n-holy { width: 150px; }
+  .node.n-holy .coin { width: 100px; height: 100px; }
+  .spoke { height: 110px; }
+  .eco-grid { grid-template-columns: 1fr; }
+  .act-card { grid-template-columns: 1fr; }
+  .act-when { border-right: none; border-bottom: 1px solid var(--line-quiet); border-radius: 18px 18px 0 0; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 12px; padding: 20px 24px; }
+  .act-body .ghost { font-size: 110px; top: auto; bottom: 6px; right: 18px; }
+  .act-when .date { margin-top: 0; font-size: 24px; }
+  .act-when .date small { display: inline; font-size: 18px; margin-left: 6px; }
+  .act-when .year { margin-top: 0; }
+  .act-when .place { margin-left: auto; padding-top: 0; }
+}
+@media (max-width: 560px) {
+  .brand b { font-size: 10.5px; letter-spacing: 0.14em; }
+  .nav-in { gap: 16px; padding: 14px var(--edge); }
+  .hero { padding-top: 104px; }
+  .relic-col { min-height: 320px; }
+  .relic-book { width: 200px; }
+  .halo.h1 { width: 240px; height: 240px; }
+  .halo.h2 { width: 330px; height: 330px; }
+  .halo.h3, .halo-glint { display: none; }
+  .relic-aura { width: 290px; height: 290px; }
+  .hero h1 { font-size: 35px; line-height: 1.12; }
+  .hero h1 .muted { font-size: 0.63em; margin-bottom: 10px; }
+  .hero .lede { font-size: 16.5px; }
+  .motto { gap: 12px; }
+  .motto .gilded { width: 26px; }
+  .motto span:not(.gilded) { font-size: 10px; letter-spacing: 0.2em; white-space: normal; }
+  .relic-cards { grid-template-columns: 1fr; }
+  .trinity { padding: 96px 0 90px; }
+  .cycle { width: min(92vw, 352px); height: min(92vw, 352px); margin-top: 30px; }
+  .cycle-ring, .cycle-glint { inset: 46px; }
+  .node .verb { display: none; }
+  .node .coin { width: 76px; height: 76px; gap: 3px; }
+  .node .coin .ti { width: 18px; height: 18px; }
+  .node .coin b { font-size: 10.5px; }
+  .node { width: 96px; }
+  .node.n-booe { top: 8px; }
+  .node.n-holy { width: 110px; }
+  .node.n-holy .coin { width: 88px; height: 88px; }
+  .node.n-holy .pill { display: none; }
+  .node.n-hope { bottom: 8px; right: 8px; }
+  .node.n-prophet { bottom: 8px; left: 8px; }
+  .spoke { height: 92px; }
+  .cycle-pill {
+    display: block;
+    width: fit-content;
+    margin: 6px auto 0;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font: 600 9.5px/1 var(--roman);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--relic-holy);
+    border: 1px solid rgba(207, 226, 230, 0.28);
+    background: rgba(207, 226, 230, 0.05);
+  }
+  .harmony { font-size: 18px; margin-top: 28px; }
+  .missions .wrap { padding-top: 84px; padding-bottom: 84px; }
+  .acts { padding: 88px 0 96px; }
+  .brethren, .ecosystem, .closing { padding: 88px 0; }
+  .act-body { padding: 24px 22px 22px; }
+  .act-body h3 { font-size: 24px; }
+  .rail { padding-left: 30px; }
+  .rail::before { left: 6px; }
+  .act-stub .dot { left: -24px; }
+  .act-card .dot { left: -24px; }
+  .act-stub .a-meta { margin-left: 0; width: 100%; }
+  .foot-row { justify-content: center; text-align: center; }
 }
