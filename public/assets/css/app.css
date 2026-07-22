@@ -1,0 +1,221 @@
+/* BOOE site base. Dark, a manuscript lit from within. Extends the locked tokens
+   (tokens.css) and self-hosted fonts (fonts.css). This is the foundation layer;
+   page-specific styles are layered on by later build agents. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink-0);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--accent-hi);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease-out);
+}
+
+a:hover {
+  color: var(--metal-hi);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Accessible skip link, hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--ink-2);
+  color: var(--text);
+  font-family: var(--roman);
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+/* --- Hero (placeholder home) --------------------------------------------- */
+
+.hero {
+  position: relative;
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(48px, 12vh, 140px) var(--gutter);
+  overflow: hidden;
+  text-align: center;
+}
+
+/* the only ambient glow allowed: a radial lapis wash behind the mark */
+.hero-glow {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  width: min(760px, 92vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(71, 99, 214, 0.28) 0%,
+    rgba(71, 99, 214, 0.1) 34%,
+    rgba(7, 9, 16, 0) 68%
+  );
+  pointer-events: none;
+  filter: blur(6px);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: rise var(--dur-grand) var(--ease-out) both;
+}
+
+.hero-logo {
+  width: clamp(88px, 14vw, 112px);
+  height: auto;
+  margin-bottom: 28px;
+  filter: drop-shadow(0 0 26px rgba(134, 160, 246, 0.4));
+}
+
+.hero-eyebrow {
+  margin: 0 0 18px;
+  font-family: var(--roman);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--metal-lo);
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 8vw, 4.75rem);
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+  color: var(--metal-hi);
+}
+
+.hero-tagline {
+  margin: 22px 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+  color: var(--text-dim);
+}
+
+/* gilded rule: a 1px gold gradient hairline, used sparingly */
+.gilded-rule {
+  width: 132px;
+  height: 1px;
+  margin: 30px 0 0;
+  background: linear-gradient(
+    90deg,
+    rgba(224, 178, 111, 0) 0%,
+    rgba(224, 178, 111, 0.85) 50%,
+    rgba(224, 178, 111, 0) 100%
+  );
+}
+
+/* --- Footer -------------------------------------------------------------- */
+
+.site-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--line);
+  background: var(--ink-1);
+}
+
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--roman);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--metal);
+}
+
+.footer-mark:hover {
+  color: var(--metal-hi);
+}
+
+.footer-credit {
+  margin: 0;
+  font-family: var(--roman);
+  font-size: 13px;
+  color: var(--text-faint);
+}
+
+.footer-credit a {
+  color: var(--text-dim);
+}
+
+.footer-credit a:hover {
+  color: var(--accent-hi);
+}
+
+/* --- Motion discipline --------------------------------------------------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,50 @@
+{*
+  BOOE head. Dark-only brand surface (ink #070910). Middle dot as the title
+  separator, NEVER an em-dash or en-dash. Fonts are self-hosted woff2 (no Google
+  Fonts hotlink). Canonical + OG from production_url. EN only.
+*}
+{var $siteName = $leafName ?? 'Book of Ethereum'}
+{var $prodUrl = $leafProductionUrl ?? 'https://bookofeth.xyz'}
+{var $tagline = 'The cultural layer of Ethereum'}
+{var $metaTitle = $siteName . ' &middot; ' . $tagline}
+{var $metaDescription = $leafDescription ?? 'The cultural layer of Ethereum. The Book of Ethereum preserves its memory, translates its meaning, and projects its myth forward.'}
+{var $canonical = $prodUrl . '/'}
+{var $ogImage = $prodUrl . '/logo.png'}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="leaf-base-url" content="{$leafBaseUrl}">
+<title>{$metaTitle|noescape}</title>
+<meta name="title" content="{$metaTitle|noescape}">
+<meta name="description" content="{$metaDescription}">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#070910">
+<meta name="color-scheme" content="dark">
+
+<link rel="canonical" href="{$canonical}">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/logo.png">
+<meta name="apple-mobile-web-app-title" content="{$siteName}">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="{$canonical}">
+<meta property="og:title" content="{$metaTitle|noescape}">
+<meta property="og:description" content="{$metaDescription}">
+<meta property="og:site_name" content="{$siteName}">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="{$ogImage}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{$canonical}">
+<meta name="twitter:title" content="{$metaTitle|noescape}">
+<meta name="twitter:description" content="{$metaDescription}">
+<meta name="twitter:image" content="{$ogImage}">
+
+{* Fonts are self-hosted. Preload the two load-bearing weights. *}
+<link rel="preload" href="/assets/fonts/eb-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/app.css">
