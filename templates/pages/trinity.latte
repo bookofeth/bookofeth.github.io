@@ -1,0 +1,30 @@
+{layout '../layouts/base.latte'}
+
+{*
+  ROUTE STUB -> /trinity/. Owned by the Trinity page agent (FLAGSHIP). $relics is
+  already available in this block (bootstrapped by the layout, see base.latte).
+  Reuse the .cycle, .node, .rcard component classes from app.css. See
+  scratchpad/BUILD-NOTES.md.
+*}
+{var $pageTitle = 'The Trinity'}
+{var $pageDescription = 'Four relics, one cycle. $BOOE creates, $HOPE remembers, $PROPHET guides, and faith is rewarded in $HOLY. All ERC-20 on Ethereum mainnet, liquidity locked, zero tax.'}
+{var $pageSlug = 'trinity'}
+{var $pageCss = 'trinity'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+<main id="main" class="page-shell">
+    <div class="wrap">
+        <div class="chapter-head">
+            <span class="ch-node"></span>
+            <span class="ch-label">Chapter &middot; The Trinity</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Folio II</span>
+        </div>
+        <p class="eyebrow page-eyebrow">$BOOE &middot; $HOPE &middot; $PROPHET &middot; $HOLY</p>
+        <h1>The Trinity</h1>
+        <p class="page-lede">A living economy of meaning: creation, remembrance, and guidance, and the faith rewarded in $HOLY.</p>
+        <p class="page-note">This chapter is being inscribed.</p>
+    </div>
+</main>
+{/block}

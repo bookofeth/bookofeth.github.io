@@ -1,0 +1,30 @@
+{layout '../layouts/base.latte'}
+
+{*
+  ROUTE STUB -> /manifest/. Owned by the Manifest / docs agent. This is the
+  illuminated table of contents into the fuller documentation (folded in as
+  first-class content). See scratchpad/BUILD-NOTES.md and CONTENT-IA.md for the
+  docs-fold decision.
+*}
+{var $pageTitle = 'The Manifest'}
+{var $pageDescription = 'The library of the Book. The fuller documentation, folded in as first-class content: Philosophy, Prophecy, the Trinity, Holy Labs, the DAO, the Guardians, Fusaka, and the reference.'}
+{var $pageSlug = 'manifest'}
+{var $pageCss = 'manifest'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+<main id="main" class="page-shell">
+    <div class="wrap">
+        <div class="chapter-head">
+            <span class="ch-node"></span>
+            <span class="ch-label">Chapter &middot; The Manifest</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Folio V</span>
+        </div>
+        <p class="eyebrow page-eyebrow">The library of the Book</p>
+        <h1>The Manifest</h1>
+        <p class="page-lede">Read the Book cover to cover. Every chapter, complete and cross-linked, the way scripture is meant to be studied.</p>
+        <p class="page-note">This chapter is being inscribed.</p>
+    </div>
+</main>
+{/block}

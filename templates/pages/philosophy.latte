@@ -1,0 +1,29 @@
+{layout '../layouts/base.latte'}
+
+{*
+  ROUTE STUB -> /philosophy/. Owned by the Philosophy page agent. Replace the
+  placeholder body with the real narrative; keep the layout + page-scoped CSS
+  convention. See scratchpad/BUILD-NOTES.md.
+*}
+{var $pageTitle = 'The Philosophy'}
+{var $pageDescription = 'The Infinite Garden, the cultural layer, the civilizational platform, and the Prophecy. Ethereum scales computation. The Book of Ethereum scales understanding.'}
+{var $pageSlug = 'philosophy'}
+{var $pageCss = 'philosophy'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+<main id="main" class="page-shell">
+    <div class="wrap">
+        <div class="chapter-head">
+            <span class="ch-node"></span>
+            <span class="ch-label">Chapter &middot; The Philosophy</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Folio I</span>
+        </div>
+        <p class="eyebrow page-eyebrow">The Philosophy</p>
+        <h1>The Infinite Garden</h1>
+        <p class="page-lede">Ethereum is not a machine we control but a garden we care for. The Book is the garden's caretaker.</p>
+        <p class="page-note">This chapter is being inscribed.</p>
+    </div>
+</main>
+{/block}
