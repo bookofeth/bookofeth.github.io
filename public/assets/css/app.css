@@ -163,7 +163,9 @@ svg.ti {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  min-height: 44px;
   border-radius: 999px;
   font: 600 13px/1 var(--roman);
   letter-spacing: 0.04em;
@@ -287,7 +289,7 @@ svg.ti {
 .nav-cta { flex: none; }
 
 /* Mobile menu button + the table-of-contents sheet (signature moment). */
-.nav-burger { display: none; margin-left: auto; width: 42px; height: 42px; align-items: center; justify-content: center; color: var(--metal-hi); border-radius: 12px; border: 1px solid var(--line); }
+.nav-burger { display: none; margin-left: auto; width: 44px; height: 44px; align-items: center; justify-content: center; color: var(--metal-hi); border-radius: 12px; border: 1px solid var(--line); }
 .nav-burger .ti { width: 22px; height: 22px; }
 .nav-sheet {
   position: fixed;
@@ -305,7 +307,7 @@ svg.ti {
   transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
 }
 .nav-sheet.open { opacity: 1; visibility: visible; transform: none; }
-.nav-sheet-close { position: absolute; top: 18px; right: var(--edge); width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; color: var(--metal-hi); border: 1px solid var(--line); border-radius: 12px; }
+.nav-sheet-close { position: absolute; top: 18px; right: var(--edge); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--metal-hi); border: 1px solid var(--line); border-radius: 12px; }
 .nav-sheet-close .ti { width: 22px; height: 22px; }
 .nav-sheet-label { font: 600 10px/1 var(--roman); letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; }
 .nav-toc { list-style: none; }
