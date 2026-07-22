@@ -33,6 +33,12 @@
 /* The living rail carries every Act as a full chronicle card. */
 .acts-rail { margin-top: 34px; }
 
+/* On the overview each chronicle card title is an h2 (a top-level section under
+   the page h1), so the heading order never skips h1 -> h3. Match the shared
+   .act-body h3 look exactly (app.css owns the h3; here we style the promoted h2).
+   The home teaser keeps its h3, correctly nested under the section h2 there. */
+.acts-rail .act-body h2 { font: 400 30px/1.22 var(--serif); color: var(--text); margin: 16px 0 0; max-width: 24ch; }
+
 /* A small scribe portrait ahead of the inscription credit (overview only). */
 .acts-rail .act-foot .by { display: inline-flex; align-items: center; gap: 8px; }
 .acts-rail .act-foot .scribe {
@@ -194,6 +200,7 @@
    RESPONSIVE
    =========================================================================== */
 @media (max-width: 560px) {
+  .acts-rail .act-body h2 { font-size: 24px; }
   .act-continues .dot-open { left: -24px; }
   .act-plate { padding-top: calc(var(--nav-h) + 34px); padding-bottom: 40px; }
   .act-prose { padding-top: 44px; }
