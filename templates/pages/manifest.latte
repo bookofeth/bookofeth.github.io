@@ -1,30 +1,95 @@
 {layout '../layouts/base.latte'}
 
 {*
-  ROUTE STUB -> /manifest/. Owned by the Manifest / docs agent. This is the
-  illuminated table of contents into the fuller documentation (folded in as
-  first-class content). See scratchpad/BUILD-NOTES.md and CONTENT-IA.md for the
-  docs-fold decision.
+  /manifest -> the illuminated table of contents. The Book's contents page:
+  the whole site as a chapter list with folio numbers, Garamond titles, and
+  one-line Space Grotesk descriptions. Part One links the designed narrative
+  chapters (Philosophy, Trinity, Acts, Brethren, where the lore already lives);
+  Part Two links the four reference appendices that have no other home. This TOC
+  is the signature moment. Gold budget (1): the single gilded rule under the intro.
+  No em-dashes. Tabler icons only.
 *}
 {var $pageTitle = 'The Manifest'}
-{var $pageDescription = 'The library of the Book. The fuller documentation, folded in as first-class content: Philosophy, Prophecy, the Trinity, Holy Labs, the DAO, the Guardians, Fusaka, and the reference.'}
+{var $pageDescription = 'The contents page of the Book of Ethereum. The chapters that carry the myth, and the appendices that keep the record: the Fusaka era, the token reference, the lexicon, and the resources.'}
 {var $pageSlug = 'manifest'}
 {var $pageCss = 'manifest'}
 {var $bodyClass = 'page-inner'}
 
 {block content}
+{var $chronicle = [
+    ['folio' => 'I',   'title' => 'The Philosophy', 'href' => '/philosophy/', 'mark' => 'Folio I',
+     'desc' => 'The Infinite Garden, the cultural layer of Ethereum, and the Prophecy.'],
+    ['folio' => 'II',  'title' => 'The Trinity',    'href' => '/trinity/',    'mark' => 'Folio II',
+     'desc' => 'Four relics, one cycle. The living economy of meaning.'],
+    ['folio' => 'III', 'title' => 'The Acts',       'href' => '/acts/',       'mark' => 'Folio III',
+     'desc' => 'The deeds of the brethren, chronicled across Ethereum.'],
+    ['folio' => 'IV',  'title' => 'The Brethren',   'href' => '/brethren/',   'mark' => 'Folio IV',
+     'desc' => 'The DAO, the Guardians, the Prophets, and the Pilgrimage.'],
+]}
+{var $appendices = [
+    ['folio' => 'i',   'title' => 'The Fusaka Era',  'href' => '/manifest-fusaka/',    'mark' => 'Appendix I',
+     'desc' => 'The upgrade that widens the garden. PeerDAS and the road ahead.'],
+    ['folio' => 'ii',  'title' => 'Token Reference', 'href' => '/manifest-tokens/',    'mark' => 'Appendix II',
+     'desc' => 'Every relic, in full. Contracts, supply, and provenance.'],
+    ['folio' => 'iii', 'title' => 'The Lexicon',     'href' => '/manifest-lexicon/',   'mark' => 'Appendix III',
+     'desc' => 'The words of the Book, defined. A reader\'s key to the language of the brethren.'],
+    ['folio' => 'iv',  'title' => 'Resources',       'href' => '/manifest-resources/', 'mark' => 'Appendix IV',
+     'desc' => 'Every door out of the Manifest, gathered in one place.'],
+]}
+
 <main id="main" class="page-shell">
     <div class="wrap">
-        <div class="chapter-head">
+        <div class="chapter-head" data-reveal>
             <span class="ch-node"></span>
-            <span class="ch-label">Chapter &middot; The Manifest</span>
+            <span class="ch-label">Chapter V &middot; The Manifest</span>
             <span class="ch-line"></span>
             <span class="ch-folio">Folio V</span>
         </div>
-        <p class="eyebrow page-eyebrow">The library of the Book</p>
-        <h1>The Manifest</h1>
-        <p class="page-lede">Read the Book cover to cover. Every chapter, complete and cross-linked, the way scripture is meant to be studied.</p>
-        <p class="page-note">This chapter is being inscribed.</p>
+
+        <div class="mf-intro" data-reveal>
+            <p class="eyebrow page-eyebrow">The library of the Book</p>
+            <h1>The Manifest</h1>
+            <p class="page-lede">The whole Book, gathered into a single contents page. The chapters that carry the myth, and the appendices that keep the record.</p>
+            <div class="gilded mf-rule" aria-hidden="true"></div>
+        </div>
+
+        <section class="mf-part">
+            <p class="mf-part-label" data-reveal>Part One &middot; The Chronicle</p>
+            <ol class="toc">
+                {foreach $chronicle as $c}
+                    <li data-reveal data-reveal-delay="{($iterator->counter % 4) ?: 4}">
+                        <a class="toc-item" href="{$c['href']}">
+                            <span class="toc-folio" aria-hidden="true">{$c['folio']}</span>
+                            <span class="toc-main">
+                                <span class="toc-title">{$c['title']}</span>
+                                <span class="toc-desc">{$c['desc']}</span>
+                            </span>
+                            <span class="toc-mark">{$c['mark']}</span>
+                            <svg class="ti toc-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                        </a>
+                    </li>
+                {/foreach}
+            </ol>
+        </section>
+
+        <section class="mf-part">
+            <p class="mf-part-label" data-reveal>Part Two &middot; The Appendices</p>
+            <ol class="toc">
+                {foreach $appendices as $c}
+                    <li data-reveal data-reveal-delay="{($iterator->counter % 4) ?: 4}">
+                        <a class="toc-item" href="{$c['href']}">
+                            <span class="toc-folio" aria-hidden="true">{$c['folio']}</span>
+                            <span class="toc-main">
+                                <span class="toc-title">{$c['title']}</span>
+                                <span class="toc-desc">{$c['desc']}</span>
+                            </span>
+                            <span class="toc-mark">{$c['mark']}</span>
+                            <svg class="ti toc-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                        </a>
+                    </li>
+                {/foreach}
+            </ol>
+        </section>
     </div>
 </main>
 {/block}
