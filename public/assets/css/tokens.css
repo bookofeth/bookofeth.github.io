@@ -20,7 +20,8 @@
   /* text */
   --text: #e7ecf4;
   --text-dim: #8e97ab;
-  --text-faint: #5a6478;
+  /* raised from #5a6478 to pass WCAG AA (>=4.5:1) as real text on ink-0/1/2 */
+  --text-faint: #7c8799;
 
   /* status */
   --pos: #6fd0a8;
