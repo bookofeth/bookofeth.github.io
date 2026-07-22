@@ -11,6 +11,7 @@ dev:
 
 build: clean
 	$(LEAF) build
+	bash bin/relocate-acts.sh dist
 
 clean:
 	rm -rf dist
