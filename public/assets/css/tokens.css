@@ -1,0 +1,80 @@
+/* Locked design tokens. Ported verbatim from the BOOE app (src/styles/tokens.css).
+   Do not re-derive colors. The website EXTENDS this system, it never fights it. */
+:root {
+  /* ink (backgrounds) */
+  --ink-0: #070910;
+  --ink-1: #0e1320;
+  --ink-2: #161e2f;
+  --ink-3: #1c2438;
+
+  /* silver (metal) */
+  --metal-hi: #eef3fa;
+  --metal: #c2ccda;
+  --metal-lo: #7c8799;
+
+  /* lapis (accent) */
+  --accent-hi: #86a0f6;
+  --accent: #4763d6;
+  --accent-lo: #2c3c96;
+
+  /* text */
+  --text: #e7ecf4;
+  --text-dim: #8e97ab;
+  --text-faint: #5a6478;
+
+  /* status */
+  --pos: #6fd0a8;
+  --warn: #e0b26f;
+  /* destructive/negative: the one sanctioned exception to the no-red rule,
+     used sparingly (sign-out, report, danger confirms) at low prominence */
+  --neg: #e0857f;
+
+  /* relic colors */
+  --relic-prophet: #9c8fe0;
+  --relic-hope: #5fc2b4;
+  --relic-holy: #cfe2e6;
+
+  /* rank check colors */
+  --chk-prophet: #e0b26f; /* gold */
+  --chk-disciple: #86a0f6; /* lapis */
+  --chk-scribe: #c2ccda; /* silver */
+
+  /* lines + glass */
+  --line: rgba(124, 151, 242, 0.1);
+  --glass: rgba(231, 236, 244, 0.05);
+  --glass-edge: rgba(124, 151, 242, 0.2);
+
+  /* type */
+  --serif: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --roman: 'Space Grotesk', var(--sans);
+  --sans: -apple-system, 'SF Pro Text', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* page gutter (was the de-facto 18px) */
+  --gutter: 18px;
+
+  /* quiet divider for nested content (annotations, sub-rows) */
+  --line-quiet: rgba(124, 151, 242, 0.06);
+
+  /* motion durations + easings */
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 320ms;
+  --dur-grand: 480ms;
+  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* elevation shadows */
+  --shadow-e1: 0 1px 0 rgba(0, 0, 0, 0.25);
+  --shadow-e2: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 18px 40px rgba(0, 0, 0, 0.55);
+  --shadow-e3: 0 -14px 40px rgba(0, 0, 0, 0.6);
+
+  /* ambient glows */
+  --glow-lapis: 0 0 12px rgba(134, 160, 246, 0.35);
+  --glow-gold: 0 0 14px rgba(224, 178, 111, 0.35);
+
+  /* heat tier colors */
+  --heat-warm: #c2ccda;
+  --heat-blazing: #86a0f6;
+  --heat-ablaze: #e0b26f;
+}
