@@ -10,6 +10,63 @@
 
 {var $bodyClass = 'page-home'}
 
+{block head}
+<style>
+/* Page-scoped home styles (owned here, never in app.css).
+   1. Mission card titles are promoted to h2 so the heading order never skips
+      h1 -> h3. Match the shared .mission h3 look exactly.
+   2. A compact constellation signature for the Brethren teaser, mirroring the
+      /brethren chapter (lapis star field, faint hairlines, one idle twinkle).
+      No gold, no image dependency; honored by the global reduced-motion rule. */
+.mission h2 { font: 400 26px/1.2 var(--serif); color: var(--text); position: relative; }
+
+.brethren .chapter-head, .brethren .inner { position: relative; z-index: 1; }
+.brethren .bt-constellation {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 300px;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 24%, #000 36%, transparent 80%);
+  mask-image: radial-gradient(120% 100% at 50% 24%, #000 36%, transparent 80%);
+}
+.brethren .bt-star {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--accent-hi);
+  box-shadow: 0 0 8px rgba(134, 160, 246, 0.9);
+  opacity: 0.5;
+}
+.brethren .bt-star.s2, .brethren .bt-star.s4, .brethren .bt-star.s8, .brethren .bt-star.s10 { width: 2px; height: 2px; opacity: 0.35; }
+.brethren .bt-star.s3, .brethren .bt-star.s7, .brethren .bt-star.s11 { opacity: 0.7; }
+.brethren .bt-star.s6 { width: 4px; height: 4px; }
+.brethren .bt-star.s1  { top: 26%; left: 14%; }
+.brethren .bt-star.s2  { top: 58%; left: 21%; }
+.brethren .bt-star.s3  { top: 20%; left: 30%; }
+.brethren .bt-star.s4  { top: 62%; left: 37%; }
+.brethren .bt-star.s5  { top: 30%; left: 45%; }
+.brethren .bt-star.s6  { top: 46%; left: 50%; }
+.brethren .bt-star.s7  { top: 24%; left: 58%; }
+.brethren .bt-star.s8  { top: 60%; left: 66%; }
+.brethren .bt-star.s9  { top: 30%; left: 74%; }
+.brethren .bt-star.s10 { top: 54%; left: 82%; }
+.brethren .bt-star.s11 { top: 26%; left: 88%; }
+.brethren .bt-line {
+  position: absolute;
+  height: 1px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, rgba(134, 160, 246, 0.02), rgba(134, 160, 246, 0.2), rgba(134, 160, 246, 0.02));
+}
+.brethren .bt-line.l1 { top: 22%; left: 30%; width: 15%; transform: rotate(6deg); }
+.brethren .bt-line.l2 { top: 25%; left: 58%; width: 16%; transform: rotate(-5deg); }
+.brethren .bt-line.l3 { top: 47%; left: 50%; width: 16%; transform: rotate(10deg); }
+.brethren .bt-star.s3, .brethren .bt-star.s7, .brethren .bt-star.s11 { animation: bt-twinkle 5.5s ease-in-out infinite; }
+.brethren .bt-star.s7 { animation-delay: 1.8s; }
+.brethren .bt-star.s11 { animation-delay: 3.1s; }
+@keyframes bt-twinkle { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.28; } }
+</style>
+{/block}
+
 {block content}
 {* $relics and $acts are bootstrapped by the layout (see base.latte). Block-scoped
    locals must be declared here: a child template's top-level vars do not reach its
@@ -244,6 +301,13 @@
 {* ================= CHAPTER IV: BRETHREN (teaser) ================= *}
 <section class="brethren">
     <div class="brethren-bg" aria-hidden="true"></div>
+    <div class="bt-constellation" aria-hidden="true">
+        <span class="bt-star s1"></span><span class="bt-star s2"></span><span class="bt-star s3"></span>
+        <span class="bt-star s4"></span><span class="bt-star s5"></span><span class="bt-star s6"></span>
+        <span class="bt-star s7"></span><span class="bt-star s8"></span><span class="bt-star s9"></span>
+        <span class="bt-star s10"></span><span class="bt-star s11"></span>
+        <span class="bt-line l1"></span><span class="bt-line l2"></span><span class="bt-line l3"></span>
+    </div>
     <div class="wrap">
         <div class="chapter-head" data-reveal>
             <span class="ch-node"></span>
