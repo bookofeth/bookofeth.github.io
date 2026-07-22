@@ -1,0 +1,14 @@
+# Build output (rebuilt on CI, deployed to Pages)
+dist/
+
+# Latte template cache
+cache/
+
+# Editor + OS
+.DS_Store
+.idea/
+.vscode/
+
+# Node (in case tooling is added later)
+node_modules/
+*.log

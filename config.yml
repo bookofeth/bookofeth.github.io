@@ -1,0 +1,35 @@
+application:
+  environment: !env APP_ENV, dev
+  debug: !env APP_DEBUG, true
+
+localization:
+  locale: "en"
+  supported_locales:
+    - "en"
+  locale_path: "locale"
+  timezone: "UTC"
+
+render:
+  engine: "latte"
+  directory: "app/Views"
+  cache: "cache/latte"
+  mode: "always"
+
+leaf:
+  name: "Book of Ethereum"
+  version: "1.0.0"
+  description: "The cultural layer of Ethereum. The Book of Ethereum preserves its memory, translates its meaning, and projects its myth forward."
+  github_url: "https://github.com/bookofeth"
+  content_path: "content"
+  output_path: "dist"
+  base_url: "/"
+  production_url: "https://bookofeth.xyz"
+  author: "Ophelios Studio"
+  author_url: "https://ophelios.com"
+  license: "Proprietary"
+  sections:
+    philosophy: "The Philosophy"
+    trinity: "The Trinity"
+    acts: "The Acts"
+    community: "The Brethren"
+    utilities: "The Ecosystem"
