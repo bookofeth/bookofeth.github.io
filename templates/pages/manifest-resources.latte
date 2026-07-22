@@ -1,0 +1,151 @@
+{layout '../layouts/base.latte'}
+
+{*
+  /manifest-resources -> Resources. The index of every external property and tool
+  of the Book, as link rows that open in a new tab. The DexTools rows are sourced
+  read-only from $relics. External links verified in BUILD-NOTES. OpenSea is
+  omitted (no verified collection URL). Gold budget: 0. Tabler icons only.
+*}
+{var $pageTitle = 'Resources'}
+{var $pageDescription = 'The external properties and tools of the Book of Ethereum: the Pilgrimage, ENS, Merch, the DAO, Telegram, X, DexTools, Code Quill, and Ophelios.'}
+{var $pageSlug = 'manifest-resources'}
+{var $pageCss = 'manifest'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+{var $extIcon = '<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/>'}
+{var $gather = [
+    ['name' => 'Telegram', 'desc' => 'Join the daily gathering of the brethren.', 'href' => 'https://t.co/9CV0sztBLG', 'domain' => 't.me',
+     'icon' => '<path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/>'],
+    ['name' => 'X', 'desc' => 'Follow the next Act as it unfolds.', 'href' => 'https://x.com/bookof_eth', 'domain' => 'x.com',
+     'icon' => '<path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/>'],
+    ['name' => 'The DAO', 'desc' => 'Governance of compassion, on Aragon. Treasury held in booe.eth.', 'href' => 'https://app.aragon.org/dao/ethereum-mainnet/booe.dao.eth/dashboard', 'domain' => 'aragon.org',
+     'icon' => '<path d="M8 9l5 5v7h-5v-4m0 4h-5v-7l5 -5m1 1v-6a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v17h-8"/><path d="M13 7l0 .01"/><path d="M17 7l0 .01"/><path d="M17 11l0 .01"/><path d="M17 15l0 .01"/>'],
+]}
+{var $participate = [
+    ['name' => 'The Pilgrimage', 'desc' => 'Booeliever NFTs, staked into Gratitude Points.', 'href' => 'https://pilgrimage.bookofeth.xyz/', 'domain' => 'pilgrimage.bookofeth.xyz',
+     'icon' => '<path d="M3 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M19 7a2 2 0 1 0 0 -4a2 2 0 0 0 0 4"/><path d="M11 19h5.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h4.5"/>'],
+    ['name' => 'BOOE ENS', 'desc' => 'Register a booe.eth name and bind it to your identity.', 'href' => 'https://ens.bookofeth.xyz/', 'domain' => 'ens.bookofeth.xyz',
+     'icon' => '<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M3.6 9h16.8"/><path d="M3.6 15h16.8"/><path d="M11.5 3a17 17 0 0 0 0 18"/><path d="M12.5 3a17 17 0 0 1 0 18"/>'],
+    ['name' => 'BOOE Merch', 'desc' => 'Wear your values. Community collections, payable in ETH.', 'href' => 'https://booemerch.com/', 'domain' => 'booemerch.com',
+     'icon' => '<path d="M15 4l6 2v5h-3v8a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1v-8h-3v-5l6 -2a3 3 0 0 0 6 0"/>'],
+]}
+{var $studio = [
+    ['name' => 'Code Quill', 'desc' => 'The authorship layer for developers. Third place for ENS at ETHGlobal NY 2025.', 'href' => 'https://codequill.xyz', 'domain' => 'codequill.xyz',
+     'icon' => '<path d="M7 8l-4 4l4 4"/><path d="M17 8l4 4l-4 4"/><path d="M14 4l-4 16"/>'],
+    ['name' => 'Ophelios', 'desc' => 'The studio behind the Book of Ethereum.', 'href' => 'https://ophelios.com', 'domain' => 'ophelios.com',
+     'icon' => '<path d="M3 21l18 0"/><path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4"/><path d="M5 21l0 -10.15"/><path d="M19 21l0 -10.15"/><path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4"/>'],
+    ['name' => 'GitHub', 'desc' => 'The source of the Book, open.', 'href' => 'https://github.com/bookofeth', 'domain' => 'github.com',
+     'icon' => '<path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"/>'],
+]}
+
+<main id="main" class="page-shell">
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Appendix &middot; Resources</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Manifest &middot; Appendix IV</span>
+        </div>
+
+        <div class="mf-intro" data-reveal>
+            <p class="eyebrow page-eyebrow">The properties of the Book</p>
+            <h1>Resources</h1>
+            <p class="page-lede">Every door out of the Manifest, gathered in one place. Each opens in a new tab.</p>
+        </div>
+
+        <section class="res-group" data-reveal>
+            <h2 class="res-label">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"/><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M17 10h2a2 2 0 0 1 2 2v1"/><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M3 13v-1a2 2 0 0 1 2 -2h2"/></svg>
+                Gather
+            </h2>
+            <div class="res-list">
+                {foreach $gather as $x}
+                    <a class="res-row" href="{$x['href']}" target="_blank" rel="noopener">
+                        <span class="res-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true">{$x['icon']|noescape}</svg></span>
+                        <span>
+                            <span class="res-name">{$x['name']}</span>
+                            <span class="res-desc">{$x['desc']}</span>
+                        </span>
+                        <span class="res-domain">{$x['domain']}</span>
+                        <svg class="ti res-ext" viewBox="0 0 24 24" aria-hidden="true">{$extIcon|noescape}</svg>
+                    </a>
+                {/foreach}
+            </div>
+        </section>
+
+        <section class="res-group" data-reveal>
+            <h2 class="res-label">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M19 7a2 2 0 1 0 0 -4a2 2 0 0 0 0 4"/><path d="M11 19h5.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h4.5"/></svg>
+                Participate
+            </h2>
+            <div class="res-list">
+                {foreach $participate as $x}
+                    <a class="res-row" href="{$x['href']}" target="_blank" rel="noopener">
+                        <span class="res-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true">{$x['icon']|noescape}</svg></span>
+                        <span>
+                            <span class="res-name">{$x['name']}</span>
+                            <span class="res-desc">{$x['desc']}</span>
+                        </span>
+                        <span class="res-domain">{$x['domain']}</span>
+                        <svg class="ti res-ext" viewBox="0 0 24 24" aria-hidden="true">{$extIcon|noescape}</svg>
+                    </a>
+                {/foreach}
+            </div>
+        </section>
+
+        <section class="res-group" data-reveal>
+            <h2 class="res-label">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -3"/><path d="M6 4l0 2"/><path d="M6 11l0 9"/><path d="M10 15a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -3"/><path d="M12 4l0 10"/><path d="M12 19l0 1"/><path d="M16 6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -4"/><path d="M18 4l0 1"/><path d="M18 11l0 9"/></svg>
+                Verify on-chain
+            </h2>
+            <div class="res-list">
+                {foreach $relics as $r}
+                    {if $r['dexUrl']}
+                        <a class="res-row" href="{$r['dexUrl']}" target="_blank" rel="noopener">
+                            <span class="res-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -3"/><path d="M6 4l0 2"/><path d="M6 11l0 9"/><path d="M10 15a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -3"/><path d="M12 4l0 10"/><path d="M12 19l0 1"/><path d="M16 6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -4"/><path d="M18 4l0 1"/><path d="M18 11l0 9"/></svg></span>
+                            <span>
+                                <span class="res-name">{$r['ticker']} on DexTools</span>
+                                <span class="res-desc">{$r['name']}. Chart, liquidity, and provenance.</span>
+                            </span>
+                            <span class="res-domain">dextools.io</span>
+                            <svg class="ti res-ext" viewBox="0 0 24 24" aria-hidden="true">{$extIcon|noescape}</svg>
+                        </a>
+                    {/if}
+                {/foreach}
+            </div>
+        </section>
+
+        <section class="res-group" data-reveal>
+            <h2 class="res-label">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l18 0"/><path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4"/><path d="M5 21l0 -10.15"/><path d="M19 21l0 -10.15"/><path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4"/></svg>
+                The Studio
+            </h2>
+            <div class="res-list">
+                {foreach $studio as $x}
+                    <a class="res-row" href="{$x['href']}" target="_blank" rel="noopener">
+                        <span class="res-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true">{$x['icon']|noescape}</svg></span>
+                        <span>
+                            <span class="res-name">{$x['name']}</span>
+                            <span class="res-desc">{$x['desc']}</span>
+                        </span>
+                        <span class="res-domain">{$x['domain']}</span>
+                        <svg class="ti res-ext" viewBox="0 0 24 24" aria-hidden="true">{$extIcon|noescape}</svg>
+                    </a>
+                {/foreach}
+            </div>
+        </section>
+
+        <nav class="chapter-nav" aria-label="Manifest">
+            <a class="cn-link cn-back" href="/manifest-lexicon/">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/></svg>
+                <span><span class="cn-label">Previous</span><span class="cn-title">The Lexicon</span></span>
+            </a>
+            <a class="cn-link cn-next" href="/manifest/">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6l-6 6"/></svg>
+                <span><span class="cn-label">Return to</span><span class="cn-title">The Manifest</span></span>
+            </a>
+        </nav>
+    </div>
+</main>
+{/block}

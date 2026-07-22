@@ -1,0 +1,126 @@
+{layout '../layouts/base.latte'}
+
+{*
+  /manifest-tokens -> Token Reference. A reference-grade appendix table of the
+  four relics: role, launch, supply, tax, liquidity, and provenance (copyable
+  contract address + DexTools link). Sourced read-only from $relics (bootstrapped
+  in base.latte). $HOLY renders honestly: in development, no fabricated numbers,
+  no contract chip. The story lives in /trinity; this page is the record.
+  Gold budget: 0. Tabler icons only. No em-dashes.
+*}
+{var $pageTitle = 'Token Reference'}
+{var $pageDescription = 'The four relics of the Trinity, recorded in full: role, launch, supply, tax, liquidity, and contract provenance. Reference-grade. For the story, read The Trinity.'}
+{var $pageSlug = 'manifest-tokens'}
+{var $pageCss = 'manifest'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+<main id="main" class="page-shell">
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Appendix &middot; Token Reference</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Manifest &middot; Appendix II</span>
+        </div>
+
+        <div class="mf-intro" data-reveal>
+            <p class="eyebrow page-eyebrow">The relics, in full</p>
+            <h1>Token Reference</h1>
+            <p class="page-lede">The four relics of the Trinity, recorded for the record. Every contract, every supply, verifiable on-chain. For the story of how they connect, read The Trinity.</p>
+        </div>
+
+        <div class="tokentable-wrap" data-reveal>
+            <table class="tokentable">
+                <thead>
+                    <tr>
+                        <th scope="col">Relic</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Launched</th>
+                        <th scope="col">Supply</th>
+                        <th scope="col">Tax</th>
+                        <th scope="col">Liquidity</th>
+                        <th scope="col">On-chain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $relics as $r}
+                        <tr>
+                            <td>
+                                <span class="tk-relic">
+                                    <span class="tk-dot" style="color: {$r['color']}" aria-hidden="true"></span>
+                                    <span>
+                                        <span class="tk-tick">{$r['ticker']}</span>
+                                        <span class="tk-name">{$r['name']}</span>
+                                    </span>
+                                </span>
+                            </td>
+                            <td>{if $r['verb']}<span class="tk-val">{$r['verb']|firstUpper}</span>{else}<span class="tk-dim">In development</span>{/if}</td>
+                            <td>{if $r['launched']}<span class="tk-val">{$r['launched']}</span>{else}<span class="tk-dim">In development</span>{/if}</td>
+                            <td>{if $r['supply']}<span class="tk-val">{$r['supply']}</span>{else}<span class="tk-dim">Not yet minted</span>{/if}</td>
+                            <td>{if $r['tax'] !== null}<span class="tk-val">{$r['tax']}</span>{else}<span class="tk-dim">To be set</span>{/if}</td>
+                            <td>{if $r['lp']}<span class="tk-val{if $r['lp'] !== null} pos{/if}">{$r['lp']}</span>{else}<span class="tk-dim">To be locked</span>{/if}</td>
+                            <td>
+                                {if $r['contract']}
+                                    <span class="tk-chain">
+                                        <button type="button" class="ca-chip" data-copy="{$r['contract']}" aria-label="Copy {$r['ticker']} contract address {$r['contract']}" title="{$r['contract']}">
+                                            <span class="ca-copy">
+                                                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667l0 -8.666"/><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"/></svg>
+                                                {substr($r['contract'], 0, 6)}&hellip;{substr($r['contract'], -4)}
+                                            </span>
+                                            <span class="ca-check">
+                                                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5l10 -10"/></svg>
+                                                Copied
+                                            </span>
+                                        </button>
+                                        <a class="tk-dex" href="{$r['dexUrl']}" target="_blank" rel="noopener">
+                                            DexTools
+                                            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg>
+                                        </a>
+                                    </span>
+                                {else}
+                                    <span class="tk-dim">Staking in development</span>
+                                {/if}
+                            </td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+
+        <p class="tk-note" data-reveal>All three live relics are ERC-20 on Ethereum mainnet with liquidity locked and zero tax. <b>$HOLY is the reward of faith, earned through Trinity staking via Holy Labs. Its supply and contract are not published until the mechanism is live.</b></p>
+
+        <div class="mf-cta" data-reveal>
+            <a class="link-arrow" href="/trinity/">Read the Trinity
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+            </a>
+        </div>
+
+        <nav class="chapter-nav" aria-label="Manifest">
+            <a class="cn-link cn-back" href="/manifest-fusaka/">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/></svg>
+                <span><span class="cn-label">Previous</span><span class="cn-title">The Fusaka Era</span></span>
+            </a>
+            <a class="cn-link cn-next" href="/manifest-lexicon/">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                <span><span class="cn-label">Next appendix</span><span class="cn-title">The Lexicon</span></span>
+            </a>
+        </nav>
+    </div>
+</main>
+
+<script>
+(function () {
+  var chips = document.querySelectorAll('.ca-chip[data-copy]');
+  if (!chips.length || !navigator.clipboard) return;
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      navigator.clipboard.writeText(chip.getAttribute('data-copy')).then(function () {
+        chip.classList.add('copied');
+        window.setTimeout(function () { chip.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+})();
+</script>
+{/block}

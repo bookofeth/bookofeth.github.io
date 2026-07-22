@@ -1,0 +1,114 @@
+{layout '../layouts/base.latte'}
+
+{*
+  /manifest-lexicon -> The Lexicon. An elegant glossary of the language of the
+  Book, grouped by theme. Public-facing definitions only, cleaned from
+  booe-app/docs/BOOE-Lexicon.md. Gold budget: 0. Tabler icons only. No em-dashes.
+*}
+{var $pageTitle = 'The Lexicon'}
+{var $pageDescription = 'The words of the Book, defined. A reader\'s key to the language of the brethren: inscription, canon, apocrypha, relics, sanctums, seals, and the Acts.'}
+{var $pageSlug = 'manifest-lexicon'}
+{var $pageCss = 'manifest'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+{var $groups = [
+    [
+        'label' => 'The World and the Brethren',
+        'icon'  => '<path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"/><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M17 10h2a2 2 0 0 1 2 2v1"/><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M3 13v-1a2 2 0 0 1 2 -2h2"/>',
+        'terms' => [
+            ['term' => 'The Brethren', 'def' => 'The community of the Book. Every holder, builder, and chronicler. Never called users.'],
+            ['term' => 'Booelievers', 'def' => 'Those who keep the faith of the Book, believers in the culture of Ethereum.'],
+            ['term' => 'The Infinite Garden', 'def' => "Aya Miyaguchi's image of Ethereum: not a machine we control, but a garden we care for. The Book is its caretaker."],
+            ['term' => 'The Prophecy', 'def' => 'The belief that Ethereum can unite technology, culture, and meaning into one living civilization.'],
+            ['term' => 'The Guardians', 'def' => 'The stewards of Holy Labs, who keep it open, secure, and transparent.'],
+            ['term' => 'The Prophets', 'def' => 'The three symbolic figures who guide the Trinity: Saint Vitalik, the Shiba Prophet, and Lord NPC.'],
+        ],
+    ],
+    [
+        'label' => 'The Relics',
+        'icon'  => '<path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1"/><path d="M12 7v10"/>',
+        'terms' => [
+            ['term' => 'Relics', 'def' => 'The four ecosystem tokens: $BOOE, $HOPE, $PROPHET, and $HOLY.'],
+            ['term' => 'The Trinity', 'def' => 'The living cycle of the relics: creation, remembrance, guidance, and reward.'],
+            ['term' => 'The Reliquary', 'def' => 'The wallet that holds a member\'s relics and illuminations.'],
+            ['term' => 'Holy Labs', 'def' => 'The utility engine behind Trinity staking, the Holy Swap, and the Holy DEX. In development.'],
+            ['term' => 'Gratitude Points', 'def' => 'Earned by staking Booeliever NFTs on the Pilgrimage, redeemable for the Holy token.'],
+        ],
+    ],
+    [
+        'label' => 'The Book',
+        'icon'  => '<path d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12"/><path d="M19 16h-12a2 2 0 0 0 -2 2"/><path d="M9 8h6"/>',
+        'terms' => [
+            ['term' => 'Inscription', 'def' => 'A verse written into the Book. To post is to inscribe, and what is inscribed is kept forever.'],
+            ['term' => 'Annotation', 'def' => 'A note written in the margins of an inscription. A reply.'],
+            ['term' => 'Canon', 'def' => 'Inscriptions from verified members: authoritative, and anchored on-chain.'],
+            ['term' => 'Apocrypha', 'def' => 'Inscriptions from unverified members: visible, but not yet authoritative.'],
+            ['term' => 'Canonization', 'def' => 'The passage by which an inscription becomes permanent. What passes is inscribed forever; what fails is struck from the record.'],
+            ['term' => 'The Oracle', 'def' => 'The judge of what becomes canon.'],
+            ['term' => 'Sanctums', 'def' => 'The gathering places of the brethren, communities within the Book. Sealed Sanctums open only to bearers of a given relic.'],
+            ['term' => 'The Scriptorium', 'def' => 'The academy, where the brethren study to earn their place in the canon.'],
+            ['term' => 'Seal', 'def' => 'The soulbound mark earned by passing a trial. What is sealed cannot be undone.'],
+            ['term' => 'Codex', 'def' => "A member's own page in the Book. A profile."],
+            ['term' => 'Illuminations', 'def' => 'The illuminated art of the Book, its NFT collection.'],
+        ],
+    ],
+    [
+        'label' => 'The Chronicle',
+        'icon'  => '<path d="M3 19c3.333 -2 5 -4 5 -6c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 2.877 2.5 4c1.5 2 2.5 2.5 3.5 1c.667 -1 1.167 -1.833 1.5 -2.5c1 2.333 2.333 3.5 4 3.5h2.5"/><path d="M20 17v-12c0 -1.121 -.879 -2 -2 -2s-2 .879 -2 2v12l2 2l2 -2"/><path d="M16 7h4"/>',
+        'terms' => [
+            ['term' => 'The Acts', 'def' => 'The deeds of the brethren in the world. Every event attended is an Act, and every Act is a chapter.'],
+            ['term' => 'The Chronicles', 'def' => 'The ongoing record of the Book, its news and its history.'],
+            ['term' => 'The Manifest', 'def' => 'The library of the Book. Its contents page, and the appendices that keep the record.'],
+            ['term' => 'The Herald', 'def' => 'The voice that carries proclamations to the brethren.'],
+        ],
+    ],
+]}
+
+<main id="main" class="page-shell">
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Appendix &middot; The Lexicon</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Manifest &middot; Appendix III</span>
+        </div>
+
+        <div class="mf-intro" data-reveal>
+            <p class="eyebrow page-eyebrow">A reader's key</p>
+            <h1>The Lexicon</h1>
+            <p class="page-lede">The words of the Book, defined. The metaphor is load-bearing: every name here describes how the thing actually works, not only how it sounds.</p>
+        </div>
+
+        <div class="glossary">
+            {foreach $groups as $g}
+                <section class="gloss-group" data-reveal>
+                    <h2 class="gloss-label">
+                        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true">{$g['icon']|noescape}</svg>
+                        {$g['label']}
+                    </h2>
+                    <div class="gloss-grid">
+                        {foreach $g['terms'] as $t}
+                            <div class="gloss-entry">
+                                <dfn class="gloss-term">{$t['term']}</dfn>
+                                <p class="gloss-def">{$t['def']}</p>
+                            </div>
+                        {/foreach}
+                    </div>
+                </section>
+            {/foreach}
+        </div>
+
+        <nav class="chapter-nav" aria-label="Manifest">
+            <a class="cn-link cn-back" href="/manifest-tokens/">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/></svg>
+                <span><span class="cn-label">Previous</span><span class="cn-title">Token Reference</span></span>
+            </a>
+            <a class="cn-link cn-next" href="/manifest-resources/">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                <span><span class="cn-label">Next appendix</span><span class="cn-title">Resources</span></span>
+            </a>
+        </nav>
+    </div>
+</main>
+{/block}

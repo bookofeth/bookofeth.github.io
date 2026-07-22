@@ -1,0 +1,75 @@
+{layout '../layouts/base.latte'}
+
+{*
+  /manifest-fusaka -> The Fusaka Era. An appendix chapter of the Manifest.
+  Source: scratchpad/booe-docs-src/fusaka.md (cleaned, de-em-dashed, "egiciency"
+  fixed to "efficiency"). Narrative prose + a slim ledger fact strip. The lore of
+  Holy Labs, the DAO and the Trinity lives in the designed chapters; this page
+  links to them. Gold budget: 0. Tabler icons only.
+*}
+{var $pageTitle = 'The Fusaka Era'}
+{var $pageDescription = 'The Fusaka upgrade widens Ethereum through PeerDAS: faster, cheaper, more inclusive. In the vision of the Book, scalability is accessibility.'}
+{var $pageSlug = 'manifest-fusaka'}
+{var $pageCss = 'manifest'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+<main id="main" class="page-shell">
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Appendix &middot; The Fusaka Era</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Manifest &middot; Appendix I</span>
+        </div>
+
+        <div class="mf-intro" data-reveal>
+            <p class="eyebrow page-eyebrow">The horizon</p>
+            <h1>The Fusaka Era</h1>
+            <p class="page-lede">Scalability, in the vision of the Book, is not only about speed. It is about who gets to enter the garden.</p>
+        </div>
+    </div>
+
+    <div class="ledger mf-ledger" data-reveal>
+        <div class="ledger-in">
+            <div class="cell"><span class="k">Upgrade</span><span class="v">Fusaka</span></div>
+            <div class="cell"><span class="k">Data layer</span><span class="v">PeerDAS</span></div>
+            <div class="cell"><span class="k">Effect</span><span class="v">Lower fees, higher throughput</span></div>
+            <div class="cell"><span class="k">For the Book</span><span class="v pos">Accessibility</span></div>
+        </div>
+    </div>
+
+    <div class="wrap mf-body">
+        <div class="prose dropcap" data-reveal>
+            <p>The Fusaka upgrade marks a new era for Ethereum. By improving throughput, lowering transaction fees, and enhancing Layer 2 performance through PeerDAS, Ethereum becomes faster, cheaper, and more inclusive.</p>
+            <p>For the Book of Ethereum, Fusaka represents expansion. Staking, NFT interactions, and identity registration become more accessible to everyone, while Holy Labs and the DAO operate with greater efficiency. The Fusaka era opens Ethereum's garden to millions of new participants, carrying its cultural and technical power to a global scale.</p>
+        </div>
+
+        <blockquote class="pull" data-reveal>
+            <p>It means allowing every culture, language, and person to find a place within Ethereum's infinite garden.</p>
+        </blockquote>
+
+        <div class="mf-cta" data-reveal>
+            <a class="link-arrow" href="/brethren/">The DAO and Holy Labs
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+            </a>
+            <a class="link-arrow" href="/trinity/">The Trinity
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+            </a>
+        </div>
+
+        <p class="mf-byline" data-reveal>Chronicled by <b>Tarzan</b> for the Book of Ethereum.</p>
+
+        <nav class="chapter-nav" aria-label="Manifest">
+            <a class="cn-link cn-back" href="/manifest/">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/></svg>
+                <span><span class="cn-label">Contents</span><span class="cn-title">The Manifest</span></span>
+            </a>
+            <a class="cn-link cn-next" href="/manifest-tokens/">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                <span><span class="cn-label">Next appendix</span><span class="cn-title">Token Reference</span></span>
+            </a>
+        </nav>
+    </div>
+</main>
+{/block}
