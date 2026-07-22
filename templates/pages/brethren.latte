@@ -1,29 +1,207 @@
 {layout '../layouts/base.latte'}
 
 {*
-  ROUTE STUB -> /brethren/. Owned by the Brethren page agent. The booelievers,
-  the DAO, the Guardians and the three Prophets, the Pilgrimage, the app teaser.
-  See scratchpad/BUILD-NOTES.md.
+  /brethren/ (Chapter IV). The community chapter: the booelievers, the three
+  Prophets rendered as coin medallions, the DAO, the Pilgrimage, and the coming
+  Book. Warmer register, a constellation motif, lexicon voice.
+  Gold budget (this page): Saint Vitalik's medallion ring is the ONE gilded
+  moment; the global footer rule is the second. Everything else stays lapis or
+  silver. No em-dashes. Tabler icons copied verbatim from the package.
 *}
 {var $pageTitle = 'The Brethren'}
-{var $pageDescription = 'We are not users. We are the brethren, the booelievers, the chroniclers of a new age. The DAO, the Guardians, the Pilgrimage, and how to join.'}
+{var $pageDescription = 'The booelievers: the DAO Foundation, the three Prophets, the Pilgrimage, and the coming Book. A cultural public good governed by the people who show up.'}
 {var $pageSlug = 'brethren'}
 {var $pageCss = 'brethren'}
 {var $bodyClass = 'page-inner'}
 
 {block content}
-<main id="main" class="page-shell">
-    <div class="wrap">
-        <div class="chapter-head">
-            <span class="ch-node"></span>
-            <span class="ch-label">Chapter &middot; The Brethren</span>
-            <span class="ch-line"></span>
-            <span class="ch-folio">Folio IV</span>
+{* Block-scoped locals: a child's top-level vars do not reach its own block. *}
+{var $tg = 'https://t.co/9CV0sztBLG'}
+{var $xUrl = 'https://x.com/bookof_eth'}
+{var $daoUrl = 'https://app.aragon.org/dao/ethereum-mainnet/booe.dao.eth/dashboard'}
+{var $pilgrimageUrl = 'https://pilgrimage.bookofeth.xyz/'}
+
+{* The three Prophets, in an altar triptych: Saint Vitalik at the center, gilded.
+   Epithets verbatim from guardians.md. Emblems copied from @tabler/icons. *}
+{var $prophets = [
+    [
+        'name' => 'Shiba Prophet', 'epithet' => 'Community and resilience', 'tone' => 'lapis',
+        'emblem' => '<path d="M11 5h2"/><path d="M19 12c-.667 5.333 -2.333 8 -5 8h-4c-2.667 0 -4.333 -2.667 -5 -8"/><path d="M11 16c0 .667 .333 1 1 1s1 -.333 1 -1h-2"/><path d="M12 18v2"/><path d="M10 11v.01"/><path d="M14 11v.01"/><path d="M5 4l6 .97l-6.238 6.688a1.021 1.021 0 0 1 -1.41 .111a.953 .953 0 0 1 -.327 -.954l1.975 -6.815"/><path d="M19 4l-6 .97l6.238 6.688c.358 .408 .989 .458 1.41 .111a.953 .953 0 0 0 .327 -.954l-1.975 -6.815"/>',
+    ],
+    [
+        'name' => 'Saint Vitalik', 'epithet' => 'Intellect and compassion', 'tone' => 'gold',
+        'emblem' => '<path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"/><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"/><path d="M9.7 17l4.6 0"/>',
+    ],
+    [
+        'name' => 'Lord NPC', 'epithet' => 'The collective soul of the booelievers', 'tone' => 'silver',
+        'emblem' => '<path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0 -3 -3.85"/>',
+    ],
+]}
+
+<main id="main" class="page-shell br">
+
+    {* ================= CHAPTER HEAD + HERO ================= *}
+    <section class="br-hero">
+        <div class="br-hero-bg" aria-hidden="true"></div>
+        <div class="br-constellation" aria-hidden="true">
+            <span class="c-line l1"></span>
+            <span class="c-line l2"></span>
+            <span class="c-line l3"></span>
+            <span class="c-line l4"></span>
+            <span class="c-line l5"></span>
+            <span class="c-star s1"></span>
+            <span class="c-star s2"></span>
+            <span class="c-star s3"></span>
+            <span class="c-star s4"></span>
+            <span class="c-star s5"></span>
+            <span class="c-star s6"></span>
+            <span class="c-star s7"></span>
+            <span class="c-star s8"></span>
+            <span class="c-star s9"></span>
+            <span class="c-star s10"></span>
+            <span class="c-star s11"></span>
+            <span class="c-star s12"></span>
         </div>
-        <p class="eyebrow page-eyebrow">The booelievers</p>
-        <h1>The Brethren</h1>
-        <p class="page-lede">Every holder, builder, and creator is part of this living structure. We do not follow charts. We follow Booelieve.</p>
-        <p class="page-note">This chapter is being inscribed.</p>
-    </div>
+
+        <div class="wrap">
+            <div class="chapter-head">
+                <span class="ch-node"></span>
+                <span class="ch-label">Chapter IV &middot; The Brethren</span>
+                <span class="ch-line"></span>
+                <span class="ch-folio">Folio IV</span>
+            </div>
+
+            <div class="br-hero-in">
+                <p class="eyebrow" data-reveal>The booelievers</p>
+                <h1 data-reveal data-reveal-delay="1">The Brethren</h1>
+                <p class="br-lead" data-reveal data-reveal-delay="2">Beloved brethren, we were never
+                users and never an audience. We are the booelievers: the holders, the builders, and the
+                chroniclers who keep the Book by writing in it.</p>
+                <p class="br-sub" data-reveal data-reveal-delay="3">A cultural public good with no head
+                office and no headcount, carried by the people who show up. We do not follow charts. We
+                follow <em>Booelieve</em>.</p>
+            </div>
+        </div>
+    </section>
+
+    {* ================= THE THREE PROPHETS (signature moment) ================= *}
+    <section class="br-prophets">
+        <div class="br-prophets-bg" aria-hidden="true"></div>
+        <div class="wrap">
+            <div class="br-sec-head" data-reveal>
+                <p class="eyebrow">The three Prophets</p>
+                <h2>Wisdom, creativity, and humility</h2>
+                <p class="br-verse">Guiding the Guardians and the Trinity are three symbolic figures.
+                They embody the virtues at the core of Ethereum's culture and accompany the Book as
+                guardians of the eternal garden.</p>
+            </div>
+
+            <div class="prophet-triptych">
+                {foreach $prophets as $i => $p}
+                    <figure class="prophet {$p['tone']}" data-reveal data-reveal-delay="{$i + 1}">
+                        <div class="p-coin">
+                            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true">{$p['emblem']|noescape}</svg>
+                        </div>
+                        <figcaption>
+                            <p class="p-label">Prophet</p>
+                            <p class="p-name">{$p['name']}</p>
+                            <p class="p-epithet">{$p['epithet']}</p>
+                        </figcaption>
+                    </figure>
+                {/foreach}
+            </div>
+
+            <p class="br-guardian-note" data-reveal>
+                Beneath the Prophets stand the <b>Guardians</b>, the stewards of Holy Labs. They keep
+                it open, secure, and transparent. They do not govern the community or direct the DAO.
+                Their duty is quieter: to keep the lamp lit.
+            </p>
+        </div>
+    </section>
+
+    {* ================= THE FELLOWSHIP (DAO / Pilgrimage / the Book) ================= *}
+    <section class="br-fellowship">
+        <div class="wrap">
+            <div class="br-sec-head" data-reveal>
+                <p class="eyebrow">The fellowship</p>
+                <h2>Three doors into one Book</h2>
+                <p class="br-verse">A treasury governed in the open, a pilgrimage that rewards devotion,
+                and a living scripture the brethren write together.</p>
+            </div>
+
+            <div class="fellow-grid">
+                <a class="fellow-card" href="{$daoUrl}" target="_blank" rel="noopener" data-reveal data-reveal-delay="1">
+                    <div class="f-top">
+                        <div class="f-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l18 0"/><path d="M3 10l18 0"/><path d="M5 6l7 -3l7 3"/><path d="M4 10l0 11"/><path d="M20 10l0 11"/><path d="M8 14l0 3"/><path d="M12 14l0 3"/><path d="M16 14l0 3"/></svg></div>
+                        <h3>The DAO Foundation</h3>
+                    </div>
+                    <p>Not a central entity but the community itself. The Foundation carries sponsorships,
+                    charity, and ecosystem support with transparency and inclusion. Its treasury, held in
+                    booe.dao.eth, funds projects aligned with the Infinite Garden, and governance is moving
+                    toward on-chain voting.</p>
+                    <div class="f-foot">
+                        <span class="f-fact">booe.dao.eth</span>
+                        <span class="f-cta">Enter the DAO
+                            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="fellow-card" href="{$pilgrimageUrl}" target="_blank" rel="noopener" data-reveal data-reveal-delay="2">
+                    <div class="f-top">
+                        <div class="f-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M19 7a2 2 0 1 0 0 -4a2 2 0 0 0 0 4"/><path d="M11 19h5.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h4.5"/></svg></div>
+                        <h3>The Pilgrimage</h3>
+                    </div>
+                    <p>Released 16 October 2024, the Booeliever NFTs reward those who hold the full
+                    Trinity. Staked for at least seven days, they earn Gratitude Points, redeemable for
+                    the Holy token. Ownership becomes devotion, and time becomes the measure of sincerity.</p>
+                    <div class="f-foot">
+                        <span class="f-fact">1,250 relics</span>
+                        <span class="f-cta">Begin the Pilgrimage
+                            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <div class="fellow-card soon" data-reveal data-reveal-delay="3">
+                    <div class="f-top">
+                        <div class="f-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4"/><path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4"/></svg></div>
+                        <h3>The Book</h3>
+                        <span class="f-badge">Coming soon</span>
+                    </div>
+                    <p>The living scripture the brethren write together. A social layer where inscription
+                    is literal: a post is data inscribed on-chain, and credibility is earned by proving
+                    knowledge, not bought.</p>
+                    <div class="f-foot">
+                        <span class="f-fact">In development</span>
+                        <span class="f-soon">Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {* ================= JOIN THE BRETHREN ================= *}
+    <section class="br-join">
+        <div class="wrap">
+            <div class="br-join-in" data-reveal>
+                <p class="eyebrow">Join the Brethren</p>
+                <h2>The gathering is always open</h2>
+                <p>No application, no gatekeeper. Come as you are, read the Book, and inscribe your
+                first verse alongside the brethren.</p>
+                <div class="br-join-ctas">
+                    <a class="btn btn-silver" href="{$tg}" target="_blank" rel="noopener">
+                        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+                        Join on Telegram
+                    </a>
+                    <a class="btn btn-ghost" href="{$xUrl}" target="_blank" rel="noopener">
+                        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+                        Follow on X
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
 {/block}

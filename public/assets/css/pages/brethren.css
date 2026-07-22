@@ -1,5 +1,326 @@
-/* Page-scoped styles for /brethren/. Owned by the Brethren page agent.
-   Linked automatically by the layout when the page sets {var $pageCss = 'brethren'}.
-   Reuse the coin-medallion device for the three Prophets; keep them silver unless
-   the gold budget is re-allocated (see DESIGN-DIRECTION C6).
-   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: max 3. */
+/* Page-scoped styles for /brethren/ (Chapter IV, the community chapter).
+   Owned by the Brethren page agent. Linked by {var $pageCss = 'brethren'}.
+   The register warms here: ink-0 lit by lapis, a constellation motif, and the
+   three Prophets rendered in the coin-medallion device. Gold is spent ONCE, on
+   Saint Vitalik's ring (the page's single gilded moment; the footer rule is the
+   second). Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: 3. */
+
+/* The page-shell already clears the fixed nav; let the sections own the rhythm. */
+.br { padding-bottom: 0; }
+
+/* ===========================================================================
+   HERO + the constellation motif (CSS star field, no image dependency)
+   =========================================================================== */
+.br-hero { position: relative; overflow: hidden; padding-bottom: 24px; }
+.br-hero-bg {
+  position: absolute;
+  inset: -80px 0 0;
+  pointer-events: none;
+  background: radial-gradient(760px 460px at 50% 8%, rgba(44, 60, 150, 0.16), transparent 70%);
+}
+
+/* Constellation: small lapis stars joined by faint hairlines, loosely suggesting
+   a gathering across the width. Masked to fade into ink at the edges. */
+.br-constellation {
+  position: absolute;
+  inset: -30px 0 auto;
+  height: 360px;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 30%, #000 40%, transparent 82%);
+  mask-image: radial-gradient(120% 100% at 50% 30%, #000 40%, transparent 82%);
+}
+.c-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent-hi);
+  box-shadow: 0 0 8px rgba(134, 160, 246, 0.9);
+  opacity: 0.55;
+}
+.c-star.s1  { top: 22%; left: 8%;  }
+.c-star.s2  { top: 54%; left: 15%; width: 2px; height: 2px; opacity: 0.4; }
+.c-star.s3  { top: 30%; left: 23%; }
+.c-star.s4  { top: 70%; left: 30%; width: 2px; height: 2px; opacity: 0.4; }
+.c-star.s5  { top: 18%; left: 38%; opacity: 0.7; }
+.c-star.s6  { top: 48%; left: 46%; width: 4px; height: 4px; }
+.c-star.s7  { top: 26%; left: 54%; opacity: 0.7; }
+.c-star.s8  { top: 66%; left: 61%; width: 2px; height: 2px; opacity: 0.4; }
+.c-star.s9  { top: 20%; left: 69%; }
+.c-star.s10 { top: 52%; left: 78%; }
+.c-star.s11 { top: 34%; left: 86%; opacity: 0.7; }
+.c-star.s12 { top: 62%; left: 93%; width: 2px; height: 2px; opacity: 0.4; }
+/* A gentle twinkle on a few points is the one idle loop in this viewport. */
+.c-star.s5, .c-star.s7, .c-star.s11 { animation: br-twinkle 5.5s ease-in-out infinite; }
+.c-star.s7 { animation-delay: 1.8s; }
+.c-star.s11 { animation-delay: 3.1s; }
+@keyframes br-twinkle { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.25; } }
+
+.c-line {
+  position: absolute;
+  height: 1px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, rgba(134, 160, 246, 0.02), rgba(134, 160, 246, 0.22), rgba(134, 160, 246, 0.02));
+}
+.c-line.l1 { top: 23%; left: 8%;  width: 17%; transform: rotate(6deg); }
+.c-line.l2 { top: 19%; left: 38%; width: 17%; transform: rotate(7deg); }
+.c-line.l3 { top: 27%; left: 54%; width: 16%; transform: rotate(-6deg); }
+.c-line.l4 { top: 49%; left: 46%; width: 15%; transform: rotate(11deg); }
+.c-line.l5 { top: 21%; left: 69%; width: 18%; transform: rotate(11deg); }
+
+.br-hero-in {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-top: 6px;
+}
+.br-hero-in h1 {
+  font: 400 clamp(40px, 5vw, 64px)/1.06 var(--serif);
+  letter-spacing: -0.012em;
+  color: var(--text);
+  margin-top: 14px;
+}
+.br-lead {
+  font: italic 400 clamp(19px, 2vw, 24px)/1.55 var(--serif);
+  color: var(--text);
+  margin: 26px auto 0;
+  max-width: 60ch;
+}
+.br-sub {
+  font: 400 16.5px/1.7 var(--serif);
+  color: var(--text-dim);
+  margin: 18px auto 0;
+  max-width: 54ch;
+}
+.br-sub em { font-style: italic; color: var(--accent-hi); }
+
+/* ===========================================================================
+   Shared section heading (centered, used by prophets / fellowship)
+   =========================================================================== */
+.br-sec-head { text-align: center; max-width: 660px; margin: 0 auto; }
+.br-sec-head h2 {
+  font: 400 clamp(30px, 3.2vw, 44px)/1.14 var(--serif);
+  color: var(--text);
+  margin-top: 14px;
+}
+.br-sec-head .br-verse {
+  font: italic 400 18px/1.6 var(--serif);
+  color: var(--text-dim);
+  margin-top: 14px;
+}
+
+/* ===========================================================================
+   THE THREE PROPHETS: coin medallions, altar triptych. Saint Vitalik gilded.
+   =========================================================================== */
+.br-prophets { position: relative; padding: 104px 0 0; overflow: hidden; }
+.br-prophets-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(720px 460px at 50% 42%, rgba(44, 60, 150, 0.13), transparent 70%);
+}
+.br-prophets .wrap { position: relative; }
+
+.prophet-triptych {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+  max-width: 840px;
+  margin: 58px auto 0;
+}
+.prophet { text-align: center; margin: 0; }
+
+/* The coin: machined ink disc, tinted rim + glow, centered Tabler emblem.
+   Recipe mirrors the Trinity .node .coin so the device reads as one family. */
+.prophet .p-coin {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 34% 26%, rgba(238, 243, 250, 0.14), transparent 44%),
+    radial-gradient(circle at 50% 122%, var(--pc-soft), transparent 60%),
+    linear-gradient(180deg, var(--ink-3), var(--ink-1));
+  border: 1px solid var(--pc-line);
+  box-shadow: 0 0 30px var(--pc-glow), inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 16px 34px rgba(0, 0, 0, 0.5);
+}
+.prophet .p-coin .ti { width: 30px; height: 30px; color: var(--pc); }
+.prophet .p-label {
+  font: 600 9.5px/1 var(--roman);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: 20px;
+}
+.prophet .p-name { font: 400 23px/1.2 var(--serif); color: var(--metal-hi); margin-top: 9px; }
+.prophet .p-epithet { font: italic 400 15px/1.45 var(--serif); color: var(--text-dim); margin-top: 5px; }
+
+/* Tones: two of the three are lapis + silver (brand chrome). */
+.prophet.lapis  { --pc: #86a0f6; --pc-line: rgba(134, 160, 246, 0.45); --pc-glow: rgba(134, 160, 246, 0.2);  --pc-soft: rgba(134, 160, 246, 0.16); }
+.prophet.silver { --pc: #c2ccda; --pc-line: rgba(194, 204, 218, 0.4);  --pc-glow: rgba(194, 204, 218, 0.15); --pc-soft: rgba(194, 204, 218, 0.12); }
+
+/* Saint Vitalik: the page's single gilded moment. Larger, lifted, haloed. */
+.prophet.gold { --pc: #e0b26f; --pc-line: rgba(224, 178, 111, 0.6); --pc-glow: rgba(224, 178, 111, 0.26); --pc-soft: rgba(224, 178, 111, 0.18); margin-top: -18px; }
+.prophet.gold .p-coin { width: 152px; height: 152px; }
+.prophet.gold .p-coin .ti { width: 34px; height: 34px; }
+.prophet.gold .p-coin::after {
+  content: '';
+  position: absolute;
+  inset: -13px;
+  border-radius: 50%;
+  border: 1px solid rgba(224, 178, 111, 0.24);
+}
+.prophet.gold .p-name { color: var(--warn); }
+
+.br-guardian-note {
+  max-width: 620px;
+  margin: 52px auto 0;
+  text-align: center;
+  font: 400 15.5px/1.72 var(--serif);
+  color: var(--text-faint);
+  padding-top: 34px;
+  border-top: 1px solid var(--line-quiet);
+}
+.br-guardian-note b { color: var(--metal); font-weight: 400; }
+
+/* ===========================================================================
+   THE FELLOWSHIP: DAO / Pilgrimage / the Book cards
+   =========================================================================== */
+.br-fellowship { padding: 104px 0 0; }
+.fellow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 54px;
+}
+.fellow-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur);
+}
+.fellow-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 26px;
+  right: 26px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-hi), transparent);
+  opacity: 0.4;
+}
+a.fellow-card:hover { transform: translateY(-3px); border-color: rgba(134, 160, 246, 0.28); }
+.fellow-card .f-top { display: flex; align-items: center; gap: 13px; }
+.f-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-hi);
+  background: radial-gradient(circle at 34% 26%, rgba(134, 160, 246, 0.16), transparent 46%), rgba(134, 160, 246, 0.06);
+  border: 1px solid rgba(134, 160, 246, 0.22);
+}
+.f-icon .ti { width: 22px; height: 22px; }
+.fellow-card h3 { font: 400 24px/1.2 var(--serif); color: var(--text); }
+.fellow-card .f-badge {
+  margin-left: auto;
+  align-self: flex-start;
+  font: 600 9px/1 var(--roman);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-hi);
+  border: 1px solid rgba(134, 160, 246, 0.3);
+  background: rgba(134, 160, 246, 0.06);
+  border-radius: 999px;
+  padding: 5px 9px;
+}
+.fellow-card > p { font: 400 16px/1.6 var(--serif); color: var(--text-dim); }
+.fellow-card.soon { background: rgba(22, 30, 47, 0.55); }
+.fellow-card .f-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.fellow-card .f-fact {
+  font: 600 10.5px/1.4 var(--roman);
+  letter-spacing: 0.06em;
+  color: var(--metal-hi);
+  font-variant-numeric: tabular-nums;
+}
+.fellow-card .f-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: 600 11px/1 var(--roman);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-hi);
+  transition: gap var(--dur) var(--ease-out);
+}
+.fellow-card .f-cta .ti { width: 14px; height: 14px; }
+a.fellow-card:hover .f-cta { gap: 11px; }
+.fellow-card .f-soon {
+  font: 600 10px/1 var(--roman);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ===========================================================================
+   JOIN THE BRETHREN
+   =========================================================================== */
+.br-join { padding: 104px 0 20px; }
+.br-join-in { max-width: 640px; margin: 0 auto; text-align: center; }
+.br-join-in h2 {
+  font: 400 clamp(30px, 3.2vw, 44px)/1.14 var(--serif);
+  color: var(--text);
+  margin-top: 14px;
+}
+.br-join-in p {
+  font: italic 400 18px/1.65 var(--serif);
+  color: var(--text-dim);
+  margin: 16px auto 0;
+  max-width: 48ch;
+}
+.br-join-ctas { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ===========================================================================
+   RESPONSIVE
+   =========================================================================== */
+@media (max-width: 860px) {
+  .prophet-triptych { max-width: 420px; gap: 40px; grid-template-columns: 1fr; }
+  .prophet.gold { margin-top: 0; }
+  .fellow-grid { grid-template-columns: 1fr; }
+  .br-constellation { height: 300px; }
+}
+@media (max-width: 560px) {
+  .br-prophets, .br-fellowship { padding-top: 80px; }
+  .br-join { padding-top: 80px; }
+  .br-lead { font-size: 19px; }
+  .prophet .p-coin { width: 120px; height: 120px; }
+  .prophet.gold .p-coin { width: 138px; height: 138px; }
+  .br-constellation { height: 240px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-star.s5, .c-star.s7, .c-star.s11 { animation: none; opacity: 0.6; }
+}
