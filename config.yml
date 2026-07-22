@@ -23,7 +23,10 @@ leaf:
   content_path: "content"
   output_path: "dist"
   base_url: "/"
-  production_url: "https://bookofeth.xyz"
+  # Canonical / OG / sitemap / robots host. The site is LIVE at bookofeth.github.io
+  # today, so this points at the host that actually serves. Flip back to
+  # https://bookofeth.xyz at the David-gated DNS cutover (single line, one change).
+  production_url: "https://bookofeth.github.io"
   author: "Ophelios Studio"
   author_url: "https://ophelios.com"
   license: "Proprietary"
