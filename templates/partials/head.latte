@@ -1,14 +1,21 @@
 {*
-  BOOE head. Dark-only brand surface (ink #070910). Middle dot as the title
-  separator, NEVER an em-dash or en-dash. Fonts are self-hosted woff2 (no Google
-  Fonts hotlink). Canonical + OG from production_url. EN only.
+  BOOE <head>. Per-page aware. Called by the base layout with explicit params:
+    pageTitle       -> page name (e.g. "The Trinity"); empty on Home
+    pageDescription -> meta description override; empty falls back to site default
+    pageSlug        -> URL slug (e.g. "trinity"); empty on Home (canonical -> "/")
+    pageCss         -> page stylesheet basename; empty links no extra sheet
+
+  House rules: middle dot as the title separator, NEVER an em-dash or en-dash.
+  Fonts are self-hosted woff2 (no Google Fonts hotlink). Dark-only brand surface.
 *}
 {var $siteName = $leafName ?? 'Book of Ethereum'}
-{var $prodUrl = $leafProductionUrl ?? 'https://bookofeth.xyz'}
+{var $prodUrl = rtrim($leafProductionUrl ?? 'https://bookofeth.xyz', '/')}
 {var $tagline = 'The cultural layer of Ethereum'}
-{var $metaTitle = $siteName . ' &middot; ' . $tagline}
-{var $metaDescription = $leafDescription ?? 'The cultural layer of Ethereum. The Book of Ethereum preserves its memory, translates its meaning, and projects its myth forward.'}
-{var $canonical = $prodUrl . '/'}
+{var $pt = trim($pageTitle ?? '')}
+{var $ps = trim($pageSlug ?? '')}
+{var $metaTitle = $pt !== '' ? $pt . ' &middot; ' . $siteName : $siteName . ' &middot; ' . $tagline}
+{var $metaDescription = trim($pageDescription ?? '') !== '' ? trim($pageDescription) : ($leafDescription ?? 'The cultural layer of Ethereum. The Book of Ethereum preserves its memory, translates its meaning, and projects its myth forward.')}
+{var $canonical = $ps !== '' ? $prodUrl . '/' . $ps . '/' : $prodUrl . '/'}
 {var $ogImage = $prodUrl . '/logo.png'}
 
 <meta charset="UTF-8">
@@ -34,6 +41,8 @@
 <meta property="og:site_name" content="{$siteName}">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="{$ogImage}">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="{$canonical}">
@@ -41,10 +50,14 @@
 <meta name="twitter:description" content="{$metaDescription}">
 <meta name="twitter:image" content="{$ogImage}">
 
-{* Fonts are self-hosted. Preload the two load-bearing weights. *}
-<link rel="preload" href="/assets/fonts/eb-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+{* Self-hosted fonts. Preload the two load-bearing weights (scripture + interface). *}
+<link rel="preload" href="/assets/fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="/assets/css/app.css">
+{if trim($pageCss ?? '') !== ''}<link rel="stylesheet" href="/assets/css/pages/{$pageCss}.css">{/if}
+
+{* Add the js hook before paint so scroll-reveal targets hide cleanly. *}
+<script>document.documentElement.classList.add('js');</script>

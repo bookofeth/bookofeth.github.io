@@ -1,0 +1,124 @@
+{*
+  BOOE base layout. The one canonical shell for every page (Home + all narrative
+  pages + route stubs). It also BOOTSTRAPS the shared data collections.
+
+  Per-page vars: child templates set these at the very top, before {block content}.
+  Child top-level {var}s reach the layout (that is how the head gets its title):
+    {var $pageTitle = 'The Trinity'}        page name (omit on Home)
+    {var $pageDescription = '...'}          meta description (optional)
+    {var $pageSlug = 'trinity'}             URL slug, drives canonical (omit on Home)
+    {var $pageCss = 'trinity'}              links /assets/css/pages/trinity.css (optional)
+    {var $bodyClass = 'page-inner'}         extra <body> class (optional)
+
+  SHARED DATA ($relics, $acts): Latte {include} does NOT export variables and a
+  child's own top-level {var} is NOT visible inside its {block content}. BUT a
+  layout-level {var} IS visible in every child block. So the two data collections
+  are defined here, once, and are automatically available in EVERY page's
+  {block content} with zero setup. To edit a relic or an Act, edit the array here.
+*}
+
+{*
+  --- $relics: the Trinity, in CYCLE order (BOOE, HOPE, PROPHET, HOLY) ---
+  emblem = verbatim Tabler icon inner-path (output with |noescape).
+  $HOLY renders honestly: no supply / tax / contract / DEX until real.
+*}
+{var $relics = [
+    [
+        'ticker' => '$BOOE', 'name' => 'The Pillar of Inscription', 'verb' => 'creates',
+        'tagline' => 'The foundation of the Book and the currency of participation.',
+        'launched' => '25 Apr 2024', 'supply' => '100,000,000', 'tax' => '0%', 'lp' => 'Locked forever',
+        'origin' => 'Genesis of the Book', 'color' => '#86a0f6',
+        'contract' => '0x289ff00235d2b98b0145ff5d4435d3e92f9540a6',
+        'dexUrl' => 'https://www.dextools.io/app/en/token/booe',
+        'emblem' => '<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4"/><path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4"/>',
+        'status' => 'live', 'veil' => null,
+    ],
+    [
+        'ticker' => '$HOPE', 'name' => 'The Keeper of History', 'verb' => 'remembers',
+        'tagline' => "Ethereum's roots through Pepe: humor, resistance, memory.",
+        'launched' => '20 May 2024', 'supply' => '1,000,000,000', 'tax' => '0%', 'lp' => 'Locked',
+        'origin' => 'Airdropped to $BOOE holders', 'color' => '#5fc2b4',
+        'contract' => '0x3b37a9caf74ead14e521d46af0bf00737d827828',
+        'dexUrl' => 'https://www.dextools.io/app/en/ether/pair-explorer/0xe666594023f345ab8b78be1886fb3bfd21942400',
+        'emblem' => '<path d="M12 8l0 4l2 2"/><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/>',
+        'status' => 'live', 'veil' => null,
+    ],
+    [
+        'ticker' => '$PROPHET', 'name' => 'The Spirit of Guidance', 'verb' => 'guides',
+        'tagline' => 'Leadership without ego, in the spirit of Ryoshi.',
+        'launched' => '15 Jul 2024', 'supply' => '1,000,000,000', 'tax' => '0%', 'lp' => 'Locked',
+        'origin' => 'Airdropped to $BOOE and $HOPE holders', 'color' => '#9c8fe0',
+        'contract' => '0x3fa55eb91be2c5d72890da11a4c0269e7f786555',
+        'dexUrl' => 'https://www.dextools.io/app/en/ether/pair-explorer/0xda1375fc4a5975514b3f414034ed7f88d786e611',
+        'emblem' => '<path d="M8 16l2 -6l6 -2l-2 6l-6 2"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M12 3l0 2"/><path d="M12 19l0 2"/><path d="M3 12l2 0"/><path d="M19 12l2 0"/>',
+        'status' => 'live', 'veil' => null,
+    ],
+    [
+        'ticker' => '$HOLY', 'name' => 'The Reward of Faith', 'verb' => 'rewards',
+        'tagline' => 'Earned through Trinity staking, via Holy Labs.',
+        'launched' => null, 'supply' => null, 'tax' => null, 'lp' => null,
+        'origin' => null, 'color' => '#cfe2e6', 'contract' => null, 'dexUrl' => null,
+        'emblem' => '<path d="M3 12h18"/><path d="M12 21v-18"/><path d="M7.5 7.5l9 9"/><path d="M7.5 16.5l9 -9"/>',
+        'status' => 'in-development',
+        'veil' => 'Stake the Trinity, and faith becomes yield. The next verse is still being written.',
+    ],
+]}
+
+{*
+  --- $acts: BOOE IRL, CHRONOLOGICAL ascending (Act I first) ---
+  Adding a future Act = one new row. Gold appears once (ETHGlobal NY marker).
+  Source: scratchpad/booe-docs-src/blog/*.{md,yml}, de-em-dashed.
+*}
+{var $acts = [
+    [
+        'act' => 'I', 'slug' => 'eth-prague', 'title' => 'Cultivating community at the edges',
+        'event' => 'ETH Prague', 'place' => 'Prague, Czechia', 'dateRange' => '27 to 29 May 2025',
+        'dateBig' => '27 May', 'dateRest' => 'to 29 May', 'year' => '2025', 'dateISO' => '2025-05-27',
+        'roleTags' => ['Sponsor', 'Speaker', 'Met Vitalik'],
+        'excerpt' => "Present at ETH Prague as sponsor and speaker, BOOE ran a workshop on building organic Ethereum communities, met Vitalik Buterin and gifted him a \$BOOE shirt, and was called the Doge of Ethereum by the Ethereum Foundation's Joseph Schweitzer.",
+        'author' => 'Tarzan', 'published' => '30 May 2025', 'closingLine' => '$BOOE matters.',
+        'gold' => false, 'goldMarker' => null, 'heroFlag' => false,
+    ],
+    [
+        'act' => 'II', 'slug' => 'eth-cc', 'title' => 'Building bridges, one conversation at a time',
+        'event' => 'ETH CC', 'place' => 'Cannes, France', 'dateRange' => '30 Jun to 4 Jul 2025',
+        'dateBig' => '30 June', 'dateRest' => 'to 4 July', 'year' => '2025', 'dateISO' => '2025-06-30',
+        'roleTags' => ['Sponsor', 'Ethereum Foundation', 'Devconnect seeds'],
+        'excerpt' => "Five days on the Croisette as a sponsor of EthCC. From MetaMask's Builders Night to Web3Privacy, from the Devconnect Argentina team to the Ethereum Foundation's Infinite Garden, a week of planting seeds across the ecosystem.",
+        'author' => 'Tarzan', 'published' => '6 Jul 2025', 'closingLine' => 'Onward.',
+        'gold' => false, 'goldMarker' => null, 'heroFlag' => false,
+    ],
+    [
+        'act' => 'III', 'slug' => '10-year-eth-zug', 'title' => 'Honoring the past, building the future',
+        'event' => '10 Years of Ethereum', 'place' => 'Zug, Switzerland', 'dateRange' => '30 Jul 2025',
+        'dateBig' => '30 July', 'dateRest' => null, 'year' => '2025', 'dateISO' => '2025-07-30',
+        'roleTags' => ['Guest', 'Mihai Alisie', 'etherLaken'],
+        'excerpt' => "At Ethereum's birthplace, the brethren honored a decade of Ethereum alongside the Ethereum Foundation, Akasha, and Bitcoin Suisse, and heard Mihai Alisie announce etherLaken, a new physical home for Ethereum in Switzerland.",
+        'author' => 'Tarzan', 'published' => '30 Jul 2025', 'closingLine' => 'So it is written, so it shall be mined.',
+        'gold' => false, 'goldMarker' => null, 'heroFlag' => false,
+    ],
+    [
+        'act' => 'IV', 'slug' => 'ethglobal-ny', 'title' => "The brethren's first win",
+        'event' => 'ETHGlobal NY', 'place' => 'New York, USA', 'dateRange' => '12 to 18 Aug 2025',
+        'dateBig' => '12 Aug', 'dateRest' => 'to 18 Aug', 'year' => '2025', 'dateISO' => '2025-08-12',
+        'roleTags' => ['Hackathon', 'Code Quill', 'ENS'],
+        'excerpt' => 'The brethren traveled to New York for ETH NYC week and won their very first prize. In a 36-hour hackathon they built Code Quill, the authorship layer for developers, and took third place for ENS. Both ETHGlobal and ENS gave the community a shoutout.',
+        'author' => 'Tarzan', 'published' => '19 Aug 2025', 'closingLine' => 'Amen.',
+        'gold' => true, 'goldMarker' => 'First win, ENS prize', 'heroFlag' => true,
+    ],
+]}
+
+<!DOCTYPE html>
+<html lang="{$currentLocale ?? 'en'}">
+<head>
+    {include '../partials/head.latte', pageTitle: ($pageTitle ?? ''), pageDescription: ($pageDescription ?? ''), pageSlug: ($pageSlug ?? ''), pageCss: ($pageCss ?? '')}
+    {block head}{/block}
+</head>
+<body class="{$bodyClass ?? ''}">
+    <a href="#main" class="skip-link">Skip to content</a>
+    {include '../partials/nav.latte'}
+    {block content}{/block}
+    {include '../partials/footer.latte'}
+    <script defer src="/assets/js/site.js"></script>
+</body>
+</html>
