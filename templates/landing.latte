@@ -1,20 +1,375 @@
-{layout 'layouts/landing.latte'}
+{layout 'layouts/base.latte'}
 
 {*
-  BOOE home. TEMPORARY on-brand placeholder. Build agents replace this with the
-  real hero, the three missions, the Trinity, the Acts, and the rest. Keep it
-  minimal: logo, the title in EB Garamond, one line, on ink. No em-dashes.
+  BOOE Home. The grand front door, built to the proof (scratchpad/proof/index.html)
+  and extended with Chapter IV (Brethren) and Chapter V (Ecosystem) and the closing
+  colophon. Owns: hero, ledger strip, three missions, Trinity cycle teaser, Acts
+  chronicle teaser, Brethren teaser, Ecosystem teaser, closing. No em-dashes.
+  Gold budget (3): hero motto rules, the Acts NY marker, the footer rule.
 *}
 
+{var $bodyClass = 'page-home'}
+
 {block content}
-<main id="main" class="hero" tabindex="-1">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <div class="hero-inner">
-        <img class="hero-logo" src="/logo.png" alt="Book of Ethereum" width="112" height="112" decoding="async">
-        <p class="hero-eyebrow">Book of Ethereum</p>
-        <h1 class="hero-title">The Book of Ethereum</h1>
-        <div class="gilded-rule" aria-hidden="true"></div>
-        <p class="hero-tagline">The cultural layer of Ethereum</p>
+{* $relics and $acts are bootstrapped by the layout (see base.latte). Block-scoped
+   locals must be declared here: a child template's top-level vars do not reach its
+   own {block content} in Latte. *}
+{var $tg = 'https://t.co/9CV0sztBLG'}
+{var $booe = $relics[0]}
+{var $hope = $relics[1]}
+{var $prophet = $relics[2]}
+{var $holy = $relics[3]}
+<main id="main">
+
+{* ================= HERO ================= *}
+<section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+        <div class="glow"></div>
+        <div class="rules"></div>
     </div>
+
+    <div class="wrap hero-grid">
+        <div>
+            <p class="eyebrow rise">The cultural layer of Ethereum</p>
+            <h1 class="rise d1">
+                <span class="muted">Ethereum scales computation.</span>
+                The Book of Ethereum scales <em>understanding</em>.
+            </h1>
+            <p class="lede rise d2">
+                A living record of Ethereum's myths, memes, and milestones. Written by the
+                brethren, kept by the Book, inscribed forever.
+            </p>
+            <div class="motto rise d3">
+                <span class="gilded"></span>
+                <span>We don't speculate. We inscribe.</span>
+                <span class="gilded"></span>
+            </div>
+            <div class="hero-ctas rise d4">
+                <a class="btn btn-silver" href="/philosophy/">
+                    Read the Book
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                </a>
+                <a class="btn btn-ghost" href="{$tg}" target="_blank" rel="noopener">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+                    Join the Brethren
+                </a>
+            </div>
+        </div>
+
+        <div class="relic-col rise d3" aria-hidden="true">
+            <div class="relic-aura"></div>
+            <div class="halo h1"></div>
+            <div class="halo h2"></div>
+            <div class="halo h3"></div>
+            <div class="halo-glint"></div>
+            <span class="star s1"></span>
+            <span class="star s2"></span>
+            <span class="star s3"></span>
+            <img class="relic-book" src="/logo.png" alt="" width="284" height="284" decoding="async">
+            <div class="relic-shadow"></div>
+        </div>
+    </div>
+
+    <div class="ledger rise d5">
+        <div class="ledger-in">
+            <div class="cell"><span class="k">Genesis</span><span class="v">25 Apr 2024</span></div>
+            <div class="cell"><span class="k">The Relics</span><span class="v">4 tokens <i>in trinity</i></span></div>
+            <div class="cell"><span class="k">$BOOE supply</span><span class="v">100,000,000</span></div>
+            <div class="cell"><span class="k">Liquidity</span><span class="v pos">Locked forever</span></div>
+        </div>
+    </div>
+</section>
+
+{* ================= CHAPTER I: MISSIONS ================= *}
+<section class="missions">
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Chapter I &middot; The Three Missions</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Folio 01</span>
+        </div>
+
+        <div class="mission-grid">
+            <div class="mission" data-reveal data-reveal-delay="1">
+                <span class="numeral" aria-hidden="true">I</span>
+                <div class="m-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2"/><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"/><path d="M10 12l4 0"/></svg></div>
+                <p class="m-label">Mission I</p>
+                <h3>Preserve memory</h3>
+                <p>The myths, memes, and milestones of Ethereum, kept so they are never lost.</p>
+            </div>
+            <div class="mission" data-reveal data-reveal-delay="2">
+                <span class="numeral" aria-hidden="true">II</span>
+                <div class="m-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6.371c0 4.418 -2.239 6.629 -5 6.629"/><path d="M4 6.371h7"/><path d="M5 9c0 2.144 2.252 3.908 6 4"/><path d="M12 20l4 -9l4 9"/><path d="M19.1 18h-6.2"/><path d="M6.694 3l.793 .582"/></svg></div>
+                <p class="m-label">Mission II</p>
+                <h3>Translate meaning</h3>
+                <p>Staking, rollups, zero knowledge: the machinery of Ethereum made understandable to all.</p>
+            </div>
+            <div class="mission" data-reveal data-reveal-delay="3">
+                <span class="numeral" aria-hidden="true">III</span>
+                <div class="m-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21l6 -5l6 5"/><path d="M12 13v8"/><path d="M3.294 13.678l.166 .281c.52 .88 1.624 1.265 2.605 .91l14.242 -5.165a1.023 1.023 0 0 0 .565 -1.456l-2.62 -4.705a1.087 1.087 0 0 0 -1.447 -.42l-.056 .032l-12.694 7.618c-1.02 .613 -1.357 1.897 -.76 2.905l-.001 0"/><path d="M14 5l3 5.5"/></svg></div>
+                <p class="m-label">Mission III</p>
+                <h3>Project myth</h3>
+                <p>Guiding builders and believers toward Ethereum's shared destiny, the Prophecy.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{* ================= CHAPTER II: TRINITY (teaser) ================= *}
+<section class="trinity">
+    <div class="trinity-bg" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Chapter II &middot; The Trinity</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Folio 02</span>
+        </div>
+
+        <div class="head" data-reveal>
+            <h2>Four relics. <em>One cycle.</em></h2>
+            <p class="verse">At the heart of the Book lies the Trinity, a living economy of meaning.</p>
+            <p class="ledger-line"><b>All ERC-20</b><span class="sep">&middot;</span><b>Ethereum mainnet</b><span class="sep">&middot;</span><b>Liquidity locked</b><span class="sep">&middot;</span><b>Zero tax</b></p>
+        </div>
+
+        <div class="cycle" data-reveal aria-hidden="true">
+            <div class="cycle-ring"></div>
+            <div class="cycle-glint"></div>
+            <span class="spoke k1"></span>
+            <span class="spoke k2"></span>
+            <span class="spoke k3"></span>
+
+            <div class="node n-booe">
+                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$booe['emblem']|noescape}</svg><b>{$booe['ticker']}</b></div>
+                <p class="verb"><b>{$booe['verb']}</b>, {$booe['name']}</p>
+            </div>
+            <div class="node n-hope">
+                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$hope['emblem']|noescape}</svg><b>{$hope['ticker']}</b></div>
+                <p class="verb"><b>{$hope['verb']}</b>, {$hope['name']}</p>
+            </div>
+            <div class="node n-prophet">
+                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$prophet['emblem']|noescape}</svg><b>{$prophet['ticker']}</b></div>
+                <p class="verb"><b>{$prophet['verb']}</b>, {$prophet['name']}</p>
+            </div>
+            <div class="node n-holy">
+                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$holy['emblem']|noescape}</svg><b>{$holy['ticker']}</b></div>
+                <span class="pill">Trinity staking &middot; in development</span>
+            </div>
+        </div>
+
+        <p class="cycle-pill" aria-hidden="true">Trinity staking &middot; in development</p>
+
+        <p class="harmony" data-reveal>
+            <i class="tb">$BOOE</i> creates. <i class="th">$HOPE</i> remembers. <i class="tp">$PROPHET</i> guides.<br>
+            And faith is rewarded in <i class="ty">$HOLY</i>.
+        </p>
+
+        <div class="head" style="margin-top:44px" data-reveal>
+            <a class="link-arrow" href="/trinity/">The full Trinity
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+{* ================= CHAPTER III: ACTS (teaser) ================= *}
+<section class="acts">
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Chapter III &middot; The Acts</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Folio 03</span>
+        </div>
+
+        <div class="head-row" data-reveal>
+            <div>
+                <h2>The deeds of the brethren</h2>
+                <p class="verse">Wherever Ethereum gathers, the Book is carried. Every Act is a chapter,
+                and every chapter is inscribed.</p>
+            </div>
+            <a class="link-arrow" href="/acts/">All Acts
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+            </a>
+        </div>
+
+        <div class="rail">
+            {foreach $acts as $a}
+                {if $a['heroFlag']}
+                    <article class="act-card" data-reveal>
+                        <span class="dot"></span>
+                        <div class="act-when">
+                            <span class="a-label">Act {$a['act']}</span>
+                            <div class="date">{$a['dateBig']}{if $a['dateRest']} <small>{$a['dateRest']}</small>{/if}</div>
+                            <span class="year">{$a['event']} &middot; {$a['year']}</span>
+                            <span class="place">
+                                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></svg>
+                                {$a['place']}
+                            </span>
+                        </div>
+                        <div class="act-body">
+                            <span class="ghost" aria-hidden="true">{$a['act']}</span>
+                            <div class="act-tags">
+                                {if $a['gold']}
+                                    <span class="tag gold"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6"/></svg>{$a['goldMarker']}</span>
+                                {/if}
+                                {foreach $a['roleTags'] as $i => $tag}
+                                    <span class="tag{if $i === 0} lapis{/if}">{$tag}</span>
+                                {/foreach}
+                            </div>
+                            <h3>{$a['title']}</h3>
+                            <p class="excerpt">{$a['excerpt']}</p>
+                            <div class="act-foot">
+                                <span class="by">Inscribed by <b>{$a['author']}</b> &middot; {$a['published']}</span>
+                                <a class="link-arrow read" href="/acts/{$a['slug']}/">Read the chapter
+                                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                {else}
+                    <a class="act-stub" href="/acts/{$a['slug']}/" data-reveal>
+                        <span class="dot"></span>
+                        <span class="a-label">Act {$a['act']}</span>
+                        <span class="a-name">{$a['event']} {$a['year']}</span>
+                        <span class="a-meta">{$a['dateRange']} &middot; {$a['place']} &middot; {$a['roleTags'][0]}</span>
+                    </a>
+                {/if}
+            {/foreach}
+        </div>
+    </div>
+</section>
+
+{* ================= CHAPTER IV: BRETHREN (teaser) ================= *}
+<section class="brethren">
+    <div class="brethren-bg" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Chapter IV &middot; The Brethren</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Folio 04</span>
+        </div>
+
+        <div class="inner">
+            <p class="verse" data-reveal>We are not users. We are the brethren, the booelievers,
+            the chroniclers of a new age.</p>
+            <p class="sub" data-reveal data-reveal-delay="1">A cultural public good governed by the community
+            itself. Every holder, builder, and creator is part of this living structure.</p>
+
+            <div class="join-row" data-reveal data-reveal-delay="2">
+                <a class="join-chip" href="{$tg}" target="_blank" rel="noopener">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>Telegram
+                </a>
+                <a class="join-chip" href="https://x.com/bookof_eth" target="_blank" rel="noopener">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>X
+                </a>
+                <a class="join-chip" href="https://app.aragon.org/dao/ethereum-mainnet/booe.dao.eth/dashboard" target="_blank" rel="noopener">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l18 0"/><path d="M3 10l18 0"/><path d="M5 6l7 -3l7 3"/><path d="M4 10l0 11"/><path d="M20 10l0 11"/><path d="M8 14l0 3"/><path d="M12 14l0 3"/><path d="M16 14l0 3"/></svg>DAO
+                </a>
+                <a class="join-chip" href="https://pilgrimage.bookofeth.xyz/" target="_blank" rel="noopener">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M17 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M5 17h5.5a3.5 3.5 0 0 0 0 -7h-3a3.5 3.5 0 0 1 0 -7h5.5"/></svg>Pilgrimage
+                </a>
+            </div>
+
+            <div class="cta-row" data-reveal data-reveal-delay="3">
+                <a class="btn btn-ghost" href="/brethren/">
+                    Meet the Brethren
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{* ================= CHAPTER V: ECOSYSTEM (teaser) ================= *}
+<section class="ecosystem">
+    <div class="wrap">
+        <div class="chapter-head" data-reveal>
+            <span class="ch-node"></span>
+            <span class="ch-label">Chapter V &middot; The Ecosystem</span>
+            <span class="ch-line"></span>
+            <span class="ch-folio">Folio 05</span>
+        </div>
+
+        <div class="head-row" data-reveal>
+            <div>
+                <h2 style="font:400 clamp(30px,3.2vw,44px)/1.14 var(--serif);color:var(--text)">The garden bears instruments</h2>
+                <p class="verse" style="font:italic 400 18px/1.6 var(--serif);color:var(--text-dim);margin-top:12px;max-width:52ch">The Book extends beyond its pages, into products that
+                carry Ethereum's culture into identity, code, and the physical world.</p>
+            </div>
+        </div>
+
+        <div class="eco-grid">
+            <a class="eco-card" href="https://pilgrimage.bookofeth.xyz/" target="_blank" rel="noopener" data-reveal data-reveal-delay="1">
+                <div class="e-top">
+                    <div class="eco-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M17 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M5 17h5.5a3.5 3.5 0 0 0 0 -7h-3a3.5 3.5 0 0 1 0 -7h5.5"/></svg></div>
+                    <h3>The Pilgrimage</h3>
+                    <span class="badge live">Live</span>
+                </div>
+                <p class="purpose">Booeliever NFTs staked into Gratitude Points, redeemable for $HOLY. Ownership turned into devotion.</p>
+                <div class="e-foot"><span class="fact">Supply 1,250</span><span class="domain">pilgrimage.bookofeth.xyz <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg></span></div>
+            </a>
+
+            <a class="eco-card" href="https://ens.bookofeth.xyz/" target="_blank" rel="noopener" data-reveal data-reveal-delay="2">
+                <div class="e-top">
+                    <div class="eco-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"/></svg></div>
+                    <h3>BOOE ENS</h3>
+                    <span class="badge live">Live</span>
+                </div>
+                <p class="purpose">Register a booe.eth name and bind it to your wallet and identity. A thousand roots feeding one tree.</p>
+                <div class="e-foot"><span class="fact">Built with Namespace</span><span class="domain">ens.bookofeth.xyz <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg></span></div>
+            </a>
+
+            <a class="eco-card" href="https://booemerch.com/" target="_blank" rel="noopener" data-reveal data-reveal-delay="1">
+                <div class="e-top">
+                    <div class="eco-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l6 2v5h-3v8a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1v-8h-3v-5l6 -2a3 3 0 0 0 6 0"/></svg></div>
+                    <h3>BOOE Merch</h3>
+                    <span class="badge live">Live</span>
+                </div>
+                <p class="purpose">Wear your values. Community-designed collections, payable in ETH. Not commerce but continuity.</p>
+                <div class="e-foot"><span class="fact">Payable in ETH</span><span class="domain">booemerch.com <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg></span></div>
+            </a>
+
+            <a class="eco-card" href="https://codequill.xyz" target="_blank" rel="noopener" data-reveal data-reveal-delay="2">
+                <div class="e-top">
+                    <div class="eco-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8l-4 4l4 4"/><path d="M17 8l4 4l-4 4"/><path d="M14 4l-4 16"/></svg></div>
+                    <h3>Code Quill</h3>
+                    <span class="badge">In development</span>
+                </div>
+                <p class="purpose">The authorship layer for developers. Claim ownership of your code, verified on-chain. Built by Ophelios.</p>
+                <div class="e-foot"><span class="fact">3rd place, ENS &middot; ETHGlobal NY 2025</span><span class="domain">codequill.xyz <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg></span></div>
+            </a>
+        </div>
+    </div>
+</section>
+
+{* ================= CLOSING COLOPHON ================= *}
+<section class="closing">
+    <div class="closing-bg" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="inner" data-reveal>
+            <div class="motto-lapis">
+                <span class="rule"></span>
+                <span>We do not speculate. We inscribe.</span>
+                <span class="rule"></span>
+            </div>
+            <h2>The Book of Ethereum will never be finished.</h2>
+            <p>It will grow, fork, and bloom, forever a testament to Ethereum's infinite garden.</p>
+            <div class="cta-row">
+                <a class="btn btn-silver" href="{$tg}" target="_blank" rel="noopener">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+                    Join the Brethren
+                </a>
+                <a class="btn btn-ghost" href="/manifest/">
+                    Read the Manifest
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 </main>
 {/block}
