@@ -1,29 +1,223 @@
 {layout '../layouts/base.latte'}
 
 {*
-  ROUTE STUB -> /philosophy/. Owned by the Philosophy page agent. Replace the
-  placeholder body with the real narrative; keep the layout + page-scoped CSS
-  convention. See scratchpad/BUILD-NOTES.md.
+  /philosophy/ : the opening chapter of the Book. Merges readme.md (the cultural
+  layer thesis), philosophy.md (the Infinite Garden, Aya Miyaguchi), and
+  prophecy.md (the Prophecy) into one flowing designed chapter. Copy is cleaned,
+  tightened, and de-em-dashed. Signature lines are verbatim.
+
+  Gold budget (2 of 3 spent, both verbatim scripture at the crescendo):
+    1. the gilded motto "We don't speculate. We inscribe."
+    2. the gilded "Amen."
+  No garden.jpg (warm daylight fights the cool palette): the Infinite Garden is an
+  ink + lapis CSS band. Tabler icons only. English. No em-dashes, no en-dashes.
 *}
 {var $pageTitle = 'The Philosophy'}
-{var $pageDescription = 'The Infinite Garden, the cultural layer, the civilizational platform, and the Prophecy. Ethereum scales computation. The Book of Ethereum scales understanding.'}
+{var $pageDescription = 'The cultural layer of Ethereum: programmable legitimacy, the Infinite Garden, and the Prophecy. Ethereum scales computation. The Book of Ethereum scales understanding.'}
 {var $pageSlug = 'philosophy'}
 {var $pageCss = 'philosophy'}
 {var $bodyClass = 'page-inner'}
 
 {block content}
-<main id="main" class="page-shell">
-    <div class="wrap">
-        <div class="chapter-head">
-            <span class="ch-node"></span>
-            <span class="ch-label">Chapter &middot; The Philosophy</span>
-            <span class="ch-line"></span>
-            <span class="ch-folio">Folio I</span>
+<main id="main" class="page-shell phi">
+
+    {* ================= FRONTISPIECE ================= *}
+    <section class="phi-hero">
+        <div class="phi-hero-bg" aria-hidden="true">
+            <div class="glow"></div>
+            <div class="rules"></div>
         </div>
-        <p class="eyebrow page-eyebrow">The Philosophy</p>
-        <h1>The Infinite Garden</h1>
-        <p class="page-lede">Ethereum is not a machine we control but a garden we care for. The Book is the garden's caretaker.</p>
-        <p class="page-note">This chapter is being inscribed.</p>
-    </div>
+        <div class="wrap">
+            <div class="chapter-head" data-reveal>
+                <span class="ch-node"></span>
+                <span class="ch-label">Chapter I &middot; The Philosophy</span>
+                <span class="ch-line"></span>
+                <span class="ch-folio">Folio I</span>
+            </div>
+
+            <div class="phi-frontis">
+                <p class="eyebrow phi-eyebrow rise">The cultural layer of Ethereum</p>
+                <h1 class="phi-title rise d1">The Infinite Garden</h1>
+                <p class="phi-lede rise d2">Ethereum began as a movement before it was ever a machine.
+                This is the story of the culture that keeps it alive, and of the Book that keeps the culture.</p>
+            </div>
+
+            <div class="phi-thesis rise d3">
+                <p class="line"><span class="muted">Ethereum scales computation.</span>The Book of Ethereum scales <em>understanding</em>.</p>
+                <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            </div>
+        </div>
+    </section>
+
+    {* ================= THE CULTURAL LAYER (lead + argument) ================= *}
+    <section class="phi-section tight">
+        <div class="wrap">
+            <div class="phi-prose">
+                <p class="lead" data-reveal>Ethereum began not only as a protocol but as a movement. It was born
+                from a desire to coordinate human activity without central authority, to build systems that
+                belong to no one and serve everyone. From its first block in 2015 it grew from an idea into what
+                Vitalik Buterin called a civilizational platform: a neutral foundation where economies, art, and
+                meaning coexist.</p>
+
+                <p data-reveal>Bitcoin introduced digital scarcity. Ethereum introduced programmable legitimacy.
+                Where Bitcoin protects the ledger, Ethereum protects the possibility to build. Over time it has
+                become more than technology, a living ecosystem shaped by openness, pluralism, and collective
+                coordination.</p>
+
+                <p data-reveal>Its history has been guided as much by ideas as by upgrades. The Merge and the
+                coming Fusaka upgrade show that Ethereum's strength comes not from control but from consensus.</p>
+            </div>
+
+            {* receipts: myth anchored by ledger fact *}
+            <div class="phi-ledger" data-reveal>
+                <div class="cell"><span class="k">First block</span><span class="v">30 Jul 2015</span></div>
+                <div class="cell"><span class="k">The Merge</span><span class="v">15 Sep 2022</span></div>
+                <div class="cell"><span class="k">The horizon</span><span class="v"><i>Fusaka</i></span></div>
+            </div>
+
+            {* pull quote on the lapis rail *}
+            <blockquote class="phi-rail" data-reveal>
+                <p>The most important scarce resource of the twenty-first century is legitimacy, and in Ethereum
+                legitimacy arises from culture: from the shared rituals, memes, and stories that connect code to
+                human meaning.</p>
+                <cite>After Vitalik Buterin</cite>
+            </blockquote>
+
+            <div class="phi-prose">
+                <p data-reveal>Culture is the invisible architecture of coordination. It turns systems of logic
+                into spaces of belonging. Without culture, decentralization becomes speculation. Without shared
+                myth, networks forget their purpose.</p>
+            </div>
+        </div>
+    </section>
+
+    {* ================= THE INFINITE GARDEN (luminous ink + lapis band) ================= *}
+    <section class="phi-garden">
+        <div class="phi-garden-bg" aria-hidden="true">
+            <div class="g-glow-a"></div>
+            <div class="g-glow-b"></div>
+            <div class="g-shaft"></div>
+            <span class="dew d-1"></span><span class="dew d-2"></span><span class="dew d-3"></span>
+            <span class="dew d-4"></span><span class="dew d-5"></span><span class="dew d-6"></span>
+        </div>
+        <div class="wrap">
+            <div class="phi-garden-head" data-reveal>
+                <div class="phi-leaf">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21c.5 -4.5 2.5 -8 7 -10"/><path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z"/></svg>
+                </div>
+                <p class="h">The Infinite Garden<small>A place without a castle or a ruler, where every participant is a gardener.</small></p>
+            </div>
+
+            <div class="phi-prose" data-reveal>
+                <p>Aya Miyaguchi described Ethereum as an infinite garden. Progress here is not linear but
+                organic. Every fork, every collaboration, every experiment adds to its biodiversity. The garden
+                grows because no single gardener decides what may bloom, and because no one owns the soil.</p>
+            </div>
+
+            <figure class="phi-garden-quote" data-reveal data-reveal-delay="1">
+                <blockquote>
+                    <span class="care">Ethereum is not a machine we control but a garden we care for.</span>
+                    <span class="keep">The Book is the garden's caretaker.</span>
+                </blockquote>
+                <cite>After <b>Aya Miyaguchi</b> &middot; the Infinite Garden</cite>
+            </figure>
+        </div>
+    </section>
+
+    {* ================= THE CULTURAL LAYER + THE THREE MISSIONS ================= *}
+    <section class="phi-section">
+        <div class="wrap">
+            <div class="phi-prose">
+                <p data-reveal>The Book of Ethereum exists to tend this garden. It is not a company or a product
+                but a cultural public good: it records Ethereum's values, translates its technologies into
+                meaning, and projects its story into the future. The Book is the cultural layer of Ethereum,
+                aligned with the Ethereum Foundation's mission to cultivate open experimentation and the public
+                good.</p>
+            </div>
+
+            <div class="phi-creed" data-reveal data-reveal-delay="1">
+                <div class="col">
+                    <div class="m-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2"/><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"/><path d="M10 12l4 0"/></svg></div>
+                    <p class="m-label">Mission I</p>
+                    <h3>Preserve memory</h3>
+                    <p>The myths, memes, and milestones of Ethereum, kept so they are never lost.</p>
+                </div>
+                <div class="col">
+                    <div class="m-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6.371c0 4.418 -2.239 6.629 -5 6.629"/><path d="M4 6.371h7"/><path d="M5 9c0 2.144 2.252 3.908 6 4"/><path d="M12 20l4 -9l4 9"/><path d="M19.1 18h-6.2"/><path d="M6.694 3l.793 .582"/></svg></div>
+                    <p class="m-label">Mission II</p>
+                    <h3>Translate meaning</h3>
+                    <p>Staking, rollups, and zero knowledge, made understandable to all.</p>
+                </div>
+                <div class="col">
+                    <div class="m-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21l6 -5l6 5"/><path d="M12 13v8"/><path d="M3.294 13.678l.166 .281c.52 .88 1.624 1.265 2.605 .91l14.242 -5.165a1.023 1.023 0 0 0 .565 -1.456l-2.62 -4.705a1.087 1.087 0 0 0 -1.447 -.42l-.056 .032l-12.694 7.618c-1.02 .613 -1.357 1.897 -.76 2.905l-.001 0"/><path d="M14 5l3 5.5"/></svg></div>
+                    <p class="m-label">Mission III</p>
+                    <h3>Project myth</h3>
+                    <p>Guiding builders and believers toward Ethereum's shared destiny, the Prophecy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {* ================= THE PROPHECY (the closing crescendo) ================= *}
+    <section class="phi-prophecy">
+        <div class="phi-prophecy-bg" aria-hidden="true"></div>
+        <div class="wrap">
+            <div class="inner">
+                <p class="eyebrow" data-reveal>The Prophecy</p>
+                <h2 data-reveal>Not an ending, but a direction</h2>
+
+                <p class="body" data-reveal data-reveal-delay="1">The Prophecy is the belief that Ethereum can
+                unite technology, culture, and meaning into a single, living civilization. In this vision Holy Labs
+                sustains participation, the DAO empowers compassion, Code Quill preserves authorship, and BOOE ENS
+                gives names to new identities. The booelievers become the chroniclers of this new age, builders of
+                an open and meaningful world.</p>
+
+                <blockquote class="phi-rail" data-reveal>
+                    <p>If Ethereum succeeds, it will not be because everyone understands the math, but because
+                    everyone feels the meaning.</p>
+                    <cite>After Vitalik Buterin</cite>
+                </blockquote>
+
+                <p class="phi-verse" data-reveal>We do not follow charts. We follow <span class="booelieve">Booelieve</span>.</p>
+
+                <div class="phi-motto" data-reveal>
+                    <span class="gilded"></span>
+                    <span>We don't speculate. We inscribe.</span>
+                    <span class="gilded"></span>
+                </div>
+
+                <p class="phi-benediction" data-reveal>The Book of Ethereum will never be finished. It will grow,
+                fork, and bloom, forever a testament to Ethereum's infinite garden.</p>
+
+                <div class="phi-amen" data-reveal>
+                    <div class="gilded" aria-hidden="true"></div>
+                    <p>Amen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {* ================= CONTINUE READING (chapter nav) ================= *}
+    <nav class="phi-next" aria-label="Chapter navigation">
+        <div class="wrap">
+            <a class="phi-turn prev" href="/">
+                <span class="kick">
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/></svg>
+                    The frontispiece
+                </span>
+                <span class="folio">Home</span>
+                <span class="name">The Book of Ethereum</span>
+            </a>
+            <a class="phi-turn next" href="/trinity/">
+                <span class="kick">
+                    Continue reading
+                    <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg>
+                </span>
+                <span class="folio">Chapter II &middot; Folio II</span>
+                <span class="name">The Trinity</span>
+            </a>
+        </div>
+    </nav>
+
 </main>
 {/block}

@@ -1,4 +1,331 @@
 /* Page-scoped styles for /philosophy/. Owned by the Philosophy page agent.
    Linked automatically by the layout when the page sets {var $pageCss = 'philosophy'}.
    Build on the global system in app.css (tokens, chapter-head, buttons, cards).
-   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: max 3. */
+   Do NOT edit app.css. No em-dashes. Tabler icons only. Gold budget: max 3.
+
+   The opening chapter, read as the first pages of a luminous book: a frontispiece,
+   Garamond prose with a drop cap, pull quotes on a lapis rail, a luminous ink+lapis
+   Infinite Garden band (NO garden.jpg; a garden-nocturne plate may drop in later),
+   the three missions as an elegant strip, and the Prophecy as the closing crescendo.
+   Gold appears exactly twice, both on verbatim scripture at the crescendo. */
+
+.phi {
+  --phi-measure: 43rem;          /* reading column, roughly 68 to 72ch */
+  --phi-body: #c6cede;           /* brighter than text-dim for long-form reading */
+  padding-bottom: 0;             /* the chapter nav carries the closing rhythm */
+}
+
+/* ---------------------------------------------------------------------------
+   FRONTISPIECE (the opening spread)
+   --------------------------------------------------------------------------- */
+.phi-hero { position: relative; overflow: hidden; padding-bottom: 18px; }
+.phi-hero-bg { position: absolute; inset: -160px 0 0; pointer-events: none; z-index: 0; }
+.phi-hero-bg .glow {
+  position: absolute;
+  top: -280px;
+  left: 50%;
+  transform: translateX(-42%);
+  width: 1200px;
+  height: 820px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(71, 99, 214, 0.26), rgba(44, 60, 150, 0.1) 46%, transparent 72%);
+}
+.phi-hero-bg .rules {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, transparent 0 87px, rgba(134, 160, 246, 0.045) 87px 88px);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24%, #000 62%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 24%, #000 62%, transparent 100%);
+}
+.phi-hero .wrap { position: relative; z-index: 1; }
+.phi-frontis { max-width: 52rem; }
+.phi-eyebrow { margin-bottom: 20px; }
+.phi-title {
+  font: 400 clamp(42px, 6vw, 78px)/1.04 var(--serif);
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin: 0;
+}
+.phi-lede {
+  font: italic 400 clamp(18px, 1.7vw, 21px)/1.62 var(--serif);
+  color: var(--text-dim);
+  max-width: 46ch;
+  margin: 24px 0 0;
+}
+
+/* The two-voice thesis, set as a centered epigraph (muted computation, lapis
+   understanding). The signature line, verbatim, rendered as light not gold. */
+.phi-thesis {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+  margin: 66px auto 0;
+  text-align: center;
+}
+.phi-thesis .line {
+  font: 400 clamp(26px, 3.2vw, 40px)/1.2 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.phi-thesis .muted { display: block; color: var(--metal-lo); font-size: 0.72em; margin-bottom: 10px; }
+.phi-thesis em {
+  font-style: italic;
+  background: linear-gradient(100deg, var(--accent-hi), #b6c6fa 60%, var(--accent-hi));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.phi-thesis .dots { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 26px; }
+.phi-thesis .dots i { width: 4px; height: 4px; border-radius: 50%; background: rgba(134, 160, 246, 0.5); }
+.phi-thesis .dots i:nth-child(2) { width: 5px; height: 5px; background: var(--accent-hi); box-shadow: 0 0 10px rgba(134, 160, 246, 0.8); }
+
+/* ---------------------------------------------------------------------------
+   PROSE (the reading column) + drop cap + pull-quote rail
+   --------------------------------------------------------------------------- */
+.phi-prose { max-width: var(--phi-measure); margin: 0 auto; }
+.phi-prose > p {
+  font: 400 clamp(17px, 1.35vw, 18.5px)/1.75 var(--serif);
+  color: var(--phi-body);
+  margin-top: 26px;
+}
+.phi-prose > p:first-child { margin-top: 0; }
+.phi-prose .lead::first-letter {
+  font-family: var(--serif);
+  font-size: 4.1em;
+  line-height: 0.78;
+  float: left;
+  padding: 8px 14px 0 0;
+  color: var(--accent-hi);
+  text-shadow: 0 0 22px rgba(134, 160, 246, 0.35);
+}
+
+/* Section spacing between the frontispiece, prose, and bands. */
+.phi-section { padding: 96px 0; }
+.phi-section.tight { padding-top: 66px; }
+
+/* Pull quote on the lapis left rail. */
+.phi-rail {
+  max-width: var(--phi-measure);
+  margin: 46px auto;
+  padding: 6px 0 6px 30px;
+  border-left: 2px solid transparent;
+  border-image: linear-gradient(180deg, var(--accent-hi), rgba(134, 160, 246, 0.15)) 1;
+}
+.phi-rail p {
+  font: italic 400 clamp(21px, 2.4vw, 27px)/1.42 var(--serif);
+  color: var(--text);
+  margin: 0;
+}
+.phi-rail cite {
+  display: block;
+  margin-top: 16px;
+  font: 600 10.5px/1 var(--roman);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--text-faint);
+}
+
+/* The receipts strip: myth anchored by ledger fact (first block, Merge, horizon). */
+.phi-ledger {
+  max-width: var(--phi-measure);
+  margin: 40px auto 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(14, 19, 32, 0.4);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.phi-ledger .cell { padding: 18px 22px; border-left: 1px solid var(--line-quiet); }
+.phi-ledger .cell:first-child { border-left: none; }
+.phi-ledger .k { display: block; font: 600 9.5px/1 var(--roman); letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 9px; }
+.phi-ledger .v { font: 600 14px/1.2 var(--roman); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; color: var(--metal-hi); }
+.phi-ledger .v i { font: italic 400 14px/1 var(--serif); color: var(--text-dim); }
+
+/* ---------------------------------------------------------------------------
+   THE INFINITE GARDEN (luminous ink + lapis band, the signature moment)
+   No garden.jpg (warm daylight fights the cool palette). Ink + lapis CSS only.
+   A garden-nocturne.webp plate may layer in later as a background-image here.
+   --------------------------------------------------------------------------- */
+.phi-garden { position: relative; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(180deg, var(--ink-1), #0b0f1b 60%, var(--ink-1)); }
+.phi-garden-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.phi-garden-bg .g-glow-a { position: absolute; left: 50%; bottom: -220px; transform: translateX(-50%); width: 1150px; height: 720px; border-radius: 50%; background: radial-gradient(closest-side, rgba(71, 99, 214, 0.28), rgba(44, 60, 150, 0.08) 48%, transparent 74%); }
+.phi-garden-bg .g-glow-b { position: absolute; left: 14%; top: -140px; width: 620px; height: 520px; border-radius: 50%; background: radial-gradient(closest-side, rgba(95, 194, 180, 0.1), transparent 70%); }
+/* one pale shaft of light through the garden */
+.phi-garden-bg .g-shaft { position: absolute; left: 68%; top: -60px; width: 210px; height: 130%; transform: rotate(9deg); background: linear-gradient(90deg, transparent, rgba(134, 160, 246, 0.07), transparent); -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); }
+/* bioluminescent dew points */
+.phi-garden-bg .dew { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--accent-hi); box-shadow: 0 0 10px rgba(134, 160, 246, 0.9); opacity: 0.55; }
+.phi-garden-bg .dew.d-1 { left: 10%; top: 22%; }
+.phi-garden-bg .dew.d-2 { left: 22%; top: 64%; opacity: 0.4; }
+.phi-garden-bg .dew.d-3 { left: 82%; top: 30%; width: 3px; height: 3px; opacity: 0.5; }
+.phi-garden-bg .dew.d-4 { left: 90%; top: 70%; opacity: 0.3; }
+.phi-garden-bg .dew.d-5 { left: 46%; top: 16%; width: 3px; height: 3px; background: var(--relic-hope); box-shadow: 0 0 10px rgba(95, 194, 180, 0.8); opacity: 0.4; }
+.phi-garden-bg .dew.d-6 { left: 62%; top: 82%; width: 3px; height: 3px; opacity: 0.35; }
+.phi-garden .wrap { position: relative; z-index: 1; padding-top: 104px; padding-bottom: 104px; }
+.phi-garden-head { display: flex; align-items: center; gap: 14px; margin: 0 auto 30px; max-width: var(--phi-measure); }
+.phi-leaf {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--relic-hope);
+  background: rgba(95, 194, 180, 0.08);
+  border: 1px solid rgba(95, 194, 180, 0.22);
+}
+.phi-leaf .ti { width: 22px; height: 22px; }
+.phi-garden-head .h { font: 600 11px/1 var(--roman); letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-hi); }
+.phi-garden-head .h small { display: block; margin-top: 8px; font: italic 400 16px/1.3 var(--serif); letter-spacing: 0; text-transform: none; color: var(--text-dim); }
+
+/* The grand caretaker quote (verbatim). Aya's line, then the Book's response. */
+.phi-garden-quote { max-width: 46rem; margin: 8px auto 0; text-align: center; }
+.phi-garden-quote blockquote {
+  font: 400 clamp(28px, 4vw, 46px)/1.22 var(--serif);
+  letter-spacing: -0.012em;
+  color: var(--text);
+  margin: 0;
+}
+.phi-garden-quote blockquote .care { color: var(--metal-hi); }
+.phi-garden-quote blockquote .keep {
+  display: block;
+  margin-top: 14px;
+  font-style: italic;
+  background: linear-gradient(100deg, var(--accent-hi), #b6c6fa 55%, var(--accent-hi));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.phi-garden-quote cite {
+  display: block;
+  margin-top: 26px;
+  font: 600 10.5px/1 var(--roman);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--text-faint);
+}
+.phi-garden-quote cite b { color: var(--accent-hi); font-weight: 600; }
+
+/* ---------------------------------------------------------------------------
+   THE CULTURAL LAYER + THE THREE MISSIONS (the elegant strip)
+   --------------------------------------------------------------------------- */
+.phi-creed {
+  max-width: var(--measure);
+  margin: 56px auto 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(22, 30, 47, 0.55), rgba(14, 19, 32, 0.35));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+}
+.phi-creed .col { position: relative; padding: 32px 30px; border-left: 1px solid var(--line-quiet); }
+.phi-creed .col:first-child { border-left: none; }
+.phi-creed .col::before { content: ''; position: absolute; top: 0; left: 30px; right: 30px; height: 1px; background: linear-gradient(90deg, transparent, rgba(134, 160, 246, 0.35), transparent); opacity: 0.6; }
+.phi-creed .m-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(134, 160, 246, 0.08);
+  border: 1px solid rgba(134, 160, 246, 0.18);
+  color: var(--accent-hi);
+}
+.phi-creed .m-icon .ti { width: 22px; height: 22px; }
+.phi-creed .m-label { font: 600 10px/1 var(--roman); letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-faint); margin: 20px 0 9px; }
+.phi-creed h3 { font: 400 24px/1.2 var(--serif); color: var(--text); }
+.phi-creed p { font: 400 15.5px/1.6 var(--serif); color: var(--text-dim); margin-top: 11px; }
+
+/* ---------------------------------------------------------------------------
+   THE PROPHECY (the closing crescendo)
+   --------------------------------------------------------------------------- */
+.phi-prophecy { position: relative; overflow: hidden; border-top: 1px solid var(--line); background: var(--ink-0); text-align: center; }
+.phi-prophecy-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; background: radial-gradient(760px 500px at 50% 34%, rgba(44, 60, 150, 0.16), transparent 72%); }
+.phi-prophecy .wrap { position: relative; z-index: 1; padding-top: 120px; padding-bottom: 120px; }
+.phi-prophecy .inner { max-width: 44rem; margin: 0 auto; }
+.phi-prophecy .eyebrow { display: inline-block; }
+.phi-prophecy h2 { font: 400 clamp(32px, 3.8vw, 50px)/1.14 var(--serif); color: var(--text); margin-top: 20px; }
+.phi-prophecy .body {
+  font: 400 clamp(17px, 1.35vw, 18.5px)/1.75 var(--serif);
+  color: var(--phi-body);
+  margin: 24px auto 0;
+  max-width: 40rem;
+  text-align: left;
+}
+.phi-prophecy .phi-rail { margin: 40px auto; text-align: left; }
+
+/* The verses that build to the close. */
+.phi-verse { font: italic 400 clamp(20px, 2.4vw, 27px)/1.5 var(--serif); color: var(--text); margin: 40px auto 0; }
+.phi-verse .booelieve { font-style: normal; color: var(--accent-hi); }
+
+/* Gilded motto, gold moment 1: the verbatim signature line at the crescendo. */
+.phi-motto { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 34px auto 0; }
+.phi-motto .gilded { width: 66px; flex: none; }
+.phi-motto span:not(.gilded) {
+  font: 600 12px/1 var(--roman);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--warn);
+  white-space: nowrap;
+}
+.phi-benediction { font: 400 clamp(18px, 1.6vw, 21px)/1.6 var(--serif); color: var(--text-dim); margin: 40px auto 0; max-width: 42ch; }
+
+/* Gilded Amen, gold moment 2: the book closing. */
+.phi-amen { margin: 48px auto 0; max-width: 320px; }
+.phi-amen .gilded { max-width: 320px; margin: 0 auto 22px; }
+.phi-amen p { font: italic 400 26px/1 var(--serif); letter-spacing: 0.04em; color: var(--warn); }
+
+/* ---------------------------------------------------------------------------
+   CHAPTER FOOTER NAV (continue reading, the page turning)
+   --------------------------------------------------------------------------- */
+.phi-next { border-top: 1px solid var(--line); background: var(--ink-1); }
+.phi-next .wrap { padding-top: 40px; padding-bottom: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.phi-turn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--ink-2);
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur), background var(--dur);
+}
+.phi-turn:hover { transform: translateY(-3px); border-color: rgba(134, 160, 246, 0.3); background: var(--ink-3); }
+.phi-turn.next { text-align: right; align-items: flex-end; }
+.phi-turn .kick { display: inline-flex; align-items: center; gap: 8px; font: 600 10px/1 var(--roman); letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); }
+.phi-turn.next .kick { color: var(--accent-hi); }
+.phi-turn .kick .ti { width: 15px; height: 15px; }
+.phi-turn .folio { font: 600 10px/1 var(--roman); letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); }
+.phi-turn .name { font: 400 27px/1.15 var(--serif); color: var(--metal); transition: color var(--dur); }
+.phi-turn:hover .name { color: var(--metal-hi); }
+
+/* ---------------------------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .phi-section { padding: 72px 0; }
+  .phi-garden .wrap { padding-top: 80px; padding-bottom: 80px; }
+  .phi-prophecy .wrap { padding-top: 92px; padding-bottom: 92px; }
+  .phi-creed { grid-template-columns: 1fr; }
+  .phi-creed .col { border-left: none; border-top: 1px solid var(--line-quiet); }
+  .phi-creed .col:first-child { border-top: none; }
+  .phi-creed .col::before { display: none; }
+}
+@media (max-width: 640px) {
+  .phi-ledger { grid-template-columns: 1fr; }
+  .phi-ledger .cell { border-left: none; border-top: 1px solid var(--line-quiet); }
+  .phi-ledger .cell:first-child { border-top: none; }
+  .phi-thesis { margin-top: 48px; }
+  .phi-rail { padding-left: 22px; }
+  .phi-garden-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .phi-next .wrap { grid-template-columns: 1fr; }
+  .phi-turn.next { text-align: left; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .phi-section { padding: 60px 0; }
+  .phi-prose .lead::first-letter { font-size: 3.4em; padding: 6px 10px 0 0; }
+}
