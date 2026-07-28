@@ -4,14 +4,25 @@
 (function () {
   'use strict';
 
-  /* --- Nav: frost on scroll --------------------------------------------- */
+  /* --- Nav: frost + frosted island on scroll ---------------------------- */
+  /* Past the threshold the header gets .scrolled: on mobile the bar frosts in
+     place, on desktop the full bar cross-fades into a centered frosted island
+     (see app.css). One passive listener, rAF-throttled. */
   var nav = document.querySelector('[data-nav]');
   if (nav) {
-    var onScroll = function () {
-      nav.classList.toggle('scrolled', window.scrollY > 24);
+    var navTicking = false;
+    var applyNav = function () {
+      nav.classList.toggle('scrolled', window.scrollY > 48);
+      navTicking = false;
     };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    var onNavScroll = function () {
+      if (!navTicking) {
+        navTicking = true;
+        window.requestAnimationFrame(applyNav);
+      }
+    };
+    applyNav();
+    window.addEventListener('scroll', onNavScroll, { passive: true });
   }
 
   /* --- Mobile menu: the table-of-contents sheet ------------------------- */

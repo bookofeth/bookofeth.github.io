@@ -35,6 +35,30 @@
             <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
         </button>
     </div>
+
+    {*
+      Frosted island (desktop, on scroll). At rest the bar above is shown; past the
+      scroll threshold it cross-fades out and this centered, detached, frosted pill
+      fades in (site.js toggles .scrolled on the header). Desktop only: the mobile
+      burger bar is untouched. Visibility (CSS) keeps exactly one layer in the a11y
+      tree + tab order at a time, so no duplicate focus stops.
+    *}
+    <div class="nav-island">
+        <div class="nav-island-in">
+            <a class="nav-island-brand" href="/" aria-label="Book of Ethereum home">
+                <img src="/logo.png" alt="" width="26" height="26" decoding="async">
+            </a>
+            <div class="nav-links">
+                {foreach $navItems as $item}
+                    <a href="{$item['href']}">{$item['label']}</a>
+                {/foreach}
+            </div>
+            <a class="btn btn-silver nav-cta" href="{$tg}" target="_blank" rel="noopener">
+                <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+                Join the Brethren
+            </a>
+        </div>
+    </div>
 </header>
 
 <div class="nav-sheet" id="nav-sheet" data-menu aria-hidden="true">
