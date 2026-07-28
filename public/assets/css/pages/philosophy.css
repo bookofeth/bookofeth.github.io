@@ -149,6 +149,23 @@
    --------------------------------------------------------------------------- */
 .phi-garden { position: relative; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(180deg, var(--ink-1), #0b0f1b 60%, var(--ink-1)); }
 .phi-garden-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+/* Night-garden plate: bioluminescent blue glass flowers, dropped in behind the
+   ink+lapis CSS band (which stays as the fallback). A dark gradient scrim rides
+   over the image so the centered heading, prose, and quote stay AA-legible while
+   the flowers still glow through. Masked to fade into ink top and bottom. */
+.phi-garden-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(180deg, rgba(14, 19, 32, 0.86), rgba(11, 15, 27, 0.6) 46%, rgba(14, 19, 32, 0.9)),
+    url('/assets/img/garden-nocturne.webp');
+  background-size: cover, cover;
+  background-position: center, center 72%;
+  background-repeat: no-repeat, no-repeat;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+}
 .phi-garden-bg .g-glow-a { position: absolute; left: 50%; bottom: -220px; transform: translateX(-50%); width: 1150px; height: 720px; border-radius: 50%; background: radial-gradient(closest-side, rgba(71, 99, 214, 0.28), rgba(44, 60, 150, 0.08) 48%, transparent 74%); }
 .phi-garden-bg .g-glow-b { position: absolute; left: 14%; top: -140px; width: 620px; height: 520px; border-radius: 50%; background: radial-gradient(closest-side, rgba(95, 194, 180, 0.1), transparent 70%); }
 /* one pale shaft of light through the garden */
