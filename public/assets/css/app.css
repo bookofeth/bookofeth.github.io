@@ -331,6 +331,22 @@ svg.ti {
    =========================================================================== */
 .hero { position: relative; padding: 150px 0 0; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; pointer-events: none; }
+/* Atmosphere plate: deep-ink navy with a lapis glow rising from lower-center and
+   faint manuscript ruled lines. Sits UNDER the CSS glow + rules (which stay as the
+   fallback if the webp fails), masked so it dissolves into ink at the edges and
+   never competes with the white Garamond headline. Decorative, no motion. */
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/img/hero-atmosphere.webp');
+  background-size: cover;
+  background-position: 50% 62%;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(118% 96% at 50% 44%, #000 30%, rgba(0, 0, 0, 0.4) 64%, transparent 86%);
+  mask-image: radial-gradient(118% 96% at 50% 44%, #000 30%, rgba(0, 0, 0, 0.4) 64%, transparent 86%);
+}
 .hero-bg .glow {
   position: absolute;
   top: -340px;
