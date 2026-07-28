@@ -23,24 +23,35 @@
 .brethren .chapter-head, .brethren .inner { position: relative; z-index: 1; }
 .brethren .bt-constellation {
   position: absolute;
-  inset: 0 0 auto;
-  height: 300px;
+  inset: -30px 0 auto;
+  height: 620px;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(120% 100% at 50% 24%, #000 36%, transparent 80%);
-  mask-image: radial-gradient(120% 100% at 50% 24%, #000 36%, transparent 80%);
+  /* Match the /brethren chapter head: a tall field that starts high and spreads
+     down through the content, with a vertical fade (opaque high, dissolving low)
+     intersected with a soft horizontal edge fade, so the plate melts into ink at
+     the sides and bottom. Same treatment as the page, for one consistent read. */
+  -webkit-mask-image:
+    linear-gradient(180deg, #000 0%, #000 76%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image:
+    linear-gradient(180deg, #000 0%, #000 76%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
-/* The open-book constellation plate, echoing the /brethren chapter head, dropped
-   faintly behind the CSS star field (which stays as the fallback). Low opacity so
-   the teaser verse below reads cleanly; the element mask fades it into ink. */
+/* The open-book constellation plate, matching the /brethren chapter head: bright
+   enough that the open-book shape reads clearly behind the whole Chapter IV block,
+   while the centered Garamond verse + CTA stay legible. The CSS star field stays as
+   the fallback; the element mask dissolves the plate into ink low and at the sides. */
 .brethren .bt-constellation::before {
   content: "";
   position: absolute;
   inset: 0;
   background-image: url('/assets/img/brethren-constellation.webp');
   background-size: cover;
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.3;
+  opacity: 0.66;
 }
 .brethren .bt-star {
   position: absolute;
