@@ -23,25 +23,34 @@
    a gathering across the width. Masked to fade into ink at the edges. */
 .br-constellation {
   position: absolute;
-  inset: -30px 0 auto;
-  height: 360px;
+  inset: -66px 0 auto;
+  height: 660px;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(120% 100% at 50% 30%, #000 40%, transparent 82%);
-  mask-image: radial-gradient(120% 100% at 50% 30%, #000 40%, transparent 82%);
+  /* Vertical fade (opaque from just under the nav, dissolving low past the verse)
+     intersected with a soft horizontal edge fade so the plate melts into ink at the
+     sides. Top is kept opaque so the constellation reads continuously under the nav. */
+  -webkit-mask-image:
+    linear-gradient(180deg, #000 0%, #000 76%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image:
+    linear-gradient(180deg, #000 0%, #000 76%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 /* Constellation plate: stars forming an open-book constellation, dropped in behind
-   the CSS star field (which stays as the fallback). Kept faint so the chapter head
-   and hero copy read cleanly; the element mask above fades it into ink at the edges.
-   Decorative, no motion. */
+   the CSS star field (which stays as the fallback). Bright enough that the open-book
+   shape reads, while the large Garamond heading and italic verse stay legible over it;
+   the element mask above dissolves it into ink low and at the sides. Decorative, no motion. */
 .br-constellation::before {
   content: "";
   position: absolute;
   inset: 0;
   background-image: url('/assets/img/brethren-constellation.webp');
   background-size: cover;
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.4;
+  opacity: 0.7;
 }
 .c-star {
   position: absolute;
@@ -324,7 +333,7 @@ a.fellow-card:hover .f-cta { gap: 11px; }
   .prophet-triptych { max-width: 420px; gap: 40px; grid-template-columns: 1fr; }
   .prophet.gold { margin-top: 0; }
   .fellow-grid { grid-template-columns: 1fr; }
-  .br-constellation { height: 300px; }
+  .br-constellation { height: 600px; }
 }
 @media (max-width: 560px) {
   .br-prophets, .br-fellowship { padding-top: 80px; }
@@ -332,7 +341,7 @@ a.fellow-card:hover .f-cta { gap: 11px; }
   .br-lead { font-size: 19px; }
   .prophet .p-coin { width: 120px; height: 120px; }
   .prophet.gold .p-coin { width: 138px; height: 138px; }
-  .br-constellation { height: 240px; }
+  .br-constellation { height: 540px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
