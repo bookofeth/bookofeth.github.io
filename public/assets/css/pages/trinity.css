@@ -22,7 +22,10 @@
    =========================================================================== */
 .node .coin.coin--relic .coin-face {
   position: absolute;
-  inset: 5px;
+  top: 5px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
   object-fit: contain;
   border-radius: 50%;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(0, 0, 0, 0.4);
@@ -31,7 +34,10 @@
 .rf-coin.rf-coin--relic { position: relative; }
 .rf-coin.rf-coin--relic .coin-face {
   position: absolute;
-  inset: 7px;
+  top: 7px;
+  left: 7px;
+  width: calc(100% - 14px);
+  height: calc(100% - 14px);
   object-fit: contain;
   border-radius: 50%;
   box-shadow: 0 3px 11px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.4);
