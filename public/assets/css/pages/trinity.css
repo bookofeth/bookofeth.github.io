@@ -14,6 +14,30 @@
 .trinity-page .ty { color: #cfe2e6; }
 
 /* ===========================================================================
+   REAL TOKEN COIN FACES ($BOOE / $HOPE / $PROPHET). Page-scoped modifier: the
+   real coin image is struck onto the cool CSS disc, framed by a thin dark ring
+   and a soft drop shadow so the warm gold coins sit like relics on cool ground.
+   The disc keeps its relic-tinted rim + glow from app.css (cool frame). $HOLY
+   is untouched (keeps its CSS north-star medallion). Never recolored or filtered.
+   =========================================================================== */
+.node .coin.coin--relic .coin-face {
+  position: absolute;
+  inset: 5px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.rf-coin.rf-coin--relic { position: relative; }
+.rf-coin.rf-coin--relic .coin-face {
+  position: absolute;
+  inset: 7px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 3px 11px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+/* ===========================================================================
    THE ALTAR (the ceremonial hero: head + cycle + harmony)
    =========================================================================== */
 .tr-altar { position: relative; padding-bottom: 40px; overflow: hidden; }

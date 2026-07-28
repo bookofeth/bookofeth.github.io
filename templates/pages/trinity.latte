@@ -57,15 +57,15 @@
             <span class="spoke k3"></span>
 
             <div class="node n-booe">
-                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$booe['emblem']|noescape}</svg><b>{$booe['ticker']}</b></div>
+                <div class="coin coin--relic"><img class="coin-face" src="/assets/img/relics/booe.webp" alt="" width="256" height="256" decoding="async"></div>
                 <p class="verb"><b>{$booe['verb']}</b>, {$booe['name']}</p>
             </div>
             <div class="node n-hope">
-                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$hope['emblem']|noescape}</svg><b>{$hope['ticker']}</b></div>
+                <div class="coin coin--relic"><img class="coin-face" src="/assets/img/relics/hope.webp" alt="" width="256" height="256" decoding="async"></div>
                 <p class="verb"><b>{$hope['verb']}</b>, {$hope['name']}</p>
             </div>
             <div class="node n-prophet">
-                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$prophet['emblem']|noescape}</svg><b>{$prophet['ticker']}</b></div>
+                <div class="coin coin--relic"><img class="coin-face" src="/assets/img/relics/prophet.webp" alt="" width="256" height="256" decoding="async"></div>
                 <p class="verb"><b>{$prophet['verb']}</b>, {$prophet['name']}</p>
             </div>
             <div class="node n-holy">
@@ -142,12 +142,12 @@
             its story and its ledger, on Ethereum mainnet, verifiable now.</p>
         </div>
 
-        {foreach $live as $r}
+        {var $relicSlugs = ['booe', 'hope', 'prophet']}
+        {foreach $live as $i => $r}
             <article class="relic-full" style="--rc:{$r['color']}" data-reveal>
                 <div class="rf-aside">
-                    <div class="rf-coin">
-                        <svg class="ti" viewBox="0 0 24 24">{$r['emblem']|noescape}</svg>
-                        <b>{$r['ticker']}</b>
+                    <div class="rf-coin rf-coin--relic">
+                        <img class="coin-face" src="/assets/img/relics/{$relicSlugs[$i]}.webp" alt="" width="256" height="256" decoding="async">
                     </div>
                     <div class="rf-id">
                         <h3 class="rf-tick">{$r['ticker']}</h3>

@@ -77,6 +77,18 @@
 .brethren .bt-star.s7 { animation-delay: 1.8s; }
 .brethren .bt-star.s11 { animation-delay: 3.1s; }
 @keyframes bt-twinkle { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.28; } }
+
+/* 3. The real token coin faces ($BOOE / $HOPE / $PROPHET) struck onto the cool
+      CSS cycle disc in the Trinity teaser. Page-scoped modifier so the global
+      .coin medallion is untouched; the disc keeps its relic-tinted rim + glow as
+      the cool frame. $HOLY keeps its CSS north-star. Coins are never filtered. */
+.node .coin.coin--relic .coin-face {
+  position: absolute;
+  inset: 5px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
 </style>
 {/block}
 
@@ -211,15 +223,15 @@
             <span class="spoke k3"></span>
 
             <div class="node n-booe">
-                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$booe['emblem']|noescape}</svg><b>{$booe['ticker']}</b></div>
+                <div class="coin coin--relic"><img class="coin-face" src="/assets/img/relics/booe.webp" alt="" width="256" height="256" decoding="async"></div>
                 <p class="verb"><b>{$booe['verb']}</b>, {$booe['name']}</p>
             </div>
             <div class="node n-hope">
-                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$hope['emblem']|noescape}</svg><b>{$hope['ticker']}</b></div>
+                <div class="coin coin--relic"><img class="coin-face" src="/assets/img/relics/hope.webp" alt="" width="256" height="256" decoding="async"></div>
                 <p class="verb"><b>{$hope['verb']}</b>, {$hope['name']}</p>
             </div>
             <div class="node n-prophet">
-                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$prophet['emblem']|noescape}</svg><b>{$prophet['ticker']}</b></div>
+                <div class="coin coin--relic"><img class="coin-face" src="/assets/img/relics/prophet.webp" alt="" width="256" height="256" decoding="async"></div>
                 <p class="verb"><b>{$prophet['verb']}</b>, {$prophet['name']}</p>
             </div>
             <div class="node n-holy">
