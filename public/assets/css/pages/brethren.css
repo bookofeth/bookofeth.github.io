@@ -29,6 +29,20 @@
   -webkit-mask-image: radial-gradient(120% 100% at 50% 30%, #000 40%, transparent 82%);
   mask-image: radial-gradient(120% 100% at 50% 30%, #000 40%, transparent 82%);
 }
+/* Constellation plate: stars forming an open-book constellation, dropped in behind
+   the CSS star field (which stays as the fallback). Kept faint so the chapter head
+   and hero copy read cleanly; the element mask above fades it into ink at the edges.
+   Decorative, no motion. */
+.br-constellation::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/img/brethren-constellation.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+}
 .c-star {
   position: absolute;
   width: 3px;
