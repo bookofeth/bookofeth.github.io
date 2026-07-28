@@ -419,9 +419,10 @@ svg.ti {
 .hero { position: relative; padding: 150px 0 0; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; pointer-events: none; }
 /* Atmosphere plate: deep-ink navy with a lapis glow rising from lower-center and
-   faint manuscript ruled lines. Sits UNDER the CSS glow + rules (which stay as the
+   faint manuscript ruled lines. Sits UNDER the CSS glow (which stays as the
    fallback if the webp fails), masked so it dissolves into ink at the edges and
-   never competes with the white Garamond headline. Decorative, no motion. */
+   never competes with the white Garamond headline. Decorative, no motion.
+   The plate carries its own faint ruled lines, so no separate .rules overlay. */
 .hero-bg::before {
   content: "";
   position: absolute;
@@ -443,13 +444,6 @@ svg.ti {
   height: 900px;
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(71, 99, 214, 0.3), rgba(44, 60, 150, 0.12) 46%, transparent 72%);
-}
-.hero-bg .rules {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(180deg, transparent 0 87px, rgba(134, 160, 246, 0.05) 87px 88px);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 66%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 66%, transparent 100%);
 }
 .star {
   position: absolute;
