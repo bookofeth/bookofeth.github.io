@@ -1,0 +1,58 @@
+{layout '../layouts/base.latte'}
+
+{*
+  The Exchange (/swap). A full page whose centre of gravity is the shared swap
+  widget partial (templates/partials/swap-widget.latte), the SAME card the home
+  hero carries. Quotes are read live from Uniswap V2; execution calls the Holy
+  Labs swap contract. The card sits on a still lapis orbit, in-voice heading, and
+  three honest assurances below. No em-dashes. Tabler icons copied verbatim.
+*}
+
+{var $pageTitle = 'The Exchange'}
+{var $pageDescription = 'Swap the relics of the Book. Trade ETH, $BOOE, $HOPE, $PROPHET, $HOLY and more on Ethereum mainnet, on-chain via Uniswap, with your own wallet and full custody.'}
+{var $pageSlug = 'swap'}
+{var $pageCss = 'swap'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+<main id="main" class="page-shell exchange-page">
+  <div class="wrap">
+
+    <div class="ex-head" data-reveal>
+      <span class="eyebrow page-eyebrow">The Ecosystem &middot; The Exchange</span>
+      <h1>Trade the <em>relics</em>.</h1>
+      <p class="ex-lede">One counter for the whole Trinity. Swap ETH for $BOOE, $HOPE, $PROPHET
+      and $HOLY, on-chain through Uniswap, with your own wallet and your own keys.</p>
+      <p class="ex-ledgerline">
+        <b>Ethereum mainnet</b><span class="sep">&middot;</span><b>On-chain via Uniswap</b><span class="sep">&middot;</span><b>Self custody</b><span class="sep">&middot;</span><b>Simulated before you sign</b>
+      </p>
+    </div>
+
+    <div class="ex-stage" data-reveal>
+      <span class="ex-stage-halo" aria-hidden="true"></span>
+      <span class="ex-stage-ring" aria-hidden="true"></span>
+      {include '../partials/swap-widget.latte', variant: 'page'}
+    </div>
+
+    <div class="ex-assurances">
+      <div class="ex-assure" data-reveal data-reveal-delay="1">
+        <div class="ea-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12"/><path d="M20 12v4h-4a2 2 0 0 1 0 -4h4"/></svg></div>
+        <h3>Your keys, your coins</h3>
+        <p>The Book never holds your funds. Every swap is signed in your own wallet and settles straight to your address.</p>
+      </div>
+      <div class="ex-assure" data-reveal data-reveal-delay="2">
+        <div class="ea-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></svg></div>
+        <h3>Live on-chain prices</h3>
+        <p>Quotes are read in real time from Uniswap liquidity on Ethereum mainnet. No middle price, no oracle guesswork.</p>
+      </div>
+      <div class="ex-assure" data-reveal data-reveal-delay="3">
+        <div class="ea-icon"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M9 12l2 2l4 -4"/></svg></div>
+        <h3>Simulated first</h3>
+        <p>Each swap is simulated against the chain before you sign. If it would fail, it never asks for your signature.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+<script defer src="/assets/js/swap.js"></script>
+{/block}

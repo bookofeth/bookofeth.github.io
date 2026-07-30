@@ -1,0 +1,147 @@
+{*
+  The Exchange, the BOOE swap widget (Illuminated Ledger dress over Holy Swap's
+  mechanics). A single reusable card so /swap and the home hero share ONE source.
+
+  It is inert markup until /assets/js/swap.js (bundled viem) wires it up by the
+  [data-swap] hook. With JS disabled it degrades to a legible, honest card whose
+  action button says "Connect a wallet to begin".
+
+  Params (all optional):
+    variant  -> 'page' (default) or 'hero'. Only changes chrome sizing.
+
+  House rules honoured: EB Garamond title, Space Grotesk tabular numbers, Tabler
+  icons copied verbatim (refresh, settings, arrows-up-down, chevron-down, search,
+  x, wallet, external-link, alert-triangle, circle-check, loader-2, currency-ethereum).
+  No em-dashes, no en-dashes.
+*}
+{var $variant = $variant ?? 'page'}
+
+<div class="sw sw--{$variant}" data-swap>
+  <div class="sw-card">
+
+    {* ---- header: title + slippage gear ---- *}
+    <div class="sw-head">
+      <p class="sw-title">
+        <span class="sw-mark" aria-hidden="true"><svg class="ti" viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></svg></span>
+        The Exchange
+      </p>
+      <button type="button" class="sw-gear" data-swap-settings aria-label="Slippage and deadline settings" aria-expanded="false">
+        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/></svg>
+      </button>
+    </div>
+
+    {* ---- slippage / deadline popover ---- *}
+    <div class="sw-settings" data-swap-settings-panel hidden>
+      <div class="sw-set-row">
+        <span class="sw-set-label">Max slippage</span>
+        <div class="sw-slip" data-slip-choices>
+          <button type="button" data-slip="0.1">0.1%</button>
+          <button type="button" data-slip="0.5" class="on">0.5%</button>
+          <button type="button" data-slip="1">1%</button>
+          <span class="sw-slip-custom">
+            <input type="text" inputmode="decimal" data-slip-input aria-label="Custom slippage percent" placeholder="Custom">
+            <i>%</i>
+          </span>
+        </div>
+      </div>
+      <div class="sw-set-row">
+        <span class="sw-set-label">Transaction deadline</span>
+        <span class="sw-set-val"><b data-deadline-min>20</b> min</span>
+      </div>
+      <p class="sw-set-note" data-slip-warn hidden></p>
+    </div>
+
+    {* ---- You Pay ---- *}
+    <div class="sw-field" data-field="pay">
+      <div class="sw-field-top">
+        <span class="sw-field-label">You Pay</span>
+        <span class="sw-balance" data-balance="pay">
+          <button type="button" class="sw-max" data-max hidden>Max</button>
+          <span data-balance-text></span>
+        </span>
+      </div>
+      <div class="sw-field-body">
+        <button type="button" class="sw-token" data-token-select="pay">
+          <span class="sw-token-emblem" data-emblem="pay">
+            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12l6 -9l6 9l-6 9l-6 -9"/><path d="M6 12l6 -3l6 3l-6 2l-6 -2"/></svg>
+          </span>
+          <b data-symbol="pay">ETH</b>
+          <svg class="ti sw-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6l6 -6"/></svg>
+        </button>
+        <input type="text" inputmode="decimal" class="sw-amount" data-amount="pay" placeholder="0.0" autocomplete="off" spellcheck="false" aria-label="Amount to pay">
+      </div>
+    </div>
+
+    {* ---- flip ---- *}
+    <div class="sw-flip-wrap">
+      <button type="button" class="sw-flip" data-flip aria-label="Flip the pay and receive tokens">
+        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3l0 18"/><path d="M10 6l-3 -3l-3 3"/><path d="M20 18l-3 3l-3 -3"/><path d="M17 21l0 -18"/></svg>
+      </button>
+    </div>
+
+    {* ---- You Receive ---- *}
+    <div class="sw-field" data-field="receive">
+      <div class="sw-field-top">
+        <span class="sw-field-label">You Receive</span>
+        <span class="sw-estimated">Estimated</span>
+      </div>
+      <div class="sw-field-body">
+        <button type="button" class="sw-token" data-token-select="receive">
+          <span class="sw-token-emblem" data-emblem="receive">
+            <img src="/assets/img/relics/booe.webp" alt="" width="28" height="28" decoding="async">
+          </span>
+          <b data-symbol="receive">$BOOE</b>
+          <svg class="ti sw-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6l6 -6"/></svg>
+        </button>
+        <output class="sw-amount sw-amount--out" data-amount="receive">0.0</output>
+      </div>
+    </div>
+
+    {* ---- rate line (filled by JS) ---- *}
+    <p class="sw-rate" data-rate hidden>
+      <span data-rate-text></span>
+    </p>
+
+    {* ---- honest status note (no route / errors) ---- *}
+    <p class="sw-note" data-note hidden>
+      <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4"/><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0"/><path d="M12 16h.01"/></svg>
+      <span data-note-text></span>
+    </p>
+
+    {* ---- action ---- *}
+    <button type="button" class="btn btn-silver sw-action" data-action disabled>
+      <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12"/><path d="M20 12v4h-4a2 2 0 0 1 0 -4h4"/></svg>
+      <span data-action-text>Connect a wallet to begin</span>
+    </button>
+
+    {* ---- transaction status (filled by JS) ---- *}
+    <div class="sw-tx" data-tx hidden>
+      <span class="sw-tx-icon" data-tx-icon aria-hidden="true"></span>
+      <span class="sw-tx-text" data-tx-text></span>
+      <a class="sw-tx-link" data-tx-link href="#" target="_blank" rel="noopener" hidden>
+        View on Etherscan
+        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/><path d="M11 13l9 -9"/><path d="M15 4h5v5"/></svg>
+      </a>
+    </div>
+
+    <p class="sw-foot">On-chain via Uniswap on Ethereum mainnet. You keep custody at all times.</p>
+  </div>
+
+  {* ---- token select modal (list rendered by swap.js from the locked config) ---- *}
+  <div class="sw-modal" data-token-modal hidden>
+    <div class="sw-modal-backdrop" data-token-close></div>
+    <div class="sw-modal-card" role="dialog" aria-modal="true" aria-label="Select a token">
+      <div class="sw-modal-head">
+        <h3>Select a token</h3>
+        <button type="button" class="sw-modal-close" data-token-close aria-label="Close">
+          <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="sw-search">
+        <svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+        <input type="text" data-token-search placeholder="Search name or paste address" autocomplete="off" spellcheck="false" aria-label="Search tokens">
+      </div>
+      <ul class="sw-token-list" data-token-list></ul>
+    </div>
+  </div>
+</div>
