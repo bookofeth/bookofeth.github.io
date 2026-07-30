@@ -12,21 +12,30 @@
      npx esbuild swap-src/index.js --bundle --minify --format=iife \
        --outfile=public/assets/js/swap.js
 
-   The committed bundle is self-contained; the only runtime network calls are the
-   eth.merkle.io RPC and the user's injected wallet.
-
-   The only runtime network calls are the eth.merkle.io RPC and the user's
-   injected wallet (window.ethereum). Nothing else is fetched.
+   The committed bundle is self-contained. Read calls (quotes + balances) go
+   through a resilient viem fallback() across several public mainnet RPCs, so a
+   429 / outage on one endpoint transparently rotates to the next. Writes still
+   go through the user's injected wallet (window.ethereum). Nothing else is
+   fetched.
    =========================================================================== */
 
 import {
-  createPublicClient, createWalletClient, custom, http,
+  createPublicClient, createWalletClient, custom, http, fallback,
   parseUnits, formatUnits, parseEther, isAddress, getAddress,
 } from 'viem';
 import { mainnet } from 'viem/chains';
 
 /* --- chain + contracts (all mainnet, all on-chain verified) --------------- */
-const RPC = 'https://eth.merkle.io';
+/* Read RPCs. Reliable public mainnet endpoints; publicnode returns 200 on the
+   getAmountsOut quote every time, eth.merkle.io (what Holy Labs uses) rate-limits
+   under load, so it stays in the pool but is no longer the sole read path. */
+const RPCS = [
+  'https://ethereum-rpc.publicnode.com',
+  'https://eth.llamarpc.com',
+  'https://rpc.ankr.com/eth',
+  'https://1rpc.io/eth',
+  'https://eth.merkle.io',
+];
 const CHAIN_ID = 1;
 const ROUTER = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'; // Uniswap V2 Router02 (== team contract's uniswapV2())
 const WETH = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2';
@@ -78,9 +87,17 @@ const SWAP_ABI = [
 ];
 
 /* --- shared read client --------------------------------------------------- */
+/* Resilient READ transport: fallback() rotates across the RPC pool and retries.
+   Each endpoint fails fast (retryCount 0) so a 429 immediately falls through to
+   the next; rank:true keeps the healthiest/fastest endpoint first, and the
+   fallback retries the whole chain twice before giving up. Reads only, writes
+   still use the wallet provider. */
 const publicClient = createPublicClient({
   chain: mainnet,
-  transport: http(RPC, { retryCount: 3, retryDelay: 1500, timeout: 20000 }),
+  transport: fallback(
+    RPCS.map((url) => http(url, { retryCount: 0, timeout: 8000 })),
+    { rank: true, retryCount: 2, retryDelay: 300 },
+  ),
 });
 
 /* --- number helpers ------------------------------------------------------- */
@@ -180,6 +197,7 @@ function initSwap(root) {
   let walletClient = null;
   let quoteSeq = 0;
   let debounceTimer = null;
+  let quoteRetryTimer = null;
   let accountChip = null;
 
   /* ---- path shared by quote AND execution (must match) ---- */
@@ -227,6 +245,7 @@ function initSwap(root) {
 
   async function refreshQuote() {
     clearNote();
+    clearTimeout(quoteRetryTimer);
     const payT = byKey(state.pay);
     const recT = byKey(state.receive);
     const raw = (state.amountIn || '').trim();
@@ -260,9 +279,18 @@ function initSwap(root) {
       updateAction();
     } catch (e) {
       if (reqId !== quoteSeq) return;
-      setOut('0.0'); clearRate();
-      showNote(isNoRouteError(e) ? 'No Uniswap route for this pair yet.' : 'Could not reach the network for a quote. Try again.');
+      if (isNoRouteError(e)) {
+        setOut('0.0'); clearRate();
+        showNote('No Uniswap route for this pair yet.');
+        updateAction();
+        return;
+      }
+      // Every RPC in the pool failed (rate-limited / unreachable). Don't leave a
+      // stuck 0.0: keep the loading state, tell the user, and auto-retry.
+      setOut('...', true); clearRate();
+      showNote('Quote unavailable, retrying...');
       updateAction();
+      quoteRetryTimer = setTimeout(() => { if (reqId === quoteSeq) refreshQuote(); }, 2500);
     }
   }
 
