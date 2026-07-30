@@ -263,7 +263,7 @@ svg.ti {
 .nav-in {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
   max-width: var(--measure);
   margin: 0 auto;
   padding: 16px var(--edge);
@@ -276,10 +276,11 @@ svg.ti {
   color: var(--metal-hi);
   white-space: nowrap;
 }
-.nav-links { display: flex; gap: 26px; margin-left: auto; }
+.nav-links { display: flex; gap: 18px; margin-left: auto; }
 .nav-links a {
-  font: 500 12.5px/1 var(--roman);
-  letter-spacing: 0.06em;
+  font: 500 12px/1 var(--roman);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
   color: var(--text-dim);
   transition: color var(--dur);
 }
@@ -298,11 +299,15 @@ svg.ti {
    --------------------------------------------------------------------------- */
 .nav-island { display: none; }
 
-/* Six chapters now ride the bar (The Exchange was added), so the full desktop
-   nav needs a touch more room. It collapses to the burger below 921px and the
-   frosted island takes over at and above it. Only the nav breakpoint moved; the
-   other 860px layout rules (missions, cycle, cards) are untouched below. */
-@media (min-width: 921px) {
+/* Seven chapters now ride the bar (The Trials was added after The Exchange), so
+   the full desktop nav needs more room. Links were tightened and pinned to a
+   single line (font 12.5 -> 12, gap 26 -> 18, nav-in 32 -> 28, white-space:nowrap),
+   which sets the natural bar width near 1078px. The collapse threshold was raised
+   to match: it now folds to the burger below 1100px and the frosted island takes
+   over at and above it, so the seven links never crowd or stack. Only the nav
+   breakpoint moved; the other 860px layout rules (missions, cycle, cards) are
+   untouched below. */
+@media (min-width: 1100px) {
   /* the fixed wrapper stops frosting the full width; the island carries the glass */
   .nav.scrolled {
     background: transparent;
@@ -351,7 +356,7 @@ svg.ti {
   .nav-island-in {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 20px;
     width: fit-content;
     margin-top: 0.75rem;
     padding: 8px 12px 8px 18px;
@@ -364,7 +369,7 @@ svg.ti {
   }
   .nav-island-brand { display: inline-flex; flex: none; }
   .nav-island-brand img { width: 26px; height: 26px; filter: drop-shadow(0 2px 8px rgba(71, 99, 214, 0.5)); }
-  .nav-island .nav-links { margin-left: 0; gap: 22px; }
+  .nav-island .nav-links { margin-left: 0; gap: 20px; }
   .nav-island .nav-cta { padding: 9px 16px; }
 }
 
@@ -909,9 +914,9 @@ svg.ti {
   .hero { padding-top: 128px; }
   .mission { padding: 12px 28px 8px; }
 }
-/* Nav collapses to the burger below 921px (six chapters need the width). Kept
+/* Nav collapses to the burger below 1100px (seven chapters need the width). Kept
    separate from the 860px block so the rest of that block stays put. */
-@media (max-width: 920px) {
+@media (max-width: 1099px) {
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .nav-burger { display: inline-flex; }
