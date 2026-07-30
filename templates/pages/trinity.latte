@@ -69,7 +69,7 @@
                 <p class="verb"><b>{$prophet['verb']}</b>, {$prophet['name']}</p>
             </div>
             <div class="node n-holy">
-                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$holy['emblem']|noescape}</svg><b>{$holy['ticker']}</b></div>
+                <div class="coin coin--relic"><img class="coin-face" src="/assets/img/relics/holy.webp" alt="" width="256" height="256" decoding="async"></div>
                 <span class="pill">Trinity staking &middot; in development</span>
             </div>
         </div>
@@ -186,9 +186,8 @@
         {* --- $HOLY: the honest outlier. No supply, no contract, no DexTools chip. --- *}
         <article class="relic-full holy" style="--rc:{$holy['color']}" data-reveal>
             <div class="rf-aside">
-                <div class="rf-coin">
-                    <svg class="ti" viewBox="0 0 24 24">{$holy['emblem']|noescape}</svg>
-                    <b>{$holy['ticker']}</b>
+                <div class="rf-coin rf-coin--relic">
+                    <img class="coin-face" src="/assets/img/relics/holy.webp" alt="" width="256" height="256" decoding="async">
                 </div>
                 <div class="rf-id">
                     <h3 class="rf-tick">{$holy['ticker']}</h3>

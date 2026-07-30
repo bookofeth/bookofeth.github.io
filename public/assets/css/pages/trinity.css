@@ -14,11 +14,12 @@
 .trinity-page .ty { color: #cfe2e6; }
 
 /* ===========================================================================
-   REAL TOKEN COIN FACES ($BOOE / $HOPE / $PROPHET). Page-scoped modifier: the
-   real coin image is struck onto the cool CSS disc, framed by a thin dark ring
-   and a soft drop shadow so the warm gold coins sit like relics on cool ground.
-   The disc keeps its relic-tinted rim + glow from app.css (cool frame). $HOLY
-   is untouched (keeps its CSS north-star medallion). Never recolored or filtered.
+   REAL TOKEN COIN FACES ($BOOE / $HOPE / $PROPHET / $HOLY). Page-scoped
+   modifier: the real coin image is struck onto the cool CSS disc, framed by a
+   thin dark ring and a soft drop shadow so the warm coins sit like relics on
+   cool ground. The disc keeps its relic-tinted rim + glow from app.css (cool
+   frame). $HOLY's coin face slots into the same disc; the "in development"
+   pill and honest veil copy stay untouched. Never recolored or filtered.
    =========================================================================== */
 .node .coin.coin--relic .coin-face {
   position: absolute;
