@@ -298,7 +298,11 @@ svg.ti {
    --------------------------------------------------------------------------- */
 .nav-island { display: none; }
 
-@media (min-width: 861px) {
+/* Six chapters now ride the bar (The Exchange was added), so the full desktop
+   nav needs a touch more room. It collapses to the burger below 921px and the
+   frosted island takes over at and above it. Only the nav breakpoint moved; the
+   other 860px layout rules (missions, cycle, cards) are untouched below. */
+@media (min-width: 921px) {
   /* the fixed wrapper stops frosting the full width; the island carries the glass */
   .nav.scrolled {
     background: transparent;
@@ -905,10 +909,14 @@ svg.ti {
   .hero { padding-top: 128px; }
   .mission { padding: 12px 28px 8px; }
 }
-@media (max-width: 860px) {
+/* Nav collapses to the burger below 921px (six chapters need the width). Kept
+   separate from the 860px block so the rest of that block stays put. */
+@media (max-width: 920px) {
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .nav-burger { display: inline-flex; }
+}
+@media (max-width: 860px) {
   .mission-grid { grid-template-columns: 1fr; gap: 44px; }
   .mission { border-left: none; padding: 0; }
   .mission:first-child { padding: 0; }

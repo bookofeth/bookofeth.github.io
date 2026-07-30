@@ -300,8 +300,17 @@
 .sw-row-empty { padding: 18px 12px; text-align: center; font: italic 400 14px/1.5 var(--serif); color: var(--text-faint); }
 
 /* --- variant: hero ------------------------------------------------------- */
-.sw--hero { position: relative; z-index: 2; }
+.sw--hero { position: relative; z-index: 2; width: 100%; }
 .sw--hero .sw-card { max-width: 392px; }
+/* the widget stands where the floating book did; give the orbit room to frame it */
+.hero-swap { min-height: 560px; }
+@media (max-width: 1080px) {
+  /* stacked hero: lead with the thesis, then the Exchange (not widget-on-top) */
+  .page-home .hero-swap { order: 0; margin-top: 12px; min-height: 0; }
+}
+@media (max-width: 560px) {
+  .page-home .hero-swap { min-height: 0; }
+}
 
 /* ===========================================================================
    /swap PAGE ("The Exchange")

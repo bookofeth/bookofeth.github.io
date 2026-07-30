@@ -11,6 +11,7 @@
 {var $bodyClass = 'page-home'}
 
 {block head}
+<link rel="stylesheet" href="/assets/css/pages/swap.css">
 <style>
 /* Page-scoped home styles (owned here, never in app.css).
    1. Mission card titles are promoted to h2 so the heading order never skips
@@ -151,17 +152,19 @@
             </div>
         </div>
 
-        <div class="relic-col rise d3" aria-hidden="true">
-            <div class="relic-aura"></div>
-            <div class="halo h1"></div>
-            <div class="halo h2"></div>
-            <div class="halo h3"></div>
-            <div class="halo-glint"></div>
-            <span class="star s1"></span>
-            <span class="star s2"></span>
-            <span class="star s3"></span>
-            <img class="relic-book" src="/logo.png" alt="" width="284" height="284" decoding="async">
-            <div class="relic-shadow"></div>
+        {* The swap widget stands where the floating book did. The lapis orbit
+           (.halo-glint) and its halos stay, spinning behind the card. The col is
+           no longer aria-hidden: it now carries the interactive Exchange. *}
+        <div class="relic-col hero-swap rise d3">
+            <div class="relic-aura" aria-hidden="true"></div>
+            <div class="halo h1" aria-hidden="true"></div>
+            <div class="halo h2" aria-hidden="true"></div>
+            <div class="halo h3" aria-hidden="true"></div>
+            <div class="halo-glint" aria-hidden="true"></div>
+            <span class="star s1" aria-hidden="true"></span>
+            <span class="star s2" aria-hidden="true"></span>
+            <span class="star s3" aria-hidden="true"></span>
+            {include 'partials/swap-widget.latte', variant: 'hero'}
         </div>
     </div>
 
@@ -248,7 +251,7 @@
                 <p class="verb"><b>{$prophet['verb']}</b>, {$prophet['name']}</p>
             </div>
             <div class="node n-holy">
-                <div class="coin"><svg class="ti" viewBox="0 0 24 24">{$holy['emblem']|noescape}</svg><b>{$holy['ticker']}</b></div>
+                <div class="coin coin--relic"><img class="coin-face" src="/assets/img/relics/holy.webp" alt="" width="256" height="256" decoding="async"></div>
                 <span class="pill">Trinity staking &middot; in development</span>
             </div>
         </div>
@@ -474,4 +477,5 @@
 </section>
 
 </main>
+<script defer src="/assets/js/swap.js"></script>
 {/block}
