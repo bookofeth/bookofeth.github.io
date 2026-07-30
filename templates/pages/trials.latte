@@ -1,0 +1,51 @@
+{layout '../layouts/base.latte'}
+
+{*
+  The Trials (/trials). The Scriptorium's knowledge test of Ethereum and the lore
+  of the Book. A static header band + a single interactive card that public/assets/js/trials.js
+  drives: one verse at a time, tappable answer cards, immediate correct/wrong
+  feedback, a running score, and a final rank from the lexicon ladder
+  (Catechumen / Acolyte / Scribe / Disciple / Prophet) with a reshuffled replay.
+
+  Every question and the Fisher-Yates shuffle are carried over from the original
+  BOOE trivia game. Tabler icons copied verbatim. No em-dashes, no en-dashes.
+*}
+
+{var $pageTitle = 'The Trials'}
+{var $pageDescription = 'The Trials are the Scriptorium\'s test of Ethereum and the lore of the Book. Answer the verses, earn a rank from Catechumen to Prophet, and prove your knowing. No wallet, no gas, only knowing.'}
+{var $pageSlug = 'trials'}
+{var $pageCss = 'trials'}
+{var $bodyClass = 'page-inner'}
+
+{block content}
+<main id="main" class="page-shell trials-page">
+  <div class="wrap">
+
+    <div class="tr-head" data-reveal>
+      <span class="eyebrow page-eyebrow">The Scriptorium &middot; The Trials</span>
+      <h1>Prove your <em>knowing</em>.</h1>
+      <p class="tr-lede">The Trials are the Scriptorium's test of Ethereum and the lore of the Book.
+      One verse at a time, one honest answer, and at the end the Scriptorium names your rank.</p>
+      <p class="tr-ledgerline">
+        <b>29 verses</b><span class="sep">&middot;</span><b>Five ranks</b><span class="sep">&middot;</span><b>Ethereum and BOOE lore</b><span class="sep">&middot;</span><b>Shuffled every attempt</b>
+      </p>
+    </div>
+
+    <div class="tr-stage" data-reveal data-reveal-delay="1">
+      <span class="tr-stage-halo" aria-hidden="true"></span>
+      <div id="trial-app" class="trial-app">
+        <noscript>
+          <section class="trial-card trial-intro">
+            <p class="trial-kicker">The Trials</p>
+            <h2 class="trial-h">Enable JavaScript to sit the <em>Trial</em>.</h2>
+            <p class="trial-lede">The Trials are an interactive quiz. Turn on JavaScript to read the
+            verses, answer them, and earn your rank in the Scriptorium.</p>
+          </section>
+        </noscript>
+      </div>
+    </div>
+
+  </div>
+</main>
+<script defer src="/assets/js/trials.js"></script>
+{/block}
