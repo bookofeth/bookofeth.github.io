@@ -187,6 +187,7 @@
         '</div>' +
         '<h2 class="trial-q" id="trial-q" tabindex="-1">' + esc(item.q) + '</h2>' +
         '<div class="trial-options" role="group" aria-label="Choose one answer">' + opts + '</div>' +
+        '<p class="trial-hint" data-hint>Choose the true answer</p>' +
         '<div class="trial-feedback" aria-live="polite" hidden>' +
           '<span class="tf-icon" aria-hidden="true"></span>' +
           '<p class="tf-text"></p>' +
@@ -229,6 +230,10 @@
     // running score chip
     var num = app.querySelector('.ts-num');
     if (num) num.textContent = state.score;
+
+    // the pre-answer hint has done its job, the feedback verse takes its slot
+    var hint = app.querySelector('[data-hint]');
+    if (hint) hint.hidden = true;
 
     // feedback verse
     var fb = app.querySelector('.trial-feedback');

@@ -76,6 +76,9 @@
   animation: trial-in 0.42s var(--ease-out) both;
 }
 @keyframes trial-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+/* the feedback verse and the "Next verse" pill rise in together once an
+   answer lands, never present a beat before that. */
+@keyframes trial-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 /* the sacred top hairline (lapis by default, gold on the verdict) */
 .trial-hairline {
@@ -99,6 +102,10 @@
 .trial-lede { font: italic 400 17px/1.6 var(--serif); color: var(--text-dim); margin-top: 14px; }
 
 .trial-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+/* the `hidden` attribute must win over the class's own display:flex, so this
+   card never shows a collapsed, content-less pill before an answer lands. */
+.trial-actions[hidden] { display: none; }
+.trial-actions:not([hidden]) { animation: trial-rise 0.3s var(--ease-out) both; }
 
 /* ===========================================================================
    INTRO
@@ -232,6 +239,19 @@
 .trial-opt.is-wrong .to-mark { color: var(--neg); }
 .trial-opt.is-muted { opacity: 0.5; }
 
+/* the one quiet line that keeps the unanswered card from reading as bottom
+   heavy, removed the instant an answer is chosen (the feedback verse takes
+   this slot instead). */
+.trial-hint {
+  margin-top: 18px;
+  text-align: center;
+  font: 500 10.5px/1 var(--roman);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.trial-hint[hidden] { display: none; }
+
 .trial-feedback {
   display: flex;
   align-items: flex-start;
@@ -243,6 +263,9 @@
   border-left-width: 2px;
   background: rgba(7, 9, 16, 0.4);
 }
+/* same fix as .trial-actions: the empty box must not render pre-answer. */
+.trial-feedback[hidden] { display: none; }
+.trial-feedback:not([hidden]) { animation: trial-rise 0.3s var(--ease-out) both; }
 .trial-feedback.is-correct { border-left-color: var(--accent-hi); }
 .trial-feedback.is-wrong { border-left-color: var(--neg); }
 .tf-icon { flex: none; width: 20px; height: 20px; display: inline-flex; margin-top: 2px; }
@@ -321,4 +344,6 @@
 @media (prefers-reduced-motion: reduce) {
   .trial-card { animation: none; }
   .tm-fill { transition: none; }
+  .trial-actions:not([hidden]),
+  .trial-feedback:not([hidden]) { animation: none; }
 }
