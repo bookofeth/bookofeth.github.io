@@ -45,6 +45,86 @@
 }
 
 /* ===========================================================================
+   THE CYCLE, ALIGNED (geometry override, self-contained; app.css untouched).
+   app.css already sizes .cycle as a square and insets .cycle-ring, so the ring
+   is a true circle. Here we place the coin CENTERS exactly on that ring by a
+   shared radius R = 50% - inset, so $BOOE (12 o'clock), $PROPHET (lower-left)
+   and $HOPE (lower-right) sit mirror-equal on the circle, $HOLY dead-center, and
+   the three spokes run from the hub to each coin. Fully parametric in
+   --ring-inset (mirrors the app.css .cycle-ring inset), so it holds at every
+   width. Each node is absolutely positioned with width:auto so it shrink-wraps
+   its coin (the verb and pill are lifted out of flow), which lets
+   translate(-50%,-50%) land the COIN center, not the label, on the anchor.
+   =========================================================================== */
+.cycle { --ring-inset: 78px; }
+
+.cycle .node { width: auto; }
+.cycle .node .verb {
+  position: absolute;
+  left: 50%;
+  width: max-content;
+  max-width: 160px;
+  margin: 0;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+/* $BOOE: on the ring at 12 o'clock (R = 50% - inset above center); label above. */
+.cycle .node.n-booe {
+  left: 50%;
+  top: calc(50% - (50% - var(--ring-inset)));
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+}
+.cycle .node.n-booe .verb { top: auto; bottom: calc(100% + 12px); margin: 0; }
+
+/* $HOPE lower-right and $PROPHET lower-left: mirror-equal at 45deg below the
+   horizontal, both on the ring (0.7071 = sin/cos 45deg). Labels below. */
+.cycle .node.n-hope {
+  left: calc(50% + (50% - var(--ring-inset)) * 0.7071);
+  top: calc(50% + (50% - var(--ring-inset)) * 0.7071);
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+}
+.cycle .node.n-prophet {
+  left: calc(50% - (50% - var(--ring-inset)) * 0.7071);
+  top: calc(50% + (50% - var(--ring-inset)) * 0.7071);
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+}
+.cycle .node.n-hope .verb,
+.cycle .node.n-prophet .verb { top: calc(100% + 10px); bottom: auto; }
+
+/* $HOLY: dead-center; the staking pill hangs below its coin. */
+.cycle .node.n-holy {
+  left: 50%;
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  width: auto;
+  transform: translate(-50%, -50%);
+}
+.cycle .node.n-holy .pill {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 9px);
+  margin: 0;
+  transform: translateX(-50%);
+}
+
+/* Spokes: hub to each coin center, length R, faint at the hub. */
+.cycle .spoke { height: calc(50% - var(--ring-inset)); }
+.cycle .spoke.k1 { transform: rotate(180deg); background: linear-gradient(180deg, transparent 22%, rgba(134, 160, 246, 0.34)); }
+.cycle .spoke.k2 { transform: rotate(315deg); height: calc(50% - var(--ring-inset)); background: linear-gradient(180deg, transparent 22%, rgba(95, 194, 180, 0.34)); }
+.cycle .spoke.k3 { transform: rotate(45deg); height: calc(50% - var(--ring-inset)); background: linear-gradient(180deg, transparent 22%, rgba(156, 143, 224, 0.34)); }
+
+@media (max-width: 860px) { .cycle { --ring-inset: 56px; } }
+@media (max-width: 560px) { .cycle { --ring-inset: 46px; } }
+
+/* ===========================================================================
    THE ALTAR (the ceremonial hero: head + cycle + harmony)
    =========================================================================== */
 .tr-altar { position: relative; padding-bottom: 40px; overflow: hidden; }
