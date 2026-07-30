@@ -5,10 +5,15 @@
    Real money on Ethereum mainnet: simulate before every write, honest slippage,
    deadlines, and decimals resolved on-chain.
 
-   Bundled (viem included) into public/assets/js/swap.js by esbuild:
+   Bundled (viem included) into public/assets/js/swap.js by esbuild. From the
+   repo root (viem is a build-only dep, not committed):
 
+     npm install viem
      npx esbuild swap-src/index.js --bundle --minify --format=iife \
        --outfile=public/assets/js/swap.js
+
+   The committed bundle is self-contained; the only runtime network calls are the
+   eth.merkle.io RPC and the user's injected wallet.
 
    The only runtime network calls are the eth.merkle.io RPC and the user's
    injected wallet (window.ethereum). Nothing else is fetched.
